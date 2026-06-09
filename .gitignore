@@ -1,0 +1,10 @@
+# Python helper scripts used to generate/modify the PDF
+inspect_pdf.py
+inspect_pdf2.py
+modify_cv.py
+pdf_layout.txt
+CV_tmp.pdf
+
+# Claude Code internal files
+.claude/settings.local.json
+.claude/launch.json
