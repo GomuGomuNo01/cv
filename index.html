@@ -10,24 +10,22 @@
   <meta name="theme-color" content="#1a1a2e">
   <title>CV – Cédric KOUADIO | Data Analyst · IA &amp; Big Data</title>
   <style>
-    /* ─── Reset ──────────────────────────────────────── */
     *, *::before, *::after {
       margin: 0; padding: 0; box-sizing: border-box;
       -webkit-tap-highlight-color: transparent;
     }
 
-    /* ─── Full-height flex shell ──────────────────────── */
     html, body { height: 100%; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background: #1a1a2e;
       display: flex;
       flex-direction: column;
-      min-height: 100dvh; /* iOS 15+ dynamic viewport */
+      min-height: 100dvh;
       overflow-x: hidden;
     }
 
-    /* ─── Header ──────────────────────────────────────── */
+    /* ── Header ─────────────────────────────────────────── */
     .header {
       position: sticky;
       top: 0;
@@ -35,103 +33,72 @@
       flex-shrink: 0;
       background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
       border-bottom: 3px solid #e94560;
-      padding-top: env(safe-area-inset-top, 0px); /* iOS notch */
+      padding-top: env(safe-area-inset-top, 0px);
     }
     .header-inner {
       display: flex;
       align-items: center;
-      gap: 10px;
-      padding: 11px 14px;
-    }
-    .title { flex: 1; min-width: 0; }
-    .title h1 {
-      color: #fff;
-      font-size: clamp(15px, 4vw, 20px);
-      font-weight: 700;
-      line-height: 1.2;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .title p {
-      color: #e94560;
-      font-size: clamp(9px, 2.3vw, 11px);
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .7px;
-      margin-top: 2px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      padding: 10px 14px;
     }
 
-    /* ─── Buttons ─────────────────────────────────────── */
-    .actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+    /* Name block – left side */
+    .title {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+    .title .first { color: #fff;     font-size: clamp(16px, 4.5vw, 22px); font-weight: 700; }
+    .title .last  { color: #e94560;  font-size: clamp(16px, 4.5vw, 22px); font-weight: 900;
+                    text-transform: uppercase; letter-spacing: .5px; }
+
+    /* Icons – pushed hard right */
+    .actions {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
     .btn {
-      height: 42px; min-width: 42px;
+      height: 42px; width: 42px;
       border-radius: 9px; border: none; cursor: pointer;
       display: flex; align-items: center; justify-content: center;
       text-decoration: none;
       transition: opacity .15s, transform .1s;
+      flex-shrink: 0;
     }
     .btn:active { opacity: .72; transform: scale(.92); }
-    .btn svg { display: block; }
+    .btn svg { display: block; width: 22px; height: 22px; }
 
-    .btn-li { background: #0A66C2; }           /* LinkedIn brand */
-    .btn-gh { background: #ffffff; }            /* GitHub brand  */
-    .btn-li svg, .btn-gh svg { width: 22px; height: 22px; }
+    .btn-li { background: #0A66C2; }
+    .btn-gh { background: #ffffff; }
+    .btn-dl { background: #e94560; }
+    .btn-dl svg { width: 18px; height: 18px; }
 
-    .btn-dl {
-      background: #e94560; color: #fff;
-      font-size: 13px; font-weight: 700;
-      padding: 0 14px; gap: 7px; white-space: nowrap;
-    }
-    .btn-dl svg { width: 16px; height: 16px; }
-    @media (max-width: 370px) {
-      .dl-lbl { display: none; }
-      .btn-dl { padding: 0 11px; }
-    }
-
-    /* ─── Viewer ──────────────────────────────────────── */
+    /* ── Viewer ──────────────────────────────────────────── */
     .viewer {
       flex: 1;
       overflow-y: auto;
       overflow-x: hidden;
       -webkit-overflow-scrolling: touch;
-      background: #ffffff;   /* white = no grey gap when image is shorter */
-      display: block;        /* block avoids flex gap below image */
+      background: #ffffff;
+      display: block;
+      /* safe-area padding at bottom so CV doesn't hide behind home bar */
+      padding-bottom: env(safe-area-inset-bottom, 0px);
     }
 
-    /* CV image — pinch-to-zoom works natively */
     .cv-img {
       display: block;
       width: 100%;
       max-width: 860px;
       height: auto;
-      margin: 0 auto;        /* center on wide screens */
+      margin: 0 auto;
     }
 
-    /* ─── Footer ──────────────────────────────────────── */
-    .footer {
-      flex-shrink: 0;
-      background: #f8f9fa;
-      border-top: 1px solid #ddd;
-      padding: 10px 16px;
-      padding-bottom: max(env(safe-area-inset-bottom, 10px), 10px);
-      font-size: 12px; color: #666;
-      text-align: center; line-height: 2;
-    }
-    .footer a { color: #e94560; text-decoration: none; font-weight: 700; }
-
-    /* ─── Desktop: shadow + padding around image ──────── */
     @media (min-width: 600px) {
       .header-inner { padding: 12px 20px; }
-      .viewer { padding: 16px; }
-      .cv-img {
-        border-radius: 4px;
-        box-shadow: 0 6px 32px rgba(0,0,0,.3);
-      }
+      .viewer { padding: 16px; padding-bottom: 16px; }
+      .cv-img { border-radius: 4px; box-shadow: 0 6px 32px rgba(0,0,0,.3); }
     }
   </style>
 </head>
@@ -142,13 +109,13 @@
     <div class="header-inner">
 
       <div class="title">
-        <h1>Cédric KOUADIO</h1>
-        <p>Data Analyst&nbsp;·&nbsp;IA &amp; Big Data&nbsp;·&nbsp;Automatisation</p>
+        <span class="first">Cédric</span>
+        <span class="last">Kouadio</span>
       </div>
 
       <div class="actions">
 
-        <!-- LinkedIn (official #0A66C2) -->
+        <!-- LinkedIn -->
         <a class="btn btn-li"
            href="https://linkedin.com/in/cedric-kouadio-dev"
            target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
@@ -165,7 +132,7 @@
           </svg>
         </a>
 
-        <!-- GitHub (official: dark Octocat on white) -->
+        <!-- GitHub -->
         <a class="btn btn-gh"
            href="https://github.com/GomuGomuNo01"
            target="_blank" rel="noopener noreferrer" aria-label="GitHub">
@@ -186,24 +153,23 @@
           </svg>
         </a>
 
-        <!-- Download -->
+        <!-- Download (icon only) -->
         <a class="btn btn-dl" id="dl-btn"
            href="CV_Kouadio_Cedric.pdf" download="CV_Kouadio_Cedric.pdf"
            aria-label="Télécharger le CV">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          <svg viewBox="0 0 24 24" fill="none" stroke="white"
                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
             <polyline points="7 10 12 15 17 10"/>
             <line x1="12" y1="15" x2="12" y2="3"/>
           </svg>
-          <span class="dl-lbl">Télécharger</span>
         </a>
 
       </div>
     </div>
   </header>
 
-  <!-- ══ CV Preview (image — instant on mobile, pinch-to-zoom) ═ -->
+  <!-- ══ CV ══════════════════════════════════════════════════ -->
   <main class="viewer">
     <img class="cv-img"
          src="CV_preview.jpg"
@@ -212,33 +178,14 @@
          decoding="async">
   </main>
 
-  <!-- ══ Footer ══════════════════════════════════════════════ -->
-  <footer class="footer">
-    cedrickouadio22@gmail.com&nbsp;|&nbsp;+33&nbsp;7&nbsp;44&nbsp;27&nbsp;65&nbsp;00
-    &nbsp;|&nbsp;
-    <a href="https://linkedin.com/in/cedric-kouadio-dev" target="_blank">LinkedIn</a>
-    &nbsp;|&nbsp;
-    <a href="https://github.com/GomuGomuNo01" target="_blank">GitHub</a>
-  </footer>
-
   <script>
-    /* Pre-fetch PDF as a blob so that when the user taps the download
-       button the createObjectURL + click are synchronous — iOS Safari
-       requires the anchor click to happen within the original user-gesture
-       frame; async fetch() breaks that, pre-fetching fixes it. */
-    let _pdfBlob = null;
     fetch('CV_Kouadio_Cedric.pdf')
       .then(r => r.blob())
       .then(b => {
-        _pdfBlob = b;
         const btn = document.getElementById('dl-btn');
-        if (btn && _pdfBlob) {
-          /* swap the direct href for a blob URL — now iOS 13+ downloads */
-          const blobUrl = URL.createObjectURL(_pdfBlob);
-          btn.href = blobUrl;
-        }
+        if (btn) btn.href = URL.createObjectURL(b);
       })
-      .catch(() => { /* keep original href as fallback */ });
+      .catch(() => {});
   </script>
 </body>
 </html>
