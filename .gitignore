@@ -2,6 +2,8 @@
 inspect_pdf.py
 inspect_pdf2.py
 modify_cv.py
+fix_spacing.py
+render_preview.py
 pdf_layout.txt
 CV_tmp.pdf
 

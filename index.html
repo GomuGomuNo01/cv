@@ -1,288 +1,242 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="theme-color" content="#1a1a2e">
-    <title>CV – Cédric KOUADIO | Data Analyst · IA & Big Data</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html, body { width: 100%; height: 100%; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,
+        viewport-fit=cover, user-scalable=yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#1a1a2e">
+  <title>CV – Cédric KOUADIO | Data Analyst · IA &amp; Big Data</title>
+  <style>
+    /* ─── Reset ──────────────────────────────────────── */
+    *, *::before, *::after {
+      margin: 0; padding: 0; box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #1a1a2e;
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            overflow: hidden;
-        }
+    /* ─── Full-height flex shell ──────────────────────── */
+    html, body { height: 100%; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #1a1a2e;
+      display: flex;
+      flex-direction: column;
+      min-height: 100dvh; /* iOS 15+ dynamic viewport */
+      overflow-x: hidden;
+    }
 
-        /* ── Header ───────────────────────────────────────────── */
-        .header-bar {
-            background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
-            padding: 12px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 3px solid #e94560;
-            flex-shrink: 0;
-            z-index: 100;
-        }
+    /* ─── Header ──────────────────────────────────────── */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+      border-bottom: 3px solid #e94560;
+      padding-top: env(safe-area-inset-top, 0px); /* iOS notch */
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 14px;
+    }
+    .title { flex: 1; min-width: 0; }
+    .title h1 {
+      color: #fff;
+      font-size: clamp(15px, 4vw, 20px);
+      font-weight: 700;
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .title p {
+      color: #e94560;
+      font-size: clamp(9px, 2.3vw, 11px);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .7px;
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
 
-        .header-info { flex: 1; }
+    /* ─── Buttons ─────────────────────────────────────── */
+    .actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
 
-        .header-info h1 {
-            color: white;
-            font-size: 19px;
-            font-weight: 700;
-            margin-bottom: 3px;
-        }
+    .btn {
+      height: 42px; min-width: 42px;
+      border-radius: 9px; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none;
+      transition: opacity .15s, transform .1s;
+    }
+    .btn:active { opacity: .72; transform: scale(.92); }
+    .btn svg { display: block; }
 
-        .header-info p {
-            color: #e94560;
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+    .btn-li { background: #0A66C2; }           /* LinkedIn brand */
+    .btn-gh { background: #ffffff; }            /* GitHub brand  */
+    .btn-li svg, .btn-gh svg { width: 22px; height: 22px; }
 
-        /* ── Action buttons ────────────────────────────────────── */
-        .header-actions {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
+    .btn-dl {
+      background: #e94560; color: #fff;
+      font-size: 13px; font-weight: 700;
+      padding: 0 14px; gap: 7px; white-space: nowrap;
+    }
+    .btn-dl svg { width: 16px; height: 16px; }
+    @media (max-width: 370px) {
+      .dl-lbl { display: none; }
+      .btn-dl { padding: 0 11px; }
+    }
 
-        .btn {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 8px 13px;
-            border-radius: 6px;
-            border: none;
-            cursor: pointer;
-            font-size: 13px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.2s ease;
-            color: white;
-            background: transparent;
-        }
+    /* ─── Viewer ──────────────────────────────────────── */
+    .viewer {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      background: #c8c8c8;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-        .btn:hover { background: rgba(255,255,255,0.12); }
-        .btn:active { transform: scale(0.95); }
+    /* CV image — pinch-to-zoom works natively */
+    .cv-img {
+      display: block;
+      width: 100%;
+      max-width: 860px;
+      height: auto;
+      /* crisp rendering on high-DPI */
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+    }
 
-        .btn-download {
-            background: #e94560;
-            color: white;
-        }
-        .btn-download:hover { background: #c73651; }
+    /* ─── Footer ──────────────────────────────────────── */
+    .footer {
+      flex-shrink: 0;
+      background: #f8f9fa;
+      border-top: 1px solid #ddd;
+      padding: 10px 16px;
+      padding-bottom: max(env(safe-area-inset-bottom, 10px), 10px);
+      font-size: 12px; color: #666;
+      text-align: center; line-height: 2;
+    }
+    .footer a { color: #e94560; text-decoration: none; font-weight: 700; }
 
-        /* ── Social icon buttons ───────────────────────────────── */
-        .icon-btn {
-            width: 36px;
-            height: 36px;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 0.2s, transform 0.15s;
-            cursor: pointer;
-            border: none;
-            text-decoration: none;
-        }
-        .icon-btn:hover  { opacity: 0.85; }
-        .icon-btn:active { transform: scale(0.93); }
-
-        /* LinkedIn official brand color */
-        .icon-btn-linkedin { background: #0A66C2; }
-        /* GitHub official brand color */
-        .icon-btn-github   { background: #ffffff; }
-
-        .icon-btn svg { width: 20px; height: 20px; }
-
-        /* ── PDF viewer ────────────────────────────────────────── */
-        .pdf-container {
-            flex: 1;
-            overflow: auto;
-            background: #e8e8e8;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .pdf-iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            display: block;
-        }
-
-        /* Mobile fallback overlay */
-        .mobile-fallback {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            gap: 16px;
-            padding: 20px;
-            text-align: center;
-            color: #333;
-        }
-        .mobile-fallback p { font-size: 15px; color: #555; }
-        .mobile-fallback .open-btn {
-            background: #0f3460;
-            color: white;
-            padding: 14px 28px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 700;
-        }
-
-        /* ── Footer ─────────────────────────────────────────────── */
-        .contact-bar {
-            background: #f8f9fa;
-            padding: 10px 20px;
-            border-top: 1px solid #ddd;
-            font-size: 12px;
-            color: #666;
-            flex-shrink: 0;
-        }
-        .contact-bar a {
-            color: #e94560;
-            text-decoration: none;
-            font-weight: 700;
-        }
-
-        /* ── Responsive ─────────────────────────────────────────── */
-        @media (max-width: 600px) {
-            .header-bar { padding: 10px 14px; flex-wrap: wrap; gap: 8px; }
-            .header-info { flex: 1 1 auto; }
-            .header-info h1 { font-size: 16px; }
-            .header-info p  { font-size: 10px; }
-            .header-actions { flex: 0 0 auto; }
-            .btn-label { display: none; }
-            .btn { padding: 8px 10px; }
-
-            /* On small screens the <object> often triggers download instead of showing.
-               Show the fallback block instead. */
-            .pdf-iframe { display: none; }
-            .mobile-fallback { display: flex; }
-        }
-    </style>
+    /* ─── Desktop: shadow + padding around image ──────── */
+    @media (min-width: 600px) {
+      .header-inner { padding: 12px 20px; }
+      .viewer { padding: 16px; }
+      .cv-img {
+        border-radius: 4px;
+        box-shadow: 0 6px 32px rgba(0,0,0,.3);
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <div class="header-bar">
-        <div class="header-info">
-            <h1>Cédric KOUADIO</h1>
-            <p>Data Analyst &nbsp;·&nbsp; IA & Big Data &nbsp;·&nbsp; Automatisation</p>
-        </div>
+  <!-- ══ Header ══════════════════════════════════════════════ -->
+  <header class="header">
+    <div class="header-inner">
 
-        <div class="header-actions">
+      <div class="title">
+        <h1>Cédric KOUADIO</h1>
+        <p>Data Analyst&nbsp;·&nbsp;IA &amp; Big Data&nbsp;·&nbsp;Automatisation</p>
+      </div>
 
-            <!-- LinkedIn – official blue brand -->
-            <a class="icon-btn icon-btn-linkedin"
-               href="https://linkedin.com/in/cedric-kouadio-dev"
-               target="_blank" rel="noopener" title="LinkedIn">
-                <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037
-                             -1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046
-                             c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286z
-                             M5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063
-                             2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064
-                             2.065zm1.782 13.019H3.555V9h3.564v11.452z
-                             M22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24
-                             1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0
-                             22.225 0z"/>
-                </svg>
-            </a>
+      <div class="actions">
 
-            <!-- GitHub – official white background with dark Octocat -->
-            <a class="icon-btn icon-btn-github"
-               href="https://github.com/GomuGomuNo01"
-               target="_blank" rel="noopener" title="GitHub">
-                <svg viewBox="0 0 24 24" fill="#181717" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387
-                             .599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033
-                             -1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729
-                             .083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807
-                             1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467
-                             -1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303
-                             -.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266
-                             1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552
-                             3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84
-                             1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372
-                             .823 1.102.823 2.222v3.293c0 .319.192.694.801.576
-                             C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
-                </svg>
-            </a>
+        <!-- LinkedIn (official #0A66C2) -->
+        <a class="btn btn-li"
+           href="https://linkedin.com/in/cedric-kouadio-dev"
+           target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="white">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037
+                     -1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046
+                     c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286z
+                     M5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063
+                     2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065
+                     -2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452z
+                     M22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24
+                     1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774
+                     23.2 0 22.225 0z"/>
+          </svg>
+        </a>
 
-            <!-- Download CV -->
-            <button class="btn btn-download" onclick="downloadCV()" title="Télécharger le CV">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-                     stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
-                     stroke-linejoin="round">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                    <polyline points="7 10 12 15 17 10"/>
-                    <line x1="12" y1="15" x2="12" y2="3"/>
-                </svg>
-                <span class="btn-label">Télécharger</span>
-            </button>
-        </div>
+        <!-- GitHub (official: dark Octocat on white) -->
+        <a class="btn btn-gh"
+           href="https://github.com/GomuGomuNo01"
+           target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" fill="#181717">
+            <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387
+                     .599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416
+                     -4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745
+                     .083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07
+                     1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604
+                     -2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381
+                     1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322
+                     3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138
+                     3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242
+                     2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807
+                     5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319
+                     .192.694.801.576C20.566 21.797 24 17.3 24 12
+                     c0-6.627-5.373-12-12-12z"/>
+          </svg>
+        </a>
+
+        <!-- Download -->
+        <button class="btn btn-dl" onclick="downloadCV()" aria-label="Télécharger le CV">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          <span class="dl-lbl">Télécharger</span>
+        </button>
+
+      </div>
     </div>
+  </header>
 
-    <!-- ── Inline PDF viewer (desktop / tablets) ─────────────────────── -->
-    <div class="pdf-container">
-        <object data="CV_Kouadio_Cedric.pdf#view=FitH"
-                type="application/pdf"
-                class="pdf-iframe">
-            <!-- Fallback shown when object tag is not supported -->
-            <div class="mobile-fallback">
-                <p>Votre navigateur n'affiche pas le PDF en ligne.</p>
-                <a class="open-btn" href="CV_Kouadio_Cedric.pdf" target="_blank">
-                    📄 Ouvrir le CV
-                </a>
-                <a href="CV_Kouadio_Cedric.pdf" download
-                   style="color:#0f3460;font-size:14px;text-decoration:underline;">
-                    Télécharger le CV
-                </a>
-            </div>
-        </object>
+  <!-- ══ CV Preview (image — instant on mobile, pinch-to-zoom) ═ -->
+  <main class="viewer">
+    <img class="cv-img"
+         src="CV_preview.jpg"
+         alt="CV de Cédric KOUADIO"
+         loading="eager"
+         decoding="async">
+  </main>
 
-        <!-- Mobile fallback (shown via CSS on small screens) -->
-        <div class="mobile-fallback">
-            <p>Visualisez le CV directement depuis votre navigateur.</p>
-            <a class="open-btn" href="CV_Kouadio_Cedric.pdf" target="_blank">
-                📄 Ouvrir le CV
-            </a>
-            <a href="CV_Kouadio_Cedric.pdf" download
-               style="color:#0f3460;font-size:14px;text-decoration:underline;">
-                Télécharger le CV
-            </a>
-        </div>
-    </div>
+  <!-- ══ Footer ══════════════════════════════════════════════ -->
+  <footer class="footer">
+    cedrickouadio22@gmail.com&nbsp;|&nbsp;+33&nbsp;7&nbsp;44&nbsp;27&nbsp;65&nbsp;00
+    &nbsp;|&nbsp;
+    <a href="https://linkedin.com/in/cedric-kouadio-dev" target="_blank">LinkedIn</a>
+    &nbsp;|&nbsp;
+    <a href="https://github.com/GomuGomuNo01" target="_blank">GitHub</a>
+  </footer>
 
-    <!-- ── Footer contact bar ────────────────────────────────────────── -->
-    <div class="contact-bar">
-        <strong>Contact :</strong> cedrickouadio22@gmail.com &nbsp;|&nbsp; +33 7 44 27 65 00
-        &nbsp;|&nbsp;
-        <a href="https://linkedin.com/in/cedric-kouadio-dev" target="_blank">LinkedIn</a>
-        &nbsp;|&nbsp;
-        <a href="https://github.com/GomuGomuNo01" target="_blank">GitHub</a>
-    </div>
-
-    <script>
-        function downloadCV() {
-            const a = document.createElement('a');
-            a.href     = 'CV_Kouadio_Cedric.pdf';
-            a.download = 'CV_Kouadio_Cedric.pdf';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        }
-    </script>
+  <script>
+    function downloadCV() {
+      /* iOS Safari ignores download attr — open PDF in new tab instead */
+      if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+        window.open('CV_Kouadio_Cedric.pdf', '_blank');
+      } else {
+        const a    = document.createElement('a');
+        a.href     = 'CV_Kouadio_Cedric.pdf';
+        a.download = 'CV_Kouadio_Cedric.pdf';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }
+    }
+  </script>
 </body>
 </html>
