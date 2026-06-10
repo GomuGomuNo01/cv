@@ -1,19 +1,10 @@
-# Python helper scripts used to generate/modify the PDF
-inspect_pdf.py
-inspect_pdf2.py
-modify_cv.py
-fix_spacing.py
-render_preview.py
-fix_formatting.py
-fix_cv2.py
-fix_cv3.py
-fix_cv4.py
-fix_cv5.py
-fix_cv6.py
-fix_cv7.py
-pdf_layout.txt
+# Fichiers temporaires
 CV_tmp.pdf
+pdf_layout.txt
 
-# Claude Code internal files
+# Claude Code
 .claude/settings.local.json
 .claude/launch.json
+
+# IDE
+.idea/

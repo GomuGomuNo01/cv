@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="CV Cedric KOUADIO – Data Analyst Big Data IA Automatisation – Mastere IA Big Data ESGI Paris – Alternance 2026-2027 Ile-de-France">
+<meta name="keywords" content="Data Analyst, Big Data, IA, automatisation, Python, pandas, numpy, scikit-learn, FastAPI, LangChain, RAG, Machine Learning, Java, Spring Boot, Laravel, ETL, SQL, Docker, CI/CD, GitHub, alternance">
+<meta name="author" content="Cedric KOUADIO">
+<title>CV – Cédric KOUADIO · Data Analyst · Big Data · IA &amp; Automatisation · Alternance 2026–2027</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+  :root {
+    --dark:  #1a1a2e;
+    --blue:  #0f3460;
+    --gold:  #e94560;
+    --text:  #1c1c1c;
+    --muted: #6c757d;
+    --light: #f4f5f7;
+    --mid:   #dde1e8;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  @page { size:A4; margin:0; }
+  @media print { body { font-size: 8.5pt; } .page { box-shadow:none !important; } }
+
+  body {
+    font-family: 'Outfit', Calibri, Arial, sans-serif;
+    font-size: 9pt;
+    color: var(--text);
+    background: #e8e8e8;
+    line-height: 1.35;
+  }
+  .page {
+    width: 210mm;
+    height: 297mm;
+    overflow: hidden;
+    margin: 0 auto;
+    background: white;
+    box-shadow: 0 4px 40px rgba(0,0,0,.18);
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--dark);
+    padding: 9px 22px 8px;
+    display: flex;
+    align-items: center;
+    border-bottom: 3px solid var(--gold);
+  }
+  header img { display: none; }
+  .hdr-info { flex: 1; }
+  h1 {
+    color: white;
+    font-size: 14.5pt;
+    font-weight: 700;
+    letter-spacing: .3px;
+    margin-bottom: 3px;
+  }
+  .hdr-title {
+    color: var(--gold);
+    font-size: 8.5pt;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .8px;
+    margin-bottom: 3px;
+  }
+  .hdr-contact {
+    color: rgba(255,255,255,.82);
+    font-size: 7.5pt;
+    line-height: 1.65;
+  }
+  .hdr-contact a { color: rgba(255,255,255,.82); text-decoration: none; }
+  .sep { color: rgba(255,255,255,.35); margin: 0 5px; }
+
+  /* ── BODY ── */
+  .body { padding: 6px 22px 4px; }
+
+  /* ── SECTIONS ── */
+  .section { margin-bottom: 3px; }
+
+  h2 {
+    font-size: 8.5pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+    color: var(--blue);
+    border-bottom: 2px solid var(--gold);
+    padding-bottom: 2px;
+    margin-bottom: 4px;
+  }
+
+  /* ── RÉSUMÉ ── */
+  .resume-text {
+    font-size: 8pt;
+    line-height: 1.44;
+    text-align: justify;
+    border-left: 3px solid var(--gold);
+    padding: 4px 10px;
+    background: var(--light);
+    border-radius: 0 3px 3px 0;
+  }
+
+  /* ── EXPÉRIENCES ── */
+  .exp { margin-bottom: 4px; padding-left: 10px; border-left: 2px solid var(--mid); position: relative; }
+  .exp::before { content:""; width:7px; height:7px; border-radius:50%; background:var(--gold); position:absolute; left:-4.5px; top:5px; }
+  .exp-hdr { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:4px; }
+  h3 { font-size: 9.5pt; font-weight: 700; color: var(--dark); }
+  .exp-date { font-size: 7.5pt; font-weight: 600; color: var(--muted); white-space: nowrap; }
+  .exp-co { font-size: 7.5pt; color: var(--muted); font-style: italic; margin: 0 0 1px; }
+  ul { list-style: none; }
+  ul li { font-size: 8pt; padding-left: 12px; position: relative; margin-bottom: 0; }
+  ul li::before { content:"•"; position:absolute; left:0; color:var(--gold); font-weight:700; }
+
+  /* ── FORMATION ── */
+  .edu { padding:1px 0; margin-bottom:2px; }
+  .edu .deg { font-size:8pt; font-weight:700; color:var(--dark); }
+  .edu .sch { font-size:7pt; color:var(--muted); }
+
+  /* ── COMPÉTENCES ── */
+  .skill-row { font-size: 8pt; margin-bottom: 1px; line-height: 1.35; }
+  .skill-row strong { color: var(--dark); }
+
+  /* ── LANGUES ── */
+  .lang-row { font-size: 8pt; margin-bottom: 0; line-height: 1.42; display: inline-block; margin-right: 18px; }
+  .lang-row strong { color: var(--dark); }
+
+  /* ── PROJETS ── */
+  .projects-grid { display:grid; grid-template-columns:1fr; gap:2px; }
+  .proj { border:1px solid var(--mid); border-radius:4px; padding:3px 8px 2px 11px; position:relative; overflow:hidden; }
+  .proj::before { content:""; position:absolute; top:0; left:0; width:3px; height:100%; background:var(--gold); }
+  .proj-name { font-size:7.5pt; font-weight:700; color:var(--dark); margin-bottom:1px; }
+  .proj-desc { font-size:6.5pt; color:var(--text); line-height:1.32; margin-bottom:0; }
+  a.proj-link { font-size:6pt; color:var(--gold); font-weight:700; display:inline-block; text-decoration:none; }
+  a.proj-demo { font-size:6pt; color:var(--blue); font-weight:700; display:inline-block; text-decoration:none; }
+  .proj-links { display:flex; gap:6px; align-items:center; flex-wrap:nowrap; }
+  .proj-links span { color:var(--mid); font-size:6pt; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="hdr-info">
+      <h1>C&eacute;dric KOUADIO</h1>
+      <div class="hdr-title">Alternance Data Analyst &nbsp;&middot;&nbsp; Big Data &nbsp;&middot;&nbsp; IA &amp; Automatisation</div>
+      <div class="hdr-contact">
+        cedric.kouadio.dev@gmail.com
+        <span class="sep">|</span>+33 07 44 27 65 00
+        <span class="sep">|</span>&Icirc;le-de-France (Paris &amp; r&eacute;gion)<br>
+        <a href="https://www.linkedin.com/in/cedric-kouadio-dev" target="_blank">linkedin.com/in/cedric-kouadio-dev</a>
+        <span class="sep">|</span>
+        <a href="https://github.com/GomuGomuNo01" target="_blank">github.com/GomuGomuNo01</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="body">
+
+    <!-- RÉSUMÉ PROFESSIONNEL -->
+    <section class="section">
+      <h2>R&eacute;sum&eacute; Professionnel</h2>
+      <p class="resume-text">
+        &Eacute;tudiant en <strong>Master IA &amp; Big Data</strong> et avec <strong>2 ans d&rsquo;exp&eacute;rience</strong> en d&eacute;veloppement logiciel, je recherche une <strong>alternance</strong> afin de mettre &agrave; profit mes comp&eacute;tences en <strong>backend et en IA appliqu&eacute;e</strong> sur des projets concrets. Habitu&eacute; &agrave; concevoir des solutions robustes et maintenables, je peux contribuer rapidement au d&eacute;veloppement d&rsquo;outils &agrave; forte valeur ajout&eacute;e. Motiv&eacute;, adaptable et orient&eacute; r&eacute;sultats, je souhaite accompagner votre entreprise dans ses projets tout en d&eacute;veloppant mon expertise au contact de vos &eacute;quipes.
+      </p>
+    </section>
+
+    <!-- EXPÉRIENCES PROFESSIONNELLES -->
+    <section class="section">
+      <h2>Exp&eacute;riences Professionnelles</h2>
+
+      <div class="exp">
+        <div class="exp-hdr">
+          <h3>D&eacute;veloppeur Web Java</h3>
+        </div>
+        <div class="exp-co">IT-CENTREX &middot; Abidjan, C&ocirc;te d&rsquo;Ivoire &middot; Juillet 2024 - Ao&ucirc;t 2025</div>
+        <ul>
+          <li>D&eacute;veloppement et s&eacute;curisation d&rsquo;APIs REST avec <strong>Spring Boot</strong> (authentification JWT, architecture Controller/Service/Repository)</li>
+          <li>D&eacute;veloppement de mod&egrave;les de <strong>Machine Learning</strong> avec <strong>scikit-learn</strong> et Python&nbsp;: d&eacute;tection d&rsquo;anomalies et mod&egrave;les pr&eacute;dictifs</li>
+          <li>D&eacute;ploiement d&rsquo;applications en production avec gestion du monitoring, de la qualit&eacute; de code et de la documentation</li>
+          <li>Travail en m&eacute;thode <strong>Agile</strong>&nbsp;: coordination d&rsquo;&eacute;quipe, suivi de sprints et respect des sp&eacute;cifications techniques via Git</li>
+          <li>Conception de prototypes <strong>UI/UX</strong> avec <strong>Figma</strong> en collaboration avec les &eacute;quipes m&eacute;tier</li>
+        </ul>
+      </div>
+
+      <div class="exp">
+        <div class="exp-hdr">
+          <h3>Stagiaire D&eacute;veloppeur Laravel</h3>
+        </div>
+        <div class="exp-co">TASNIM SOLUTION &middot; Abidjan, C&ocirc;te d&rsquo;Ivoire &middot; F&eacute;vrier - Avril 2024</div>
+        <ul>
+          <li>D&eacute;veloppement d&rsquo;applications web avec <strong>Laravel (PHP)</strong>, patterns MVC et ORM Eloquent</li>
+          <li>D&eacute;veloppement d&rsquo;applications de bureau en <strong>C#</strong></li>
+        </ul>
+      </div>
+
+      <div class="exp">
+        <div class="exp-hdr">
+          <h3>Stagiaire D&eacute;veloppeur Java</h3>
+        </div>
+        <div class="exp-co">Institut Pasteur de C&ocirc;te d&rsquo;Ivoire &middot; Abidjan &middot; Novembre 2022 - Juillet 2023</div>
+        <ul>
+          <li>D&eacute;veloppement d&rsquo;applications web avec <strong>Spring Boot</strong> dans un environnement m&eacute;dical</li>
+          <li>Gestion de bases de donn&eacute;es relationnelles (<strong>MySQL / SQL Server</strong>)</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- COMPÉTENCES -->
+    <section class="section">
+      <h2>Comp&eacute;tences</h2>
+      <div class="skill-row"><strong>Java &amp; Spring Boot :</strong> APIs REST s&eacute;curis&eacute;es (JWT, JPA), architecture Controller/Service/Repository, tests unitaires JUnit, documentation Swagger</div>
+      <div class="skill-row"><strong>Python &amp; Machine Learning :</strong> scikit-learn, pandas, numpy &middot; d&eacute;tection d&rsquo;anomalies, mod&egrave;les pr&eacute;dictifs, FastAPI, LangChain, RAG (FAISS, BM25)</div>
+      <div class="skill-row"><strong>D&eacute;veloppement Web Back-end :</strong> Laravel (PHP) &middot; MVC, Eloquent ORM, APIs REST&nbsp;; Java &middot; Spring Boot, architecture robuste, code testable</div>
+      <div class="skill-row"><strong>Bases de donn&eacute;es :</strong> MySQL, PostgreSQL, SQL Server &middot; requ&ecirc;tes complexes, mod&eacute;lisation relationnelle, optimisation, MongoDB/Redis (NoSQL)</div>
+      <div class="skill-row"><strong>Outils &amp; M&eacute;thodes :</strong> Git, Agile/Scrum, Docker, Figma, Postman, pytest, CI/CD, documentation technique</div>
+    </section>
+
+    <!-- LANGUES -->
+    <section class="section">
+      <h2>Langues</h2>
+      <span class="lang-row"><strong>Fran&ccedil;ais :</strong> Langue maternelle</span>
+      <span class="lang-row"><strong>Anglais :</strong> Interm&eacute;diaire (B1)</span>
+    </section>
+
+    <!-- PROJETS -->
+    <section class="section">
+      <h2>Projets</h2>
+      <div class="projects-grid">
+
+        <div class="proj">
+          <div class="proj-name">Chatbot RAG - DocAssist</div>
+          <div class="proj-desc">Moteur de recherche documentaire intelligent (FAISS + BM25), r&eacute;ponses en moins de 2s avec un taux de matching sup&eacute;rieur &agrave; 85%. Production-ready avec monitoring 24/7.</div>
+          <div class="proj-links">
+            <a class="proj-demo" href="https://gomugomuno01-chatbot-rag.hf.space/" target="_blank">&#9654; D&eacute;mo live</a>
+            <span>|</span>
+            <a class="proj-link" href="https://github.com/GomuGomuNo01/Chatbot-RAG" target="_blank">GitHub</a>
+          </div>
+        </div>
+
+        <div class="proj">
+          <div class="proj-name">Sales Report Automation</div>
+          <div class="proj-desc">Pipeline automatique&nbsp;: import CSV, nettoyage, d&eacute;tection d&rsquo;anomalies par Machine Learning, et g&eacute;n&eacute;ration d&rsquo;un rapport PDF en 7 secondes. 50+ tests, z&eacute;ro bug en production.</div>
+          <div class="proj-links">
+            <a class="proj-demo" href="https://colab.research.google.com/github/GomuGomuNo01/sales-report-automation/blob/main/demo_colab.ipynb" target="_blank">&#9654; Demo Colab</a>
+            <span>|</span>
+            <a class="proj-link" href="https://github.com/GomuGomuNo01/sales-report-automation" target="_blank">GitHub</a>
+          </div>
+        </div>
+
+        <div class="proj">
+          <div class="proj-name">Automatisation de Processus d&rsquo;Entreprise</div>
+          <div class="proj-desc">6 modules orchestr&eacute;s automatisant des t&acirc;ches m&eacute;tier&nbsp;: envoi d&rsquo;emails, mise &agrave; jour Excel, scraping web et formulaires Selenium. En production depuis plus de 2 ans.</div>
+          <div class="proj-links">
+            <a class="proj-demo" href="https://github.com/codespaces/new/GomuGomuNo01/automatisation-de-processus" target="_blank">&#9654; Codespaces</a>
+            <span>|</span>
+            <a class="proj-link" href="https://github.com/GomuGomuNo01/automatisation-de-processus" target="_blank">GitHub</a>
+          </div>
+        </div>
+
+        <div class="proj">
+          <div class="proj-name">API REST JWT - Spring Boot</div>
+          <div class="proj-desc">API REST s&eacute;curis&eacute;e avec authentification JWT, tests unitaires et d&rsquo;int&eacute;gration JUnit, et documentation Swagger auto-g&eacute;n&eacute;r&eacute;e. Architecture en couches, production-ready.</div>
+          <div class="proj-links">
+            <a class="proj-demo" href="https://jwt-api-gkdg.onrender.com/swagger-ui.html" target="_blank">&#9654; Swagger UI</a>
+            <span>|</span>
+            <a class="proj-link" href="https://github.com/GomuGomuNo01/api-rest-jwt" target="_blank">GitHub</a>
+          </div>
+        </div>
+
+        <div class="proj">
+          <div class="proj-name">Hospital - Syst&egrave;me de Gestion</div>
+          <div class="proj-desc">Application de gestion hospitali&egrave;re s&eacute;curis&eacute;e&nbsp;: 3 profils utilisateurs (Admin, M&eacute;decin, Infirmier), authentification double facteur (2FA) et journal d&rsquo;audit immuable.</div>
+          <div class="proj-links">
+            <a class="proj-link" href="https://github.com/GomuGomuNo01/Hospital" target="_blank">GitHub</a>
+          </div>
+        </div>
+
+        <div class="proj">
+          <div class="proj-name">Career-Ops - Job Search AI</div>
+          <div class="proj-desc">Syst&egrave;me IA de recherche d&rsquo;emploi&nbsp;: 14 modes d&rsquo;analyse, dashboard Go, g&eacute;n&eacute;ration automatique de PDF et traitement par lots. Automatisation intelligente du processus de candidature.</div>
+          <div class="proj-links">
+            <a class="proj-link" href="https://github.com/GomuGomuNo01/career-ops" target="_blank">GitHub</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FORMATION -->
+    <section class="section">
+      <h2>Formation</h2>
+      <div class="edu">
+        <div class="deg">Mast&egrave;re - Intelligence Artificielle &amp; Big Data</div>
+        <div class="sch">ESGI Paris &middot; 1&egrave;re ann&eacute;e en alternance &middot; rentr&eacute;e sept. 2026</div>
+      </div>
+      <div class="edu">
+        <div class="deg">Mast&egrave;re - Intelligence Artificielle &amp; Management de projet num&eacute;rique</div>
+        <div class="sch">ESIIA Torcy &middot; 1&egrave;re ann&eacute;e &middot; 2025-2026</div>
+      </div>
+      <div class="edu">
+        <div class="deg">Licence Pro. - R&eacute;seaux &amp; G&eacute;nie Logiciel</div>
+        <div class="sch">PIGIER C&ocirc;te d&rsquo;Ivoire &middot; Abidjan &middot; 2024-2025</div>
+      </div>
+      <div class="edu">
+        <div class="deg">BTS - D&eacute;veloppement d&rsquo;Applications</div>
+        <div class="sch">PIGIER C&ocirc;te d&rsquo;Ivoire &middot; Abidjan &middot; 2021-2022</div>
+      </div>
+    </section>
+
+  </div>
+</div>
+<script>
+(function () {
+  function scaleCV() {
+    var page = document.querySelector('.page');
+    var vw = window.innerWidth;
+    var pw = page.offsetWidth;
+    if (vw < pw) {
+      var s = vw / pw;
+      page.style.transformOrigin = 'top left';
+      page.style.transform = 'scale(' + s + ')';
+      document.body.style.height = Math.round(page.offsetHeight * s) + 'px';
+      document.body.style.overflowX = 'hidden';
+    } else {
+      page.style.transform = '';
+      document.body.style.height = '';
+    }
+  }
+  scaleCV();
+  window.addEventListener('resize', scaleCV);
+})();
+</script>
+</body>
+</html>
