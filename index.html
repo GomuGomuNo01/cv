@@ -72,8 +72,6 @@
 
     .btn-li { background: #0A66C2; }
     .btn-gh { background: #ffffff; }
-    .btn-dl { background: #e94560; }
-    .btn-dl svg { width: 18px; height: 18px; }
 
     /* ── Viewer ──────────────────────────────────────────── */
     .viewer {
@@ -153,18 +151,6 @@
           </svg>
         </a>
 
-        <!-- Download (icon only) -->
-        <a class="btn btn-dl" id="dl-btn"
-           href="CV_Kouadio_Cedric.pdf" download="CV_Kouadio_Cedric.pdf"
-           aria-label="Télécharger le CV">
-          <svg viewBox="0 0 24 24" fill="none" stroke="white"
-               stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-            <polyline points="7 10 12 15 17 10"/>
-            <line x1="12" y1="15" x2="12" y2="3"/>
-          </svg>
-        </a>
-
       </div>
     </div>
   </header>
@@ -178,14 +164,5 @@
          decoding="async">
   </main>
 
-  <script>
-    fetch('CV_Kouadio_Cedric.pdf')
-      .then(r => r.blob())
-      .then(b => {
-        const btn = document.getElementById('dl-btn');
-        if (btn) btn.href = URL.createObjectURL(b);
-      })
-      .catch(() => {});
-  </script>
 </body>
 </html>
