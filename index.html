@@ -187,7 +187,9 @@
         </a>
 
         <!-- Download -->
-        <button class="btn btn-dl" onclick="downloadCV()" aria-label="Télécharger le CV">
+        <a class="btn btn-dl" id="dl-btn"
+           href="CV_Kouadio_Cedric.pdf" download="CV_Kouadio_Cedric.pdf"
+           aria-label="Télécharger le CV">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
@@ -195,7 +197,7 @@
             <line x1="12" y1="15" x2="12" y2="3"/>
           </svg>
           <span class="dl-lbl">Télécharger</span>
-        </button>
+        </a>
 
       </div>
     </div>
@@ -220,26 +222,23 @@
   </footer>
 
   <script>
-    async function downloadCV() {
-      const filename = 'CV_Kouadio_Cedric.pdf';
-      try {
-        /* fetch as blob so iOS Safari triggers a real download
-           instead of navigating away to the built-in PDF viewer */
-        const res  = await fetch(filename);
-        const blob = await res.blob();
-        const url  = URL.createObjectURL(blob);
-        const a    = document.createElement('a');
-        a.href     = url;
-        a.download = filename;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        setTimeout(() => URL.revokeObjectURL(url), 2000);
-      } catch (e) {
-        /* network error fallback */
-        window.open(filename, '_blank');
-      }
-    }
+    /* Pre-fetch PDF as a blob so that when the user taps the download
+       button the createObjectURL + click are synchronous — iOS Safari
+       requires the anchor click to happen within the original user-gesture
+       frame; async fetch() breaks that, pre-fetching fixes it. */
+    let _pdfBlob = null;
+    fetch('CV_Kouadio_Cedric.pdf')
+      .then(r => r.blob())
+      .then(b => {
+        _pdfBlob = b;
+        const btn = document.getElementById('dl-btn');
+        if (btn && _pdfBlob) {
+          /* swap the direct href for a blob URL — now iOS 13+ downloads */
+          const blobUrl = URL.createObjectURL(_pdfBlob);
+          btn.href = blobUrl;
+        }
+      })
+      .catch(() => { /* keep original href as fallback */ });
   </script>
 </body>
 </html>
