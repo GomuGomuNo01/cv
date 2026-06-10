@@ -99,10 +99,8 @@
       overflow-y: auto;
       overflow-x: hidden;
       -webkit-overflow-scrolling: touch;
-      background: #c8c8c8;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      background: #ffffff;   /* white = no grey gap when image is shorter */
+      display: block;        /* block avoids flex gap below image */
     }
 
     /* CV image — pinch-to-zoom works natively */
@@ -111,9 +109,7 @@
       width: 100%;
       max-width: 860px;
       height: auto;
-      /* crisp rendering on high-DPI */
-      image-rendering: -webkit-optimize-contrast;
-      image-rendering: crisp-edges;
+      margin: 0 auto;        /* center on wide screens */
     }
 
     /* ─── Footer ──────────────────────────────────────── */
@@ -224,17 +220,24 @@
   </footer>
 
   <script>
-    function downloadCV() {
-      /* iOS Safari ignores download attr — open PDF in new tab instead */
-      if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-        window.open('CV_Kouadio_Cedric.pdf', '_blank');
-      } else {
+    async function downloadCV() {
+      const filename = 'CV_Kouadio_Cedric.pdf';
+      try {
+        /* fetch as blob so iOS Safari triggers a real download
+           instead of navigating away to the built-in PDF viewer */
+        const res  = await fetch(filename);
+        const blob = await res.blob();
+        const url  = URL.createObjectURL(blob);
         const a    = document.createElement('a');
-        a.href     = 'CV_Kouadio_Cedric.pdf';
-        a.download = 'CV_Kouadio_Cedric.pdf';
+        a.href     = url;
+        a.download = filename;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
+        setTimeout(() => URL.revokeObjectURL(url), 2000);
+      } catch (e) {
+        /* network error fallback */
+        window.open(filename, '_blank');
       }
     }
   </script>
