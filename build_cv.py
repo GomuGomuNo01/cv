@@ -13,8 +13,8 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 from pypdf import PdfReader, PdfWriter
 
-HTML_PATH = Path(__file__).parent / "CV_Kouadio_Cedric.html"
-PDF_PATH  = Path(__file__).parent / "CV_Kouadio_Cedric.pdf"
+HTML_PATH = Path(__file__).parent / "CV_Cedric_Kouadio.html"
+PDF_PATH  = Path(__file__).parent / "CV_Cedric_Kouadio.pdf"
 
 ATS_KEYWORDS = (
     "Data Analyst Data Scientist Big Data Intelligence Artificielle IA Automatisation "
