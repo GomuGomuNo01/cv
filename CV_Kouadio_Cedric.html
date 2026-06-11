@@ -53,7 +53,9 @@
     body { background: #fff; font-size: 10pt; }
     .page { box-shadow: none; }
     header { padding: 14px 16px 12px; }
-    .hdr-name { font-size: 19pt; }
+    .hdr-name { font-size: 18pt; }
+    .hdr-title { font-size: 9pt; letter-spacing: 1.5px; }
+    .hdr-pipe { font-size: 13pt; margin: 0 8px; }
     .body { padding: 10px 16px 10px; }
     .section { margin-bottom: 8px; }
     .exp { margin-bottom: 8px; }
@@ -74,20 +76,33 @@
     padding: 11px 22px 10px;
     border-bottom: 3px solid var(--gold);
   }
+  .hdr-name-title {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0;
+    margin-bottom: 5px;
+  }
   .hdr-name {
     color: #fff;
-    font-size: 17pt;
+    font-size: 19pt;
     font-weight: 700;
     letter-spacing: .5px;
-    margin-bottom: 2px;
+  }
+  .hdr-pipe {
+    color: var(--gold);
+    font-size: 15pt;
+    font-weight: 300;
+    margin: 0 10px;
+    opacity: .75;
   }
   .hdr-title {
     color: var(--gold);
-    font-size: 8pt;
+    font-size: 9.5pt;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 4px;
+    letter-spacing: 2px;
+    align-self: center;
   }
   .hdr-contact {
     color: rgba(255,255,255,.80);
@@ -258,8 +273,11 @@ Data Analyst Data Scientist Big Data Intelligence Artificielle IA Automatisation
 
   <!-- HEADER -->
   <header>
-    <div class="hdr-name">C&eacute;dric KOUADIO</div>
-    <div class="hdr-title">Alternance Data Analyst</div>
+    <div class="hdr-name-title">
+      <span class="hdr-name">C&eacute;dric KOUADIO</span>
+      <span class="hdr-pipe">|</span>
+      <span class="hdr-title">Alternance Data Analyst</span>
+    </div>
     <div class="hdr-contact">
       cedric.kouadio.dev@gmail.com
       <span class="sep">|</span>+33 07 44 27 65 00
