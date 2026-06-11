@@ -127,13 +127,15 @@
   }
   .hdr-text { flex: 1; min-width: 0; }
   .hdr-photo {
-    width: 72px;
-    height: 72px;
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
     object-fit: cover;
-    object-position: center 12%;
+    object-position: center 8%;
     border: 2.5px solid var(--gold);
     flex-shrink: 0;
+    image-rendering: -webkit-optimize-contrast;
+    filter: contrast(1.05) brightness(1.02);
   }
   .hdr-rhythm {
     font-size: 7pt;
@@ -285,7 +287,7 @@
     .page { width: 210mm; min-height: 297mm; box-shadow: none; background: white; }
     header { padding: 11px 22px 10px; }
     .hdr-main { gap: 12px; }
-    .hdr-photo { width: 62px; height: 62px; }
+    .hdr-photo { width: 78px; height: 78px; }
     .hdr-name-title { margin-bottom: 5px; }
     .hdr-social { margin-top: 2px; }
     .hdr-rhythm { margin-top: 3px; }
@@ -344,7 +346,7 @@ Data Analyst Data Scientist Big Data Intelligence Artificielle IA Automatisation
           </a>
         </div>
         <div class="hdr-rhythm">
-          <strong>Rythme alternance</strong> &mdash; 1&nbsp;semaine cours&nbsp;/&nbsp;3&nbsp;semaines entreprise
+          <strong>Rythme alternance</strong> : 1&nbsp;semaine cours&nbsp;/&nbsp;3&nbsp;semaines entreprise
         </div>
       </div>
       <img class="hdr-photo" src="Me.jpeg" alt="C&eacute;dric KOUADIO">
