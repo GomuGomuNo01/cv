@@ -283,11 +283,12 @@
 
   /* ─── PRINT / PDF — doit rester EN FIN de style pour surcharger les règles écran ── */
   @media print {
+    html { margin: 0; padding: 0; }
     body { font-size: 8pt; background: white; margin: 0; padding: 0; line-height: 1.43; }
-    .page { width: 210mm; min-height: 297mm; box-shadow: none; background: white; }
+    .page { width: 210mm; min-height: 297mm; margin: 0; box-shadow: none; background: white; }
     header { padding: 11px 22px 10px; }
     .hdr-main { gap: 12px; }
-    .hdr-photo { width: 96px; height: 96px; }
+    .hdr-photo { width: 108px; height: 108px; }
     .hdr-name-title { margin-bottom: 5px; }
     .hdr-social { margin-top: 2px; }
     .hdr-rhythm { margin-top: 3px; }
