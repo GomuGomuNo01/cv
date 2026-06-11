@@ -23,10 +23,10 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   @page { size: A4; margin: 0; }
 
-  /* ─── PRINT / PDF : contraintes A4 strictes ────────────── */
+  /* ─── PRINT / PDF ───────────────────────────────────────── */
   @media print {
     body { font-size: 8pt; background: white; }
-    .page { width: 210mm; height: 297mm; overflow: hidden; box-shadow: none; }
+    .page { width: 210mm; box-shadow: none; }
     .proj { padding: 3px 8px 2px 11px; }
     .proj-desc { font-size: 7pt; }
   }
