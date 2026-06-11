@@ -16,8 +16,9 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 from pypdf import PdfReader, PdfWriter
 
-HTML_PATH = Path(__file__).parent / "CV_Cedric_Kouadio.html"
-PDF_PATH  = Path(__file__).parent / "CV_Cedric_Kouadio.pdf"
+HTML_PATH  = Path(__file__).parent / "CV_Cedric_Kouadio.html"
+PDF_PATH   = Path(__file__).parent / "CV_Cedric_Kouadio.pdf"
+PHOTO_PATH = Path(__file__).parent / "Me.jpeg"
 
 ATS_KEYWORDS = (
     "Data Analyst Data Scientist Big Data Intelligence Artificielle IA Automatisation "
@@ -81,6 +82,58 @@ def create_ats_overlay() -> io.BytesIO:
     return buf
 
 
+def create_photo_layer() -> "io.BytesIO | None":
+    """Injecte la photo directement dans le PDF à la résolution native (928×928 px → ~790 DPI).
+    Chromium plafonne les images à ~150 DPI ; ce contournement donne une netteté maximale."""
+    if not PHOTO_PATH.exists():
+        return None
+
+    from PIL import Image as PILImage
+    from reportlab.lib.utils import ImageReader
+
+    W, H = A4  # 595.28 × 841.89 pt
+
+    # CSS print → pt : 1 CSS px @ 96 dpi = 0.75 pt
+    # Photo : 112 px, padding header : 11 px haut / 22 px droite
+    r_pt = 112 * 0.75 / 2        # 42 pt
+    cx   = W - 22 * 0.75 - r_pt  # 536.78 pt (centre X)
+    cy   = H - 11 * 0.75 - r_pt  # 791.64 pt (centre Y, origine bas-gauche)
+
+    # Crop carré centré sur le visage (miroir de object-position: center 5%)
+    with PILImage.open(PHOTO_PATH) as im:
+        iw, ih = im.size          # 928 × 1130
+        s    = min(iw, ih)        # 928
+        left = (iw - s) // 2     # 0
+        top  = int(ih * 0.01)    # ≈ 11 px depuis le haut
+        top  = max(0, min(top, ih - s))
+        im_sq = im.crop((left, top, left + s, top + s)).convert("RGB")
+        img_buf = io.BytesIO()
+        im_sq.save(img_buf, "PNG")
+        img_buf.seek(0)
+
+    ir = ImageReader(img_buf)
+
+    buf = io.BytesIO()
+    c = canvas.Canvas(buf, pagesize=A4)
+
+    # Clip circulaire + dessin de l'image pleine résolution
+    c.saveState()
+    clip = c.beginPath()
+    clip.circle(cx, cy, r_pt)
+    c.clipPath(clip, stroke=0, fill=0)
+    c.drawImage(ir, cx - r_pt, cy - r_pt, width=2 * r_pt, height=2 * r_pt)
+    c.restoreState()
+
+    # Bordure dorée (#e94560) dessinée hors du clip
+    c.setStrokeColorRGB(233 / 255, 69 / 255, 96 / 255)
+    c.setLineWidth(1.5)
+    c.circle(cx, cy, r_pt, stroke=1, fill=0)
+
+    c.save()
+    buf.seek(0)
+    return buf
+
+
 def embed_images(html: str, base_dir: Path) -> str:
     """Remplace src="fichier.ext" par des data URI base64 pour forcer la pleine résolution.
     Les JPEG sont convertis en PNG lossless pour éviter la double compression dans le PDF."""
@@ -121,17 +174,18 @@ async def build():
             margin={"top": "0", "right": "0", "bottom": "0", "left": "0"},
         )
         await browser.close()
-    print(f"[1/2] PDF Playwright   : OK")
+    print(f"[1/3] PDF Playwright   : OK")
 
-    # ── Étape 2 : injection du bloc ATS via reportlab + pypdf ─
+    # ── Étape 2 : photo haute résolution via reportlab ────────
+    photo_buf   = create_photo_layer()
     overlay_buf = create_ats_overlay()
     reader      = PdfReader(str(PDF_PATH))
-    overlay     = PdfReader(overlay_buf)
     writer      = PdfWriter()
 
-    # Fusionner la couche ATS sur la page 1
     main_page = reader.pages[0]
-    main_page.merge_page(overlay.pages[0])
+    if photo_buf:
+        main_page.merge_page(PdfReader(photo_buf).pages[0])
+    main_page.merge_page(PdfReader(overlay_buf).pages[0])
     writer.add_page(main_page)
 
     # Conserver les pages suivantes si elles existent
@@ -142,7 +196,7 @@ async def build():
         writer.write(f)
 
     size_kb = PDF_PATH.stat().st_size // 1024
-    print(f"[2/2] Bloc ATS injecte : OK  ->  {PDF_PATH.name} ({size_kb} Ko)")
+    print(f"[3/3] Photo HR + ATS   : OK  ->  {PDF_PATH.name} ({size_kb} Ko)")
 
 
 asyncio.run(build())
