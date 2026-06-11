@@ -5,7 +5,10 @@ build_cv.py – Génère CV_Kouadio_Cedric.pdf en deux étapes :
      correctement encodé et extractible par tous les parseurs PDF des ATS.
 """
 import asyncio
+import base64
 import io
+import re
+import tempfile
 from pathlib import Path
 
 from playwright.async_api import async_playwright
@@ -78,12 +81,31 @@ def create_ats_overlay() -> io.BytesIO:
     return buf
 
 
+def embed_images(html: str, base_dir: Path) -> str:
+    """Remplace src="fichier.ext" par des data URI base64 pour forcer la pleine résolution."""
+    def replacer(m):
+        src = m.group(1)
+        if src.startswith("http") or src.startswith("data:"):
+            return m.group(0)
+        img_path = base_dir / src
+        if not img_path.exists():
+            return m.group(0)
+        mime = "image/jpeg" if src.lower().endswith((".jpg", ".jpeg")) else "image/png"
+        data = base64.b64encode(img_path.read_bytes()).decode()
+        return f'src="data:{mime};base64,{data}"'
+    return re.sub(r'src="([^"]+)"', replacer, html)
+
+
 async def build():
     # ── Étape 1 : Playwright → PDF ────────────────────────────
+    # Intégrer les images en base64 pour la pleine résolution dans le PDF
+    html_content = HTML_PATH.read_text(encoding="utf-8")
+    html_embedded = embed_images(html_content, HTML_PATH.parent)
+
     async with async_playwright() as p:
         browser = await p.chromium.launch()
         page = await browser.new_page()
-        await page.goto(HTML_PATH.as_uri(), wait_until="networkidle")
+        await page.set_content(html_embedded, wait_until="networkidle")
         await page.pdf(
             path=str(PDF_PATH),
             format="A4",
