@@ -6,150 +6,211 @@
 <meta name="description" content="CV Cedric KOUADIO – Data Analyst Big Data IA Automatisation – Mastere IA Big Data ESGI Paris – Alternance 2026-2027 Ile-de-France">
 <meta name="keywords" content="Data Analyst, Big Data, IA, automatisation, Python, pandas, numpy, scikit-learn, FastAPI, LangChain, RAG, Machine Learning, Java, Spring Boot, Laravel, ETL, SQL, Docker, CI/CD, GitHub, alternance">
 <meta name="author" content="Cedric KOUADIO">
-<title>CV – Cédric KOUADIO · Data Analyst · Big Data · IA &amp; Automatisation · Alternance 2026–2027</title>
+<title>CV - Cedric KOUADIO · Data Analyst · Big Data · IA & Automatisation · Alternance 2026-2027</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
   :root {
     --dark:  #1a1a2e;
     --blue:  #0f3460;
     --gold:  #e94560;
-    --text:  #1c1c1c;
+    --text:  #2c2c2c;
     --muted: #6c757d;
-    --light: #f4f5f7;
+    --light: #f5f6f8;
     --mid:   #dde1e8;
   }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  @page { size:A4; margin:0; }
-  @media print { body { font-size: 8.5pt; } .page { box-shadow:none !important; } }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  @page { size: A4; margin: 0; }
+  @media print { body { font-size: 8pt; } .page { box-shadow: none !important; } }
 
   body {
     font-family: 'Outfit', Calibri, Arial, sans-serif;
-    font-size: 9pt;
+    font-size: 8.5pt;
     color: var(--text);
-    background: #e8e8e8;
-    line-height: 1.35;
+    background: #e0e0e0;
+    line-height: 1.42;
   }
+
   .page {
     width: 210mm;
     height: 297mm;
     overflow: hidden;
     margin: 0 auto;
-    background: white;
+    background: #fff;
     box-shadow: 0 4px 40px rgba(0,0,0,.18);
   }
 
-  /* ── HEADER ── */
+  /* ─── HEADER ─────────────────────────────────────────── */
   header {
     background: var(--dark);
-    padding: 9px 22px 8px;
-    display: flex;
-    align-items: center;
+    padding: 10px 22px 9px;
     border-bottom: 3px solid var(--gold);
   }
-  header img { display: none; }
-  .hdr-info { flex: 1; }
-  h1 {
-    color: white;
-    font-size: 14.5pt;
+  .hdr-name {
+    color: #fff;
+    font-size: 17pt;
     font-weight: 700;
-    letter-spacing: .3px;
-    margin-bottom: 3px;
+    letter-spacing: .5px;
+    margin-bottom: 2px;
   }
   .hdr-title {
     color: var(--gold);
-    font-size: 8.5pt;
+    font-size: 8pt;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: .8px;
-    margin-bottom: 3px;
-  }
-  .hdr-contact {
-    color: rgba(255,255,255,.82);
-    font-size: 7.5pt;
-    line-height: 1.65;
-  }
-  .hdr-contact a { color: rgba(255,255,255,.82); text-decoration: none; }
-  .sep { color: rgba(255,255,255,.35); margin: 0 5px; }
-
-  /* ── BODY ── */
-  .body { padding: 6px 22px 4px; }
-
-  /* ── SECTIONS ── */
-  .section { margin-bottom: 3px; }
-
-  h2 {
-    font-size: 8.5pt;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.3px;
-    color: var(--blue);
-    border-bottom: 2px solid var(--gold);
-    padding-bottom: 2px;
+    letter-spacing: 1px;
     margin-bottom: 4px;
   }
+  .hdr-contact {
+    color: rgba(255,255,255,.80);
+    font-size: 7.5pt;
+    line-height: 1.6;
+  }
+  .hdr-contact a { color: rgba(255,255,255,.80); text-decoration: none; }
+  .sep { color: rgba(255,255,255,.30); margin: 0 6px; }
 
-  /* ── RÉSUMÉ ── */
+  /* ─── BODY ───────────────────────────────────────────── */
+  .body { padding: 8px 22px 6px; }
+
+  /* ─── SECTIONS ───────────────────────────────────────── */
+  .section { margin-bottom: 5px; }
+
+  h2 {
+    font-size: 8pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+    color: var(--blue);
+    border-bottom: 1.5px solid var(--gold);
+    padding-bottom: 2px;
+    margin-bottom: 5px;
+  }
+
+  /* ─── RÉSUMÉ ─────────────────────────────────────────── */
   .resume-text {
     font-size: 8pt;
-    line-height: 1.44;
+    line-height: 1.5;
     text-align: justify;
+    color: var(--text);
     border-left: 3px solid var(--gold);
-    padding: 4px 10px;
+    padding: 5px 10px 5px 10px;
     background: var(--light);
     border-radius: 0 3px 3px 0;
   }
 
-  /* ── EXPÉRIENCES ── */
-  .exp { margin-bottom: 4px; padding-left: 10px; border-left: 2px solid var(--mid); position: relative; }
-  .exp::before { content:""; width:7px; height:7px; border-radius:50%; background:var(--gold); position:absolute; left:-4.5px; top:5px; }
-  .exp-hdr { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:4px; }
-  h3 { font-size: 9.5pt; font-weight: 700; color: var(--dark); }
-  .exp-date { font-size: 7.5pt; font-weight: 600; color: var(--muted); white-space: nowrap; }
-  .exp-co { font-size: 7.5pt; color: var(--muted); font-style: italic; margin: 0 0 1px; }
+  /* ─── EXPÉRIENCES ────────────────────────────────────── */
+  .exp {
+    margin-bottom: 5px;
+    padding-left: 11px;
+    border-left: 2px solid var(--mid);
+    position: relative;
+  }
+  .exp::before {
+    content: "";
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--gold);
+    position: absolute;
+    left: -4.5px; top: 5px;
+  }
+  h3 {
+    font-size: 9pt;
+    font-weight: 700;
+    color: var(--dark);
+  }
+  .exp-co {
+    font-size: 7.5pt;
+    color: var(--muted);
+    font-style: italic;
+    margin: 1px 0 3px;
+  }
   ul { list-style: none; }
-  ul li { font-size: 8pt; padding-left: 12px; position: relative; margin-bottom: 0; }
-  ul li::before { content:"•"; position:absolute; left:0; color:var(--gold); font-weight:700; }
+  ul li {
+    font-size: 8pt;
+    padding-left: 12px;
+    position: relative;
+    margin-bottom: 1px;
+    line-height: 1.38;
+  }
+  ul li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-weight: 700;
+  }
 
-  /* ── FORMATION ── */
-  .edu { padding:1px 0; margin-bottom:2px; }
-  .edu .deg { font-size:8pt; font-weight:700; color:var(--dark); }
-  .edu .sch { font-size:7pt; color:var(--muted); }
+  /* ─── COMPÉTENCES ────────────────────────────────────── */
+  .skill-row {
+    font-size: 8pt;
+    margin-bottom: 2px;
+    line-height: 1.38;
+  }
+  .skill-row strong { color: var(--dark); font-weight: 600; }
 
-  /* ── COMPÉTENCES ── */
-  .skill-row { font-size: 8pt; margin-bottom: 1px; line-height: 1.35; }
-  .skill-row strong { color: var(--dark); }
+  /* ─── LANGUES ────────────────────────────────────────── */
+  .lang-row {
+    font-size: 8pt;
+    display: inline-block;
+    margin-right: 22px;
+    line-height: 1.4;
+  }
+  .lang-row strong { color: var(--dark); font-weight: 600; }
 
-  /* ── LANGUES ── */
-  .lang-row { font-size: 8pt; margin-bottom: 0; line-height: 1.42; display: inline-block; margin-right: 18px; }
-  .lang-row strong { color: var(--dark); }
+  /* ─── PROJETS ────────────────────────────────────────── */
+  .projects-grid { display: grid; grid-template-columns: 1fr; gap: 2px; }
+  .proj {
+    border: 1px solid var(--mid);
+    border-radius: 3px;
+    padding: 3px 9px 3px 12px;
+    position: relative;
+    overflow: hidden;
+  }
+  .proj::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--gold);
+  }
+  .proj-name {
+    font-size: 7.5pt;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 1px;
+  }
+  .proj-desc {
+    font-size: 7pt;
+    color: var(--text);
+    line-height: 1.32;
+    margin-bottom: 1px;
+  }
+  a.proj-link { font-size: 6.5pt; color: var(--gold);  font-weight: 700; text-decoration: none; display: inline-block; }
+  a.proj-demo { font-size: 6.5pt; color: var(--blue); font-weight: 700; text-decoration: none; display: inline-block; }
+  .proj-links { display: flex; gap: 6px; align-items: center; flex-wrap: nowrap; }
+  .proj-links span { color: var(--mid); font-size: 6pt; }
 
-  /* ── PROJETS ── */
-  .projects-grid { display:grid; grid-template-columns:1fr; gap:2px; }
-  .proj { border:1px solid var(--mid); border-radius:4px; padding:3px 8px 2px 11px; position:relative; overflow:hidden; }
-  .proj::before { content:""; position:absolute; top:0; left:0; width:3px; height:100%; background:var(--gold); }
-  .proj-name { font-size:7.5pt; font-weight:700; color:var(--dark); margin-bottom:1px; }
-  .proj-desc { font-size:6.5pt; color:var(--text); line-height:1.32; margin-bottom:0; }
-  a.proj-link { font-size:6pt; color:var(--gold); font-weight:700; display:inline-block; text-decoration:none; }
-  a.proj-demo { font-size:6pt; color:var(--blue); font-weight:700; display:inline-block; text-decoration:none; }
-  .proj-links { display:flex; gap:6px; align-items:center; flex-wrap:nowrap; }
-  .proj-links span { color:var(--mid); font-size:6pt; }
+  /* ─── FORMATION ──────────────────────────────────────── */
+  .edu { padding: 1px 0; margin-bottom: 3px; }
+  .edu .deg { font-size: 8pt;   font-weight: 700; color: var(--dark); }
+  .edu .sch { font-size: 7.5pt; color: var(--muted); }
 </style>
 </head>
 <body>
 <div class="page">
 
+  <!-- HEADER -->
   <header>
-    <div class="hdr-info">
-      <h1>C&eacute;dric KOUADIO</h1>
-      <div class="hdr-title">Alternance Data Analyst &nbsp;&middot;&nbsp; Big Data &nbsp;&middot;&nbsp; IA &amp; Automatisation</div>
-      <div class="hdr-contact">
-        cedric.kouadio.dev@gmail.com
-        <span class="sep">|</span>+33 07 44 27 65 00
-        <span class="sep">|</span>&Icirc;le-de-France (Paris &amp; r&eacute;gion)<br>
-        <a href="https://www.linkedin.com/in/cedric-kouadio-dev" target="_blank">linkedin.com/in/cedric-kouadio-dev</a>
-        <span class="sep">|</span>
-        <a href="https://github.com/GomuGomuNo01" target="_blank">github.com/GomuGomuNo01</a>
-      </div>
+    <div class="hdr-name">C&eacute;dric KOUADIO</div>
+    <div class="hdr-title">Alternance Data Analyst &nbsp;&middot;&nbsp; Big Data &nbsp;&middot;&nbsp; IA &amp; Automatisation</div>
+    <div class="hdr-contact">
+      cedric.kouadio.dev@gmail.com
+      <span class="sep">|</span>+33 07 44 27 65 00
+      <span class="sep">|</span>&Icirc;le-de-France (Paris &amp; r&eacute;gion)<br>
+      <a href="https://linkedin.com/in/cedric-kouadio-dev" target="_blank">linkedin.com/in/cedric-kouadio-dev</a>
+      <span class="sep">|</span>
+      <a href="https://github.com/GomuGomuNo01" target="_blank">github.com/GomuGomuNo01</a>
     </div>
   </header>
 
@@ -159,7 +220,7 @@
     <section class="section">
       <h2>R&eacute;sum&eacute; Professionnel</h2>
       <p class="resume-text">
-        &Eacute;tudiant en <strong>Master IA &amp; Big Data</strong> et avec <strong>2 ans d&rsquo;exp&eacute;rience</strong> en d&eacute;veloppement logiciel, je recherche une <strong>alternance</strong> afin de mettre &agrave; profit mes comp&eacute;tences en <strong>backend et en IA appliqu&eacute;e</strong> sur des projets concrets. Habitu&eacute; &agrave; concevoir des solutions robustes et maintenables, je peux contribuer rapidement au d&eacute;veloppement d&rsquo;outils &agrave; forte valeur ajout&eacute;e. Motiv&eacute;, adaptable et orient&eacute; r&eacute;sultats, je souhaite accompagner votre entreprise dans ses projets tout en d&eacute;veloppant mon expertise au contact de vos &eacute;quipes.
+        &Eacute;tudiant en Master IA &amp; Big Data et avec 2 ans d&rsquo;exp&eacute;rience en d&eacute;veloppement logiciel, je recherche une alternance afin de mettre &agrave; profit mes comp&eacute;tences en backend et en IA appliqu&eacute;e sur des projets concrets. Habitu&eacute; &agrave; concevoir des solutions robustes et maintenables, je peux contribuer rapidement au d&eacute;veloppement d&rsquo;outils &agrave; forte valeur ajout&eacute;e. Motiv&eacute;, adaptable et orient&eacute; r&eacute;sultats, je souhaite accompagner votre entreprise dans ses projets tout en d&eacute;veloppant mon expertise au contact de vos &eacute;quipes.
       </p>
     </section>
 
@@ -168,9 +229,7 @@
       <h2>Exp&eacute;riences Professionnelles</h2>
 
       <div class="exp">
-        <div class="exp-hdr">
-          <h3>D&eacute;veloppeur Web Java</h3>
-        </div>
+        <h3>D&eacute;veloppeur Web Java</h3>
         <div class="exp-co">IT-CENTREX &middot; Abidjan, C&ocirc;te d&rsquo;Ivoire &middot; Juillet 2024 - Ao&ucirc;t 2025</div>
         <ul>
           <li>D&eacute;veloppement et s&eacute;curisation d&rsquo;APIs REST avec <strong>Spring Boot</strong> (authentification JWT, architecture Controller/Service/Repository)</li>
@@ -182,9 +241,7 @@
       </div>
 
       <div class="exp">
-        <div class="exp-hdr">
-          <h3>Stagiaire D&eacute;veloppeur Laravel</h3>
-        </div>
+        <h3>Stagiaire D&eacute;veloppeur Laravel</h3>
         <div class="exp-co">TASNIM SOLUTION &middot; Abidjan, C&ocirc;te d&rsquo;Ivoire &middot; F&eacute;vrier - Avril 2024</div>
         <ul>
           <li>D&eacute;veloppement d&rsquo;applications web avec <strong>Laravel (PHP)</strong>, patterns MVC et ORM Eloquent</li>
@@ -193,9 +250,7 @@
       </div>
 
       <div class="exp">
-        <div class="exp-hdr">
-          <h3>Stagiaire D&eacute;veloppeur Java</h3>
-        </div>
+        <h3>Stagiaire D&eacute;veloppeur Java</h3>
         <div class="exp-co">Institut Pasteur de C&ocirc;te d&rsquo;Ivoire &middot; Abidjan &middot; Novembre 2022 - Juillet 2023</div>
         <ul>
           <li>D&eacute;veloppement d&rsquo;applications web avec <strong>Spring Boot</strong> dans un environnement m&eacute;dical</li>
@@ -290,7 +345,7 @@
       <h2>Formation</h2>
       <div class="edu">
         <div class="deg">Mast&egrave;re - Intelligence Artificielle &amp; Big Data</div>
-        <div class="sch">ESGI Paris &middot; 1&egrave;re ann&eacute;e en alternance &middot; rentr&eacute;e sept. 2026</div>
+        <div class="sch">ESGI Paris &middot; 1&egrave;re ann&eacute;e en alternance &middot; rentr&eacute;e septembre 2026</div>
       </div>
       <div class="edu">
         <div class="deg">Mast&egrave;re - Intelligence Artificielle &amp; Management de projet num&eacute;rique</div>
