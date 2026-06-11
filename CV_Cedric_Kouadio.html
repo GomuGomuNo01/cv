@@ -42,24 +42,42 @@
 
   /* ─── MOBILE (≤ 620px) ──────────────────────────────────── */
   @media screen and (max-width: 620px) {
-    body { background: #fff; font-size: 10pt; }
+    body  { background: #fff; font-size: 9pt; }
     .page { box-shadow: none; }
-    header { padding: 14px 16px 12px; }
-    .hdr-name { font-size: 13pt; }
-    .hdr-title { font-size: 13pt; letter-spacing: 1.2px; }
-    .hdr-pipe { font-size: 12pt; margin: 0 8px; }
-    .body { padding: 10px 16px 10px; }
+
+    /* ── Header mobile ── */
+    header { padding: 12px 14px 10px; }
+    .hdr-main  { gap: 10px; align-items: center; }
+    .hdr-photo { width: 72px; height: 72px; }
+    .hdr-name  { font-size: 10.5pt; }
+    .hdr-pipe  { font-size: 10pt; margin: 0 6px; }
+    .hdr-title { font-size: 10pt; letter-spacing: 0.4px; }
+    .hdr-name-title { margin-bottom: 5px; flex-wrap: wrap; }
+    .hdr-contact { font-size: 7pt; line-height: 1.55; }
+    .sep { margin: 0 4px; }
+    .hdr-social { flex-wrap: wrap; gap: 2px 0; margin-top: 3px; }
+    .hdr-social-link { font-size: 7pt; }
+    .hdr-rhythm { font-size: 6.5pt; margin-top: 3px; }
+
+    /* ── Body mobile ── */
+    .body    { padding: 10px 14px 10px; }
     .section { margin-bottom: 8px; }
-    .exp { margin-bottom: 8px; }
+    .exp     { margin-bottom: 8px; }
+    .resume-text { font-size: 8.5pt; }
+    ul li { font-size: 8.5pt; }
+    .skill-row { margin-bottom: 4px; font-size: 8.5pt; }
+
+    /* ── Projets : 1 colonne sur mobile ── */
     .projects-grid { grid-template-columns: 1fr; gap: 6px; }
-    .proj { padding: 6px 10px 5px 14px; }
-    .proj-name { font-size: 9pt; }
-    .proj-desc { font-size: 8pt; }
+    .proj     { padding: 6px 10px 5px 14px; }
+    .proj-name  { font-size: 9pt; }
+    .proj-desc  { font-size: 8pt; }
     a.proj-link, a.proj-demo { font-size: 8pt; }
-    .skill-row { margin-bottom: 4px; }
-    .edu { margin-bottom: 6px; }
-    .edu .deg { font-size: 9.5pt; }
-    .edu .sch { font-size: 8.5pt; }
+
+    /* ── Formations ── */
+    .edu       { margin-bottom: 6px; }
+    .edu .deg  { font-size: 9pt; }
+    .edu .sch  { font-size: 8pt; }
   }
 
   /* ─── HEADER ─────────────────────────────────────────── */
