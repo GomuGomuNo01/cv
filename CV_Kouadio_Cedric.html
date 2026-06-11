@@ -23,20 +23,12 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   @page { size: A4; margin: 0; }
 
-  /* ─── PRINT / PDF ───────────────────────────────────────── */
-  @media print {
-    body { font-size: 8pt; background: white; margin: 0; padding: 0; }
-    .page { width: 210mm; min-height: 297mm; box-shadow: none; background: white; }
-    .proj { padding: 3px 8px 2px 11px; }
-    .proj-desc { font-size: 7pt; }
-  }
-
   body {
     font-family: 'Outfit', Calibri, Arial, sans-serif;
     font-size: 9pt;
     color: var(--text);
     background: #e0e0e0;
-    line-height: 1.43;
+    line-height: 1.5;
   }
 
   /* ─── PAGE : responsive sur écran, A4 à l'impression ────── */
@@ -73,7 +65,7 @@
   /* ─── HEADER ─────────────────────────────────────────── */
   header {
     background: var(--dark);
-    padding: 11px 22px 10px;
+    padding: 13px 22px 12px;
     border-bottom: 3px solid var(--gold);
   }
   .hdr-name-title {
@@ -81,7 +73,7 @@
     align-items: center;
     flex-wrap: wrap;
     gap: 0;
-    margin-bottom: 5px;
+    margin-bottom: 7px;
   }
   .hdr-name {
     color: #fff;
@@ -114,7 +106,7 @@
     display: flex;
     align-items: center;
     gap: 0;
-    margin-top: 2px;
+    margin-top: 4px;
   }
   .hdr-social-link {
     display: inline-flex;
@@ -128,10 +120,10 @@
   .hdr-social-link svg { flex-shrink: 0; }
 
   /* ─── BODY ───────────────────────────────────────────── */
-  .body { padding: 9px 22px 6px; }
+  .body { padding: 10px 22px 8px; }
 
   /* ─── SECTIONS ───────────────────────────────────────── */
-  .section { margin-bottom: 6px; }
+  .section { margin-bottom: 7px; }
   .section:last-child { margin-bottom: 0; }
 
   h2 {
@@ -141,25 +133,25 @@
     letter-spacing: 1.4px;
     color: var(--blue);
     border-bottom: 1.5px solid var(--gold);
-    padding-bottom: 2px;
-    margin-bottom: 5px;
+    padding-bottom: 3px;
+    margin-bottom: 6px;
   }
 
   /* ─── RÉSUMÉ ─────────────────────────────────────────── */
   .resume-text {
     font-size: 8pt;
-    line-height: 1.5;
+    line-height: 1.6;
     text-align: justify;
     color: var(--text);
     border-left: 3px solid var(--gold);
-    padding: 5px 10px;
+    padding: 7px 12px;
     background: var(--light);
     border-radius: 0 3px 3px 0;
   }
 
   /* ─── EXPÉRIENCES ────────────────────────────────────── */
   .exp {
-    margin-bottom: 6px;
+    margin-bottom: 7px;
     padding-left: 11px;
     border-left: 2px solid var(--mid);
     position: relative;
@@ -182,15 +174,15 @@
     font-size: 8pt;
     color: var(--muted);
     font-style: italic;
-    margin: 1px 0 2px;
+    margin: 1px 0 3px;
   }
   ul { list-style: none; }
   ul li {
     font-size: 8pt;
     padding-left: 12px;
     position: relative;
-    margin-bottom: 1px;
-    line-height: 1.4;
+    margin-bottom: 2px;
+    line-height: 1.45;
   }
   ul li::before {
     content: "•";
@@ -203,8 +195,8 @@
   /* ─── COMPÉTENCES ────────────────────────────────────── */
   .skill-row {
     font-size: 8pt;
-    margin-bottom: 2px;
-    line-height: 1.4;
+    margin-bottom: 3px;
+    line-height: 1.5;
   }
   .skill-row strong { color: var(--dark); font-weight: 600; }
 
@@ -213,7 +205,7 @@
     font-size: 8pt;
     display: inline-block;
     margin-right: 22px;
-    line-height: 1.4;
+    line-height: 1.5;
   }
   .lang-row strong { color: var(--dark); font-weight: 600; }
 
@@ -221,12 +213,12 @@
   .projects-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 4px 8px;
+    gap: 6px 10px;
   }
   .proj {
     border: 1px solid var(--mid);
     border-radius: 3px;
-    padding: 4px 8px 3px 11px;
+    padding: 6px 8px 5px 11px;
     position: relative;
     overflow: hidden;
   }
@@ -241,13 +233,13 @@
     font-size: 8pt;
     font-weight: 700;
     color: var(--dark);
-    margin-bottom: 2px;
+    margin-bottom: 3px;
   }
   .proj-desc {
     font-size: 7pt;
     color: var(--text);
-    line-height: 1.35;
-    margin-bottom: 2px;
+    line-height: 1.45;
+    margin-bottom: 3px;
   }
   a.proj-link { font-size: 7pt; color: var(--gold);  font-weight: 700; text-decoration: none; display: inline-block; }
   a.proj-demo { font-size: 7pt; color: var(--blue); font-weight: 700; text-decoration: none; display: inline-block; }
@@ -255,10 +247,32 @@
   .proj-links span { color: var(--mid); font-size: 6pt; }
 
   /* ─── FORMATIONS ─────────────────────────────────────── */
-  .edu { padding: 1px 0; margin-bottom: 4px; }
+  .edu { padding: 1px 0; margin-bottom: 5px; }
   .edu:last-child { margin-bottom: 0; }
   .edu .deg { font-size: 8.5pt; font-weight: 700; color: var(--dark); }
-  .edu .sch { font-size: 8pt;   color: var(--muted); }
+  .edu .sch { font-size: 8pt;   color: var(--muted); margin-top: 1px; }
+
+  /* ─── PRINT / PDF — doit rester EN FIN de style pour surcharger les règles écran ── */
+  @media print {
+    body { font-size: 8pt; background: white; margin: 0; padding: 0; line-height: 1.43; }
+    .page { width: 210mm; min-height: 297mm; box-shadow: none; background: white; }
+    header { padding: 11px 22px 10px; }
+    .hdr-name-title { margin-bottom: 5px; }
+    .hdr-social { margin-top: 2px; }
+    .body { padding: 9px 22px 6px; }
+    .section { margin-bottom: 6px; }
+    h2 { padding-bottom: 2px; margin-bottom: 5px; }
+    .resume-text { padding: 5px 10px; line-height: 1.5; }
+    .exp { margin-bottom: 6px; }
+    .exp-co { margin: 1px 0 2px; }
+    ul li { margin-bottom: 1px; line-height: 1.4; }
+    .skill-row { margin-bottom: 2px; line-height: 1.4; }
+    .edu { padding: 1px 0; margin-bottom: 4px; }
+    .projects-grid { gap: 4px 8px; }
+    .proj { padding: 4px 8px 3px 11px; }
+    .proj-name { margin-bottom: 2px; }
+    .proj-desc { font-size: 7pt; line-height: 1.35; margin-bottom: 2px; }
+  }
 </style>
 </head>
 <body>
