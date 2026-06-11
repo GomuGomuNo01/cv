@@ -22,7 +22,12 @@
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
   @page { size: A4; margin: 0; }
-  @media print { body { font-size: 8pt; } .page { box-shadow: none !important; } }
+
+  /* ─── PRINT / PDF : contraintes A4 strictes ────────────── */
+  @media print {
+    body { font-size: 8pt; background: white; }
+    .page { width: 210mm; height: 297mm; overflow: hidden; box-shadow: none; }
+  }
 
   body {
     font-family: 'Outfit', Calibri, Arial, sans-serif;
@@ -32,13 +37,33 @@
     line-height: 1.43;
   }
 
+  /* ─── PAGE : responsive sur écran, A4 à l'impression ────── */
   .page {
     width: 210mm;
-    height: 297mm;
-    overflow: hidden;
+    max-width: 100%;
     margin: 0 auto;
     background: #fff;
     box-shadow: 0 4px 40px rgba(0,0,0,.18);
+  }
+
+  /* ─── MOBILE (≤ 620px) ──────────────────────────────────── */
+  @media screen and (max-width: 620px) {
+    body { background: #fff; font-size: 10pt; }
+    .page { box-shadow: none; }
+    header { padding: 14px 16px 12px; }
+    .hdr-name { font-size: 19pt; }
+    .body { padding: 10px 16px 10px; }
+    .section { margin-bottom: 8px; }
+    .exp { margin-bottom: 8px; }
+    .projects-grid { grid-template-columns: 1fr; gap: 6px; }
+    .proj { padding: 6px 10px 5px 14px; }
+    .proj-name { font-size: 9pt; }
+    .proj-desc { font-size: 8pt; }
+    a.proj-link, a.proj-demo { font-size: 8pt; }
+    .skill-row { margin-bottom: 4px; }
+    .edu { margin-bottom: 6px; }
+    .edu .deg { font-size: 9.5pt; }
+    .edu .sch { font-size: 8.5pt; }
   }
 
   /* ─── HEADER ─────────────────────────────────────────── */
@@ -402,26 +427,5 @@ Data Analyst Data Scientist Big Data Intelligence Artificielle IA Automatisation
   </div>
 </div>
 
-<script>
-(function () {
-  function scaleCV() {
-    var page = document.querySelector('.page');
-    var vw = window.innerWidth;
-    var pw = page.offsetWidth;
-    if (vw < pw) {
-      var s = vw / pw;
-      page.style.transformOrigin = 'top left';
-      page.style.transform = 'scale(' + s + ')';
-      document.body.style.height = Math.round(page.offsetHeight * s) + 'px';
-      document.body.style.overflowX = 'hidden';
-    } else {
-      page.style.transform = '';
-      document.body.style.height = '';
-    }
-  }
-  scaleCV();
-  window.addEventListener('resize', scaleCV);
-})();
-</script>
 </body>
 </html>
