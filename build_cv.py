@@ -82,7 +82,8 @@ def create_ats_overlay() -> io.BytesIO:
 
 
 def embed_images(html: str, base_dir: Path) -> str:
-    """Remplace src="fichier.ext" par des data URI base64 pour forcer la pleine résolution."""
+    """Remplace src="fichier.ext" par des data URI base64 pour forcer la pleine résolution.
+    Les JPEG sont convertis en PNG lossless pour éviter la double compression dans le PDF."""
     def replacer(m):
         src = m.group(1)
         if src.startswith("http") or src.startswith("data:"):
@@ -90,9 +91,15 @@ def embed_images(html: str, base_dir: Path) -> str:
         img_path = base_dir / src
         if not img_path.exists():
             return m.group(0)
-        mime = "image/jpeg" if src.lower().endswith((".jpg", ".jpeg")) else "image/png"
+        if src.lower().endswith((".jpg", ".jpeg")):
+            from PIL import Image as _Image
+            buf = io.BytesIO()
+            with _Image.open(img_path) as im:
+                im.save(buf, format="PNG", optimize=False)
+            data = base64.b64encode(buf.getvalue()).decode()
+            return f'src="data:image/png;base64,{data}"'
         data = base64.b64encode(img_path.read_bytes()).decode()
-        return f'src="data:{mime};base64,{data}"'
+        return f'src="data:image/png;base64,{data}"'
     return re.sub(r'src="([^"]+)"', replacer, html)
 
 
@@ -104,7 +111,7 @@ async def build():
 
     async with async_playwright() as p:
         browser = await p.chromium.launch()
-        context = await browser.new_context(device_scale_factor=2)
+        context = await browser.new_context(device_scale_factor=3)
         page = await context.new_page()
         await page.set_content(html_embedded, wait_until="networkidle")
         await page.pdf(
