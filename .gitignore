@@ -22,6 +22,7 @@ media/*
 !media/education/
 media/projects/*
 !media/projects/*.png
+!media/projects/*.gif
 !media/projects/gallery/
 media/projects/gallery/*
 !media/projects/gallery/*.png
