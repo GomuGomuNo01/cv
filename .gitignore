@@ -16,11 +16,14 @@ ENV/
 *.env
 
 # Médias uploadés (formulaires, admin) : ignorés, sauf les images
-# illustratives des projets du portfolio, versionnées volontairement.
+# illustratives des projets et les logos de formation, versionnés volontairement.
 media/*
 !media/projects/
+!media/education/
 media/projects/*
 !media/projects/*.png
+media/education/*
+!media/education/*.png
 
 # Base de données locale
 

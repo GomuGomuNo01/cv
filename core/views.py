@@ -1,5 +1,5 @@
 from django.views.generic import TemplateView
-from .models import Project, Skill, Company
+from .models import Project, Skill, Company, Education
 
 class PortfolioView(TemplateView):
     template_name = "core/index.html"
@@ -11,6 +11,10 @@ class PortfolioView(TemplateView):
         companies = Company.objects.all().order_by('-start_date')
         context['companies'] = companies
         context['companies_count'] = companies.count()
+
+        educations = Education.objects.all().order_by('-start_date')
+        context['educations'] = educations
+        context['educations_count'] = educations.count()
 
         # Années d'expérience : valeur figée pour rester cohérente avec les CV
         # ("deux ans d'expérience" = IT-CENTREX + madameb0nplan). Un calcul

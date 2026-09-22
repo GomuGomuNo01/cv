@@ -278,6 +278,7 @@ footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;
         <a href="#hero" class="nav-link active">Accueil</a>
         <a href="#stack" class="nav-link">Compétences</a>
         <a href="#projects" class="nav-link">Projets</a>
+        <a href="#education" class="nav-link">Formation</a>
         <a href="#deployment" class="nav-link">Approche</a>
         <a href="#contact" class="nav-link">Contact</a>
     </div>
@@ -295,6 +296,7 @@ footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;
     <a href="#hero" onclick="toggleMenu()">Accueil</a>
     <a href="#stack" onclick="toggleMenu()">Compétences</a>
     <a href="#projects" onclick="toggleMenu()">Projets</a>
+    <a href="#education" onclick="toggleMenu()">Formation</a>
     <a href="#deployment" onclick="toggleMenu()">Approche</a>
     <a href="#contact" onclick="toggleMenu()">Contact</a>
     <a href="#" onclick="toggleTerminal();toggleMenu()">Accès Terminal</a>
@@ -401,7 +403,7 @@ footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;
             <span class="stat-label">Expériences en Entreprise</span>
         </div>
         <div class="stat-cell reveal delay-4">
-            <span class="stat-num" style="color:var(--orange3);" data-target="3" data-suffix="">0</span>
+            <span class="stat-num" style="color:var(--orange3);" data-target="{{ educations_count }}" data-suffix="">0</span>
             <span class="stat-label">Formations</span>
         </div>
     </div>
@@ -645,6 +647,46 @@ footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;
                     <div class="exp-company">@ Startup CI — Télétravail</div>
                 </div>
                 <div class="exp-status">STATUT : EXPÉRIENCE VÉRIFIÉE</div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- FORMATION -->
+<section class="experience-section" id="education" style="background:var(--bg);">
+    <div style="max-width:80rem;margin:0 auto;">
+        <div class="reveal" style="margin-bottom:3rem;">
+            <div class="section-line"></div>
+            <h2 style="font-size:clamp(2rem,5vw,3rem);font-weight:700;text-transform:uppercase;letter-spacing:-.03em;">
+                Formation
+            </h2>
+        </div>
+        {% for edu in educations %}
+        <div class="exp-row reveal delay-{{ forloop.counter }}">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">
+                <div style="display:flex;align-items:center;gap:1.25rem;">
+                    {% if edu.logo %}
+                    <img src="{{ edu.logo.url }}" alt="{{ edu.school }}" style="width:44px;height:44px;object-fit:contain;border-radius:.4rem;background:#fff;padding:4px;flex-shrink:0;"/>
+                    {% endif %}
+                    <div>
+                        <div class="exp-date">{{ edu.start_date|date:"Y" }} &gt;&gt; {% if edu.is_current %}EN COURS{% else %}{{ edu.end_date|date:"Y" }}{% endif %}</div>
+                        <div class="exp-title">{{ edu.degree }}</div>
+                        <div class="exp-company">@ {{ edu.school }} — {{ edu.location }}</div>
+                    </div>
+                </div>
+                <div class="exp-status">STATUT : FORMATION VÉRIFIÉE</div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="exp-row reveal delay-1">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">
+                <div>
+                    <div class="exp-date">2026 &gt;&gt; EN COURS</div>
+                    <div class="exp-title">Mastère Informatique - Intelligence Artificielle &amp; Big Data</div>
+                    <div class="exp-company">@ ESGI Paris — Paris, France</div>
+                </div>
+                <div class="exp-status">STATUT : FORMATION VÉRIFIÉE</div>
             </div>
         </div>
         {% endfor %}

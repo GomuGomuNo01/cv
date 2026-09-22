@@ -63,3 +63,20 @@ class Company(models.Model):
 
     def __str__(self):
         return f"{self.job_title} @ {self.name}"
+
+
+class Education(models.Model):
+    school = models.CharField(max_length=150)
+    degree = models.CharField(max_length=200, help_text="Ex: Master IA & Big Data")
+    location = models.CharField(max_length=100)
+    logo = models.ImageField(upload_to='education/', blank=True, null=True)
+    start_date = models.DateField()
+    end_date = models.DateField(null=True, blank=True, help_text="Laissez vide si en cours")
+    is_current = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name_plural = "Education"
+        ordering = ['-start_date']
+
+    def __str__(self):
+        return f"{self.degree} @ {self.school}"
