@@ -25,6 +25,7 @@ class Project(models.Model):
     github_link = models.URLField(blank=True)
     live_link = models.URLField(blank=True)
     is_featured = models.BooleanField(default=True)
+    in_progress = models.BooleanField(default=False, help_text="Projet encore en cours de développement")
     created_at = models.DateTimeField(auto_now_add=True)
 
     def get_tech_list(self):

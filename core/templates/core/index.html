@@ -505,7 +505,12 @@ footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;
                 <span class="project-num" style="color:{% if forloop.counter|divisibleby:3 %}var(--green){% elif forloop.counter|divisibleby:2 %}var(--cyan){% else %}var(--orange3){% endif %};">
                     {{ project.index_number }}_{{ project.title|slugify }}
                 </span>
-                <div class="project-title">{{ project.title }}</div>
+                <div class="project-title">
+                    {{ project.title }}
+                    {% if project.in_progress %}
+                    <span style="display:inline-block;vertical-align:middle;margin-left:.75rem;font-family:monospace;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cyan);border:.5px solid rgba(0,218,243,.4);background:rgba(0,218,243,.08);padding:.2rem .6rem;border-radius:999px;">En cours</span>
+                    {% endif %}
+                </div>
                 <p class="project-desc">{{ project.short_description }}</p>
                 <div class="tech-wrap">
                     {% for tech in project.get_tech_list %}
