@@ -1,10 +1,63 @@
-# Fichiers temporaires
-CV_tmp.pdf
-pdf_layout.txt
+# Environnement virtuel
 
-# Claude Code
-.claude/settings.local.json
-.claude/launch.json
+venv/
+env/
+ENV/
 
-# IDE
+# Cache Python
+
+**pycache**/
+*.pyc
+*.pyo
+*.pyd
+
+# Fichiers secrets
+.env
+*.env
+
+# Médias uploadés (formulaires, admin) : ignorés, sauf les images
+# illustratives des projets du portfolio, versionnées volontairement.
+media/*
+!media/projects/
+media/projects/*
+!media/projects/*.png
+
+# Base de données locale
+
+db.sqlite3
+
+# Logs
+
+*.log
+
+# Fichiers système
+
+.DS_Store
+Thumbs.db
+
+# Dossiers IDE
+
+.vscode/
 .idea/
+
+# Fichiers temporaires
+
+*.swp
+*.swo
+
+# Dossier de build
+
+build/
+dist/
+
+# Fichiers statiques collectés (Django)
+
+staticfiles/
+
+# migrations compilées
+
+*.sqlite3
+
+# Node (si tu utilises frontend)
+
+node_modules/
