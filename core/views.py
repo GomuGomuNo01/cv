@@ -23,7 +23,7 @@ class PortfolioView(TemplateView):
         context['years_experience'] = 2
 
         # On organise les compétences par catégorie pour le template
-        projects = Project.objects.filter(is_featured=True).order_by('index_number')
+        projects = Project.objects.filter(is_featured=True).order_by('index_number').prefetch_related('gallery_images')
         context['projects'] = projects
         context['projects_count'] = projects.count()
         context['skills_data'] = Skill.objects.filter(category='data').order_by('order')

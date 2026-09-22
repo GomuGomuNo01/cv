@@ -34,6 +34,20 @@ class Project(models.Model):
     def __str__(self):
         return self.title
 
+
+class ProjectImage(models.Model):
+    """Images supplémentaires d'un projet, affichées dans une galerie au clic."""
+    project = models.ForeignKey(Project, related_name='gallery_images', on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='projects/gallery/')
+    order = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ['order']
+
+    def __str__(self):
+        return f"Image {self.order} de {self.project.title}"
+
+
 class Experience(models.Model):
     """Pour la section 'Au-delà du code' ou un CV plus détaillé"""
     title = models.CharField(max_length=100)
@@ -55,12 +69,16 @@ class Company(models.Model):
     end_date = models.DateField(null=True, blank=True, help_text="Laissez vide si vous y êtes encore")
     is_current = models.BooleanField(default=False)
     
-    # Description des responsabilités (orienté DevOps/Infra)
-    description = models.TextField(help_text="Décrivez vos missions principales (ex: Migration Oracle 11g vers PostgreSQL)")
+    # Missions principales, une par ligne (affichées comme liste à puces
+    # dans le détail dépliable de l'expérience)
+    description = models.TextField(help_text="Une mission par ligne")
 
     class Meta:
         verbose_name_plural = "Companies"
         ordering = ['-start_date']
+
+    def get_task_list(self):
+        return [line.strip() for line in self.description.splitlines() if line.strip()]
 
     def __str__(self):
         return f"{self.job_title} @ {self.name}"

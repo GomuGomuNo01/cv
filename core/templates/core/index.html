@@ -223,10 +223,17 @@ nav{position:fixed;top:1rem;left:50%;transform:translateX(-50%);width:95%;max-wi
 
 /* EXPÉRIENCE */
 .experience-section{padding:7rem 2rem;background:var(--bg2);position:relative;z-index:5;}
-.exp-row{padding:1.75rem 1.5rem;background:var(--bg);border:.5px solid var(--bg3);border-radius:.5rem;transition:all .35s;position:relative;overflow:hidden;margin-bottom:.75rem;}
+.exp-row{padding:1.75rem 1.5rem;background:var(--bg);border:.5px solid var(--bg3);border-radius:.5rem;transition:all .35s;position:relative;overflow:hidden;margin-bottom:.75rem;cursor:pointer;}
 .exp-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--orange),transparent);transform:scaleY(0);transform-origin:top;transition:transform .4s cubic-bezier(.16,1,.3,1);}
 .exp-row:hover{border-color:var(--orange);background:var(--bg3);}
 .exp-row:hover::before{transform:scaleY(1);}
+.exp-toggle{transition:transform .3s;color:var(--muted);flex-shrink:0;}
+.exp-row.open .exp-toggle{transform:rotate(180deg);color:var(--orange);}
+.exp-detail{max-height:0;overflow:hidden;transition:max-height .35s ease;}
+.exp-row.open .exp-detail{max-height:20rem;}
+.exp-detail-inner{padding-top:1.25rem;margin-top:1.25rem;border-top:.5px solid var(--bg3);}
+.exp-detail-inner li{font-size:.85rem;color:var(--muted);line-height:1.7;padding-left:1.1rem;position:relative;margin-bottom:.5rem;}
+.exp-detail-inner li::before{content:'▸';position:absolute;left:0;color:var(--orange);}
 .exp-date{font-family:monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--green);margin-bottom:.5rem;}
 .exp-title{font-size:clamp(1rem,2.5vw,1.2rem);font-weight:700;text-transform:uppercase;letter-spacing:-.01em;font-family:'Space Grotesk',sans-serif;color:var(--text);}
 .exp-company{color:var(--muted);font-size:.85rem;margin-top:.25rem;}
@@ -519,29 +526,36 @@ footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;
                 </div>
                 <div style="display:flex;gap:1.5rem;flex-wrap:wrap;">
                 {% if project.github_link %}
-                <a href="javascript:void(0);"
-            onclick="openProjectPreview('{{ project.github_link }}')"
-            class="project-link">
+                <a href="{{ project.github_link }}" target="_blank" rel="noopener noreferrer" class="project-link">
                 Code <span class="material-symbols-outlined" style="font-size:1.1rem;">arrow_forward</span>
             </a>
                 {% endif %}
                 {% if project.live_link %}
-                <a href="{{ project.live_link }}" target="_blank" class="project-link">
+                <a href="{{ project.live_link }}" target="_blank" rel="noopener noreferrer" class="project-link">
                 Démo <span class="material-symbols-outlined" style="font-size:1.1rem;">open_in_new</span>
             </a>
                 {% endif %}
                 </div>
             </div>
             <div class="reveal-right">
-                <div class="img-wrap">
-                    {% if project.image %}
+                {% if project.image %}
+                <div class="img-wrap" style="cursor:pointer;"
+                     onclick='openGallery([{% if project.image %}"{{ project.image.url }}"{% endif %}{% for img in project.gallery_images.all %},"{{ img.image.url }}"{% endfor %}], "{{ project.title }}")'>
                     <img src="{{ project.image.url }}" alt="{{ project.title }}"/>
-                    {% else %}
+                    {% if project.gallery_images.all %}
+                    <span style="position:absolute;bottom:.75rem;right:.75rem;z-index:2;background:rgba(0,0,0,.65);color:#fff;font-family:monospace;font-size:.68rem;letter-spacing:.1em;padding:.3rem .7rem;border-radius:999px;display:flex;align-items:center;gap:.35rem;">
+                        <span class="material-symbols-outlined" style="font-size:.95rem;">photo_library</span>
+                        {{ project.gallery_images.all|length|add:1 }}
+                    </span>
+                    {% endif %}
+                </div>
+                {% else %}
+                <div class="img-wrap">
                     <div class="img-placeholder" style="background:linear-gradient(135deg,#1a1200,#0d0d0d);">
                         <span class="material-symbols-outlined" style="font-size:3rem;opacity:.3;">deployed_code</span>
                     </div>
-                    {% endif %}
                 </div>
+                {% endif %}
             </div>
         </div>
         {% empty %}
@@ -613,14 +627,24 @@ footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;
             </h2>
         </div>
         {% for company in companies %}
-        <div class="exp-row reveal delay-{{ forloop.counter }}">
+        <div class="exp-row reveal delay-{{ forloop.counter }}" onclick="toggleExp(this)">
             <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">
                 <div>
                     <div class="exp-date">{{ company.start_date|date:"Y" }} &gt;&gt; {% if company.is_current %}EN COURS{% else %}{{ company.end_date|date:"Y" }}{% endif %}</div>
                     <div class="exp-title">{{ company.job_title }}</div>
                     <div class="exp-company">@ {{ company.name }} &middot; {{ company.location }}</div>
                 </div>
-                <div class="exp-status">STATUT : EXPÉRIENCE VÉRIFIÉE</div>
+                <div style="display:flex;align-items:center;gap:1rem;">
+                    <div class="exp-status">STATUT : EXPÉRIENCE VÉRIFIÉE</div>
+                    <span class="material-symbols-outlined exp-toggle">expand_more</span>
+                </div>
+            </div>
+            <div class="exp-detail">
+                <ul class="exp-detail-inner">
+                    {% for task in company.get_task_list %}
+                    <li>{{ task }}</li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
         {% empty %}
@@ -852,6 +876,11 @@ document.getElementById('terminal-input').addEventListener('keypress',function(e
     this.value='';
 });
 
+/* ACCORDÉON EXPÉRIENCE */
+function toggleExp(row){
+    row.classList.toggle('open');
+}
+
 /* MENU MOBILE */
 function toggleMenu(){
     document.getElementById('mobile-menu').classList.toggle('open');
@@ -881,35 +910,67 @@ themeBtn.addEventListener('click', () => {
         themeIcon.innerText = 'dark_mode';
     }
 });
-function openProjectPreview(url) {
-    const modal = document.getElementById('project-modal');
-    const iframe = document.getElementById('project-frame');
-    
-    // On injecte l'URL et on affiche le modal
-    iframe.src = url;
-    modal.style.display = 'block';
-    
-    // On bloque le scroll du corps de page
+/* GALERIE D'IMAGES PROJET */
+let galleryImages = [];
+let galleryIndex = 0;
+
+function openGallery(images, title) {
+    galleryImages = images;
+    galleryIndex = 0;
+    document.getElementById('gallery-title').textContent = title;
+    document.getElementById('gallery-modal').style.display = 'flex';
     document.body.style.overflow = 'hidden';
+    renderGallery();
 }
 
-function closeProjectPreview() {
-    const modal = document.getElementById('project-modal');
-    const iframe = document.getElementById('project-frame');
-    
-    modal.style.display = 'none';
-    iframe.src = ''; // On vide l'iframe pour stopper les processus
+function closeGallery() {
+    document.getElementById('gallery-modal').style.display = 'none';
     document.body.style.overflow = 'auto';
 }
+
+function galleryNext() {
+    galleryIndex = (galleryIndex + 1) % galleryImages.length;
+    renderGallery();
+}
+
+function galleryPrev() {
+    galleryIndex = (galleryIndex - 1 + galleryImages.length) % galleryImages.length;
+    renderGallery();
+}
+
+function renderGallery() {
+    document.getElementById('gallery-img').src = galleryImages[galleryIndex];
+    document.getElementById('gallery-counter').textContent = (galleryIndex + 1) + ' / ' + galleryImages.length;
+    const nav = galleryImages.length > 1;
+    document.getElementById('gallery-prev').style.display = nav ? 'flex' : 'none';
+    document.getElementById('gallery-next').style.display = nav ? 'flex' : 'none';
+}
+
+document.addEventListener('keydown', function(e) {
+    const modal = document.getElementById('gallery-modal');
+    if (modal.style.display !== 'flex') return;
+    if (e.key === 'Escape') closeGallery();
+    if (e.key === 'ArrowRight') galleryNext();
+    if (e.key === 'ArrowLeft') galleryPrev();
+});
 </script>
-<div id="project-modal" style="display:none; position:fixed; inset:0; z-index:9999; background:#000;">
-    <div style="height:50px; background:#181818; display:flex; align-items:center; padding:0 20px; border-bottom:1px solid #333;">
-        <span style="color:var(--orange); font-family:monospace; font-size:0.8rem;">PREVIEW_MODE_ACTIVE</span>
-        <button onclick="closeProjectPreview()" style="margin-left:auto; background:none; border:none; color:#fff; cursor:pointer;">
-            <span class="material-symbols-outlined">close</span>
+<div id="gallery-modal" onclick="if(event.target===this) closeGallery()" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,.93); flex-direction:column; align-items:center; justify-content:center; padding:2rem;">
+    <div style="width:100%; max-width:70rem; display:flex; align-items:center; justify-content:space-between; margin-bottom:1rem;">
+        <span id="gallery-title" style="color:var(--orange); font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:.9rem; letter-spacing:.1em; text-transform:uppercase;"></span>
+        <button onclick="closeGallery()" style="background:none; border:none; color:#fff; cursor:pointer;">
+            <span class="material-symbols-outlined" style="font-size:1.8rem;">close</span>
         </button>
     </div>
-    <iframe id="project-frame" src="" style="width:100%; height:calc(100% - 50px); border:none;"></iframe>
+    <div style="position:relative; width:100%; max-width:70rem; display:flex; align-items:center; justify-content:center;">
+        <button id="gallery-prev" onclick="galleryPrev()" style="display:none; position:absolute; left:-.5rem; background:rgba(255,255,255,.08); border:.5px solid rgba(255,255,255,.2); color:#fff; cursor:pointer; border-radius:50%; width:2.75rem; height:2.75rem; align-items:center; justify-content:center; z-index:2;">
+            <span class="material-symbols-outlined">chevron_left</span>
+        </button>
+        <img id="gallery-img" src="" alt="" style="max-width:100%; max-height:75vh; border-radius:.5rem; border:.5px solid rgba(255,255,255,.15); object-fit:contain;"/>
+        <button id="gallery-next" onclick="galleryNext()" style="display:none; position:absolute; right:-.5rem; background:rgba(255,255,255,.08); border:.5px solid rgba(255,255,255,.2); color:#fff; cursor:pointer; border-radius:50%; width:2.75rem; height:2.75rem; align-items:center; justify-content:center; z-index:2;">
+            <span class="material-symbols-outlined">chevron_right</span>
+        </button>
+    </div>
+    <span id="gallery-counter" style="margin-top:1rem; color:var(--muted); font-family:monospace; font-size:.75rem; letter-spacing:.15em;"></span>
 </div>
 </body>
 </html>
