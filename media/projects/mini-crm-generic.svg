@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bgGrad3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a1200"/>
+      <stop offset="100%" stop-color="#0d0d0d"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bgGrad3)"/>
+  <g stroke="#07d1e8" stroke-opacity="0.08" stroke-width="1">
+    <line x1="0" y1="90" x2="800" y2="90"/>
+    <line x1="0" y1="180" x2="800" y2="180"/>
+    <line x1="0" y1="270" x2="800" y2="270"/>
+    <line x1="0" y1="360" x2="800" y2="360"/>
+  </g>
+
+  <!-- 6 cartes clients -->
+  <g font-family="monospace" font-size="9">
+    <!-- carte 1 -->
+    <rect x="90" y="110" width="180" height="90" rx="6" fill="none" stroke="#ff6b35" stroke-width="1.5"/>
+    <circle cx="118" cy="140" r="12" fill="none" stroke="#ff6b35" stroke-width="1.5"/>
+    <line x1="142" y1="134" x2="245" y2="134" stroke="#e5e9ee" stroke-width="2"/>
+    <line x1="142" y1="148" x2="215" y2="148" stroke="#5a6270" stroke-width="1.5"/>
+    <line x1="108" y1="175" x2="252" y2="175" stroke="#334155" stroke-width="1"/>
+    <text x="108" y="192" fill="#8891a0">CONTRAT ACTIF</text>
+
+    <!-- carte 2 -->
+    <rect x="310" y="110" width="180" height="90" rx="6" fill="none" stroke="#07d1e8" stroke-width="1.5"/>
+    <circle cx="338" cy="140" r="12" fill="none" stroke="#07d1e8" stroke-width="1.5"/>
+    <line x1="362" y1="134" x2="465" y2="134" stroke="#e5e9ee" stroke-width="2"/>
+    <line x1="362" y1="148" x2="435" y2="148" stroke="#5a6270" stroke-width="1.5"/>
+    <line x1="328" y1="175" x2="472" y2="175" stroke="#334155" stroke-width="1"/>
+    <text x="328" y="192" fill="#8891a0">CONTRAT ACTIF</text>
+
+    <!-- carte 3 -->
+    <rect x="530" y="110" width="180" height="90" rx="6" fill="none" stroke="#10e93b" stroke-width="1.5"/>
+    <circle cx="558" cy="140" r="12" fill="none" stroke="#10e93b" stroke-width="1.5"/>
+    <line x1="582" y1="134" x2="685" y2="134" stroke="#e5e9ee" stroke-width="2"/>
+    <line x1="582" y1="148" x2="655" y2="148" stroke="#5a6270" stroke-width="1.5"/>
+    <line x1="548" y1="175" x2="692" y2="175" stroke="#334155" stroke-width="1"/>
+    <text x="548" y="192" fill="#8891a0">EN RENOUVELLEMENT</text>
+
+    <!-- carte 4 -->
+    <rect x="200" y="240" width="180" height="90" rx="6" fill="none" stroke="#e94560" stroke-width="1.5"/>
+    <circle cx="228" cy="270" r="12" fill="none" stroke="#e94560" stroke-width="1.5"/>
+    <line x1="252" y1="264" x2="355" y2="264" stroke="#e5e9ee" stroke-width="2"/>
+    <line x1="252" y1="278" x2="325" y2="278" stroke="#5a6270" stroke-width="1.5"/>
+    <line x1="218" y1="305" x2="362" y2="305" stroke="#334155" stroke-width="1"/>
+    <text x="218" y="322" fill="#8891a0">CONTRAT ACTIF</text>
+
+    <!-- carte 5 -->
+    <rect x="420" y="240" width="180" height="90" rx="6" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+    <circle cx="448" cy="270" r="12" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+    <line x1="472" y1="264" x2="575" y2="264" stroke="#e5e9ee" stroke-width="2"/>
+    <line x1="472" y1="278" x2="545" y2="278" stroke="#5a6270" stroke-width="1.5"/>
+    <line x1="438" y1="305" x2="582" y2="305" stroke="#334155" stroke-width="1"/>
+    <text x="438" y="322" fill="#8891a0">ARCHIVE</text>
+  </g>
+
+  <text x="400" y="400" fill="#5a5a5a" text-anchor="middle" font-family="monospace" font-size="11" letter-spacing="3">GESTION CLIENTS &amp; CONTRATS</text>
+</svg>

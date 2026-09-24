@@ -24,6 +24,7 @@ media/projects/*
 !media/projects/*.png
 !media/projects/*.gif
 !media/projects/*.webp
+!media/projects/*.svg
 !media/projects/gallery/
 media/projects/gallery/*
 !media/projects/gallery/*.png
