@@ -60,8 +60,8 @@ a{text-decoration:none;color:inherit;}
 .material-symbols-outlined{font-family:'Material Symbols Outlined';font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;font-style:normal;display:inline-block;line-height:1;text-transform:none;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-smoothing:antialiased;}
 
 /* CURSEUR */
-#cursor{position:fixed;width:10px;height:10px;background:var(--orange);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .15s,height .15s,background .15s;}
-#cursor-ring{position:fixed;width:36px;height:36px;border:1.5px solid rgba(255,107,53,.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);}
+#cursor{position:fixed;width:10px;height:10px;background:var(--orange);border-radius:50%;pointer-events:none;z-index:10001;transform:translate(-50%,-50%);transition:width .15s,height .15s,background .15s;}
+#cursor-ring{position:fixed;width:36px;height:36px;border:1.5px solid rgba(255,107,53,.5);border-radius:50%;pointer-events:none;z-index:10000;transform:translate(-50%,-50%);}
 body:has(a:hover) #cursor,body:has(button:hover) #cursor{width:16px;height:16px;background:var(--green);}
 body:has(a:hover) #cursor-ring,body:has(button:hover) #cursor-ring{width:52px;height:52px;border-color:rgba(19,255,67,.4);}
 @media(max-width:768px){#cursor,#cursor-ring{display:none;}body{cursor:auto;}}
