@@ -541,7 +541,7 @@ footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;
                 {% if project.image %}
                 <div class="img-wrap" style="cursor:pointer;"
                      onclick='openGallery([{% if project.image %}"{{ project.image.url }}"{% endif %}{% for img in project.gallery_images.all %},"{{ img.image.url }}"{% endfor %}], "{{ project.title }}")'>
-                    <img src="{{ project.image.url }}" alt="{{ project.title }}"/>
+                    <img src="{{ project.image.url }}" alt="{{ project.title }}" loading="lazy" decoding="async"/>
                     {% if project.gallery_images.all %}
                     <span style="position:absolute;bottom:.75rem;right:.75rem;z-index:2;background:rgba(0,0,0,.65);color:#fff;font-family:monospace;font-size:.68rem;letter-spacing:.1em;padding:.3rem .7rem;border-radius:999px;display:flex;align-items:center;gap:.35rem;">
                         <span class="material-symbols-outlined" style="font-size:.95rem;">photo_library</span>
@@ -696,7 +696,7 @@ footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;
             <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">
                 <div style="display:flex;align-items:center;gap:1.25rem;">
                     {% if edu.logo %}
-                    <img src="{{ edu.logo.url }}" alt="{{ edu.school }}" style="width:44px;height:44px;object-fit:contain;border-radius:.4rem;background:#fff;padding:4px;flex-shrink:0;"/>
+                    <img src="{{ edu.logo.url }}" alt="{{ edu.school }}" loading="lazy" decoding="async" style="width:44px;height:44px;object-fit:contain;border-radius:.4rem;background:#fff;padding:4px;flex-shrink:0;"/>
                     {% endif %}
                     <div>
                         <div class="exp-date">{{ edu.start_date|date:"Y" }} &gt;&gt; {% if edu.is_current %}EN COURS{% else %}{{ edu.end_date|date:"Y" }}{% endif %}</div>

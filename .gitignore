@@ -23,9 +23,11 @@ media/*
 media/projects/*
 !media/projects/*.png
 !media/projects/*.gif
+!media/projects/*.webp
 !media/projects/gallery/
 media/projects/gallery/*
 !media/projects/gallery/*.png
+!media/projects/gallery/*.webp
 media/education/*
 !media/education/*.png
 !media/education/*.jpg
