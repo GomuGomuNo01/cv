@@ -215,6 +215,10 @@ nav{position:fixed;top:1rem;left:50%;transform:translateX(-50%);width:95%;max-wi
 .tech-badge{padding:.28rem .75rem;background:var(--bg3);font-family:monospace;font-size:.68rem;border:.5px solid var(--subtle);border-radius:2px;letter-spacing:.1em;color:var(--muted);}
 .project-link{display:inline-flex;align-items:center;gap:.5rem;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;color:var(--orange);text-decoration:none;transition:gap .3s;}
 .project-link:hover{gap:1rem;}
+.download-badge{display:inline-flex;align-items:stretch;margin-top:1.25rem;border-radius:.25rem;overflow:hidden;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.25);transition:transform .25s,box-shadow .25s;}
+.download-badge:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(242,200,17,.28);}
+.download-badge-left{display:inline-flex;align-items:center;gap:.45rem;background:#555;color:#fff;padding:.65rem 1rem;}
+.download-badge-right{display:inline-flex;align-items:center;background:#F2C811;color:#000;padding:.65rem 1rem;}
 .img-wrap{aspect-ratio:16/9;border-radius:.75rem;overflow:hidden;position:relative;background:var(--bg2);border: 1px solid var(--bg3);}
 .img-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(to top, var(--bg) 0%, transparent 55%);}
 .img-wrap img{width:100%;height:100%;object-fit:cover;filter:grayscale(.5);opacity:.75;transition:all .7s cubic-bezier(.16,1,.3,1);}
@@ -536,6 +540,12 @@ footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;
             </a>
                 {% endif %}
                 </div>
+                {% if project.download_link %}
+                <a href="{{ project.download_link }}" rel="noopener noreferrer" class="download-badge">
+                    <span class="download-badge-left"><span class="material-symbols-outlined" style="font-size:1rem;">download</span>Télécharger le rapport</span>
+                    <span class="download-badge-right">{{ project.download_label|default:"Fichier" }}</span>
+                </a>
+                {% endif %}
             </div>
             <div class="reveal-right">
                 {% if project.image %}
