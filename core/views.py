@@ -35,27 +35,3 @@ class PortfolioView(TemplateView):
         context['availability'] = "Septembre 2026"
 
         return context
-    
-from datetime import datetime
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-import json
-
-@csrf_exempt
-def execute_command(request):
-    if request.method == 'POST':
-        data = json.loads(request.body)
-        command = data.get('command', '').lower().strip()
-
-        # Simulation de commandes basiques
-        responses = {
-            "ls": "projets/  competences/  cv_cedric_kouadio.pdf  profil.yaml",
-            "whoami": "cedric_kouadio",
-            "uptime": "master IA & Big Data, ESGI Paris, rentrée septembre 2026",
-            "uname -a": "Data Analyst & Developpeur, Paris, FR",
-            "help": "Available commands: ls, whoami, uptime, uname -a, clear, date",
-            "date": datetime.now().strftime("%a %b %d %H:%M:%S GMT %Y"),
-        }
-
-        result = responses.get(command, f"command not found: {command}")
-        return JsonResponse({"output": result})

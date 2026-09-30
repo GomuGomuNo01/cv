@@ -102,9 +102,6 @@ nav{position:fixed;top:1rem;left:50%;transform:translateX(-50%);width:95%;max-wi
 .nav-link:hover,.nav-link.active{color:var(--text);}
 .nav-link:hover::after,.nav-link.active::after{width:100%;}
 .nav-link.active{color:var(--orange);}
-.btn-nav{background:linear-gradient(135deg,#ff571a,#ffb59e);color:#3a0b00;padding:.375rem 1.5rem;border-radius:999px;font-family:'Space Grotesk',sans-serif;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.2em;border:none;cursor:none;transition:transform .2s,box-shadow .2s;}
-.btn-nav:hover{transform:scale(1.05);box-shadow:0 0 25px rgba(255,87,26,.5);}
-
 /* Burger */
 .nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;}
 .nav-burger span{display:block;width:22px;height:2px;background:var(--orange);border-radius:2px;transition:all .3s;}
@@ -117,20 +114,7 @@ nav{position:fixed;top:1rem;left:50%;transform:translateX(-50%);width:95%;max-wi
 .mobile-menu.open{display:flex;}
 .mobile-menu a{font-family:'Space Grotesk',sans-serif;font-size:.9rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:.75rem 1rem;border-radius:.5rem;transition:all .2s;display:block;}
 .mobile-menu a:hover{color:var(--orange);background:rgba(255,107,53,.06);}
-@media(max-width:768px){.nav-links{display:none;}.nav-burger{display:flex;}.btn-nav{display:none;}}
-
-/* TERMINAL MODAL */
-#terminal-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(8px);z-index:200;align-items:center;justify-content:center;padding:1rem;}
-#terminal-modal.open{display:flex;}
-.term-modal-box{width:100%;max-width:42rem;background:#0d0d0d;border:.5px solid rgba(255,107,53,.3);border-radius:.75rem;overflow:hidden;box-shadow:0 0 60px rgba(255,87,26,.18);}
-.term-modal-bar{background:#181818;padding:.7rem 1rem;display:flex;justify-content:space-between;align-items:center;border-bottom:.5px solid rgba(255,255,255,.05);}
-.term-modal-title{font-family:monospace;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--orange);}
-.term-modal-close{background:none;border:none;cursor:pointer;color:var(--muted);font-size:1.4rem;line-height:1;transition:color .2s;}
-.term-modal-close:hover{color:var(--orange);}
-#terminal-output{padding:1.25rem;height:240px;overflow-y:auto;font-family:monospace;font-size:.8rem;color:var(--green);line-height:1.8;}
-.term-input-row{padding:.75rem 1rem;border-top:.5px solid rgba(255,255,255,.05);display:flex;align-items:center;gap:.75rem;}
-.term-prompt{color:var(--orange);font-family:monospace;font-weight:700;}
-#terminal-input{background:transparent;border:none;outline:none;color:#ffffff;font-family:monospace;font-size:.8rem;flex:1;}
+@media(max-width:768px){.nav-links{display:none;}.nav-burger{display:flex;}}
 
 /* HERO */
 .hero-section{position:relative;min-height:100vh;display:flex;align-items:center;padding:7rem 2rem 5rem;overflow:hidden;}
@@ -302,7 +286,6 @@ footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;
     <button class="nav-burger" id="burger" onclick="toggleMenu()">
         <span></span><span></span><span></span>
     </button>
-    <button onclick="toggleTerminal()" class="btn-nav">Exécuter</button>
 </nav>
 
 <!-- MENU MOBILE -->
@@ -313,24 +296,6 @@ footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;
     <a href="#education" onclick="toggleMenu()">Formation</a>
     <a href="#deployment" onclick="toggleMenu()">Approche</a>
     <a href="#contact" onclick="toggleMenu()">Contact</a>
-    <a href="#" onclick="toggleTerminal();toggleMenu()">Accès Terminal</a>
-</div>
-
-<!-- TERMINAL MODAL -->
-<div id="terminal-modal">
-    <div class="term-modal-box">
-        <div class="term-modal-bar">
-            <span class="term-modal-title">SESSION TERMINAL &middot; v1.0</span>
-            <button class="term-modal-close" onclick="toggleTerminal()">×</button>
-        </div>
-        <div id="terminal-output">
-            <p>&gt; Système initialisé. Tapez <strong>help</strong> pour commencer.</p>
-        </div>
-        <div class="term-input-row">
-            <span class="term-prompt">$</span>
-            <input type="text" id="terminal-input" placeholder="Entrez une commande..." autocomplete="off"/>
-        </div>
-    </div>
 </div>
 
 <!-- HERO -->
@@ -356,7 +321,6 @@ footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;
             </p>
             <div style="display:flex;gap:1rem;flex-wrap:wrap;animation:fadeUp .6s 1.05s both;">
                 <button class="btn-primary" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">Voir mes projets</button>
-                <button class="btn-secondary" onclick="toggleTerminal()">Accès Terminal</button>
             </div>
         </div>
         <div class="terminal-box">
@@ -768,7 +732,6 @@ footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;
         <div class="social-links">
             <a href="https://github.com/GomuGomuNo01" target="_blank" class="social-link">GitHub</a>
             <a href="https://linkedin.com/in/cedric-kouadio-dev" target="_blank" class="social-link">LinkedIn</a>
-            <a href="#" class="social-link" onclick="toggleTerminal();return false;">Terminal</a>
         </div>
     </div>
 </footer>
@@ -844,25 +807,6 @@ window.addEventListener('scroll',()=>{let cur='';sections.forEach(s=>{if(window.
 const statusLine=document.getElementById('status-line');
 let blink=true;
 setInterval(()=>{if(statusLine){blink=!blink;statusLine.style.opacity=blink?'1':'.4';}},1800);
-
-/* TERMINAL MODAL */
-function toggleTerminal(){
-    const m=document.getElementById('terminal-modal');
-    m.classList.toggle('open');
-    if(m.classList.contains('open'))document.getElementById('terminal-input').focus();
-}
-document.getElementById('terminal-modal').addEventListener('click',function(e){if(e.target===this)toggleTerminal();});
-document.getElementById('terminal-input').addEventListener('keypress',function(e){
-    if(e.key!=='Enter')return;
-    const cmd=this.value.trim();if(!cmd)return;
-    const out=document.getElementById('terminal-output');
-    out.innerHTML+=`<p style="color:#888"><span style="color:#ff6b35;">$</span> ${cmd}</p>`;
-    if(cmd==='clear'){out.innerHTML='';this.value='';return;}
-    fetch('/execute-command/',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({command:cmd})})
-    .then(r=>r.json()).then(d=>{out.innerHTML+=`<p style="color:#13ff43;">${d.output}</p>`;out.scrollTop=out.scrollHeight;})
-    .catch(()=>{out.innerHTML+=`<p style="color:#ff6b35;">Erreur : impossible de contacter le serveur.</p>`;out.scrollTop=out.scrollHeight;});
-    this.value='';
-});
 
 /* MENU MOBILE */
 function toggleMenu(){
