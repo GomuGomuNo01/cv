@@ -7,9 +7,9 @@ class PortfolioView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        # La section "Parcours Professionnel" a été retirée du portfolio ;
-        # seul le total est conservé pour la stat "Expériences en Entreprise".
-        context['companies_count'] = Company.objects.count()
+        companies = Company.objects.all().order_by('-start_date')
+        context['companies'] = companies
+        context['companies_count'] = companies.count()
 
         educations = Education.objects.all().order_by('-start_date')
         context['educations'] = educations

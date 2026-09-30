@@ -597,6 +597,32 @@ footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;
     </div>
 </section>
 
+<!-- EXPÉRIENCE PROFESSIONNELLE -->
+{% if companies %}
+<section class="experience-section" id="experience">
+    <div style="max-width:80rem;margin:0 auto;">
+        <div class="reveal" style="margin-bottom:3rem;">
+            <div class="section-line"></div>
+            <h2 style="font-size:clamp(2rem,5vw,3rem);font-weight:700;text-transform:uppercase;letter-spacing:-.03em;">
+                Expérience <span style="color:var(--green);">Professionnelle</span>
+            </h2>
+        </div>
+        {% for company in companies %}
+        <div class="exp-row reveal delay-{{ forloop.counter }}">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">
+                <div>
+                    <div class="exp-date">{{ company.start_date|date:"M Y" }} &gt;&gt; {% if company.is_current %}PRÉSENT{% else %}{{ company.end_date|date:"M Y" }}{% endif %}</div>
+                    <div class="exp-title">{{ company.job_title }}</div>
+                    <div class="exp-company">@ {{ company.name }} &middot; {{ company.location }}</div>
+                </div>
+                <div class="exp-status">STATUT : EXPÉRIENCE VÉRIFIÉE</div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
 <!-- FORMATION -->
 <section class="experience-section" id="education" style="background:var(--bg);">
     <div style="max-width:80rem;margin:0 auto;">
