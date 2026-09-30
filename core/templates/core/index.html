@@ -200,7 +200,7 @@ nav{position:fixed;top:1rem;left:50%;transform:translateX(-50%);width:95%;max-wi
 
 /* PROJETS */
 .projects-section{padding:7rem 2rem;background:var(--bg);position:relative;z-index:5;}
-.project-block{display:flex;align-items:center;gap:5rem;margin-bottom:9rem;}
+.project-block{display:flex;align-items:center;gap:5rem;margin-bottom:9rem;scroll-margin-top:7rem;}
 .project-block .reveal-left,.project-block .reveal-right{flex:1;min-width:0;}
 .project-block.is-reversed{flex-direction:row-reverse;}
 .project-block:last-child{margin-bottom:0;}
@@ -511,7 +511,7 @@ footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;
         </div>
 
         {% for project in projects %}
-        <div class="project-block {% if forloop.counter|divisibleby:2 %}is-reversed{% endif %}">
+        <div id="{{ project.slug }}" class="project-block {% if forloop.counter|divisibleby:2 %}is-reversed{% endif %}">
             <div class="reveal-left">
                 <span class="project-num" style="color:{% if forloop.counter|divisibleby:3 %}var(--green){% elif forloop.counter|divisibleby:2 %}var(--cyan){% else %}var(--orange3){% endif %};">
                     {{ project.index_number }}_{{ project.title|slugify }}
