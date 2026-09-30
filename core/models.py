@@ -86,6 +86,23 @@ class Company(models.Model):
         return f"{self.job_title} @ {self.name}"
 
 
+class Certification(models.Model):
+    """Certification obtenue en dehors du cursus scolaire (AWS, etc.)."""
+    title = models.CharField(max_length=200)
+    issuer = models.CharField(max_length=150, help_text="Ex: Amazon Web Services (AWS)")
+    issue_date = models.DateField()
+    icon_name = models.CharField(max_length=50, default='workspace_premium', help_text="Nom de l'icône Material Symbols")
+    certificate_file = models.FileField(upload_to='certifications/', blank=True, null=True, help_text="Certificat au format PDF (optionnel)")
+    order = models.IntegerField(default=0)
+
+    class Meta:
+        verbose_name_plural = "Certifications"
+        ordering = ['order', '-issue_date']
+
+    def __str__(self):
+        return f"{self.title} ({self.issuer})"
+
+
 class Education(models.Model):
     school = models.CharField(max_length=150)
     degree = models.CharField(max_length=200, help_text="Ex: Master IA & Big Data")

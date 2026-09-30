@@ -220,6 +220,7 @@ nav{position:fixed;top:1rem;left:50%;transform:translateX(-50%);width:95%;max-wi
 .exp-company{color:var(--muted);font-size:.85rem;margin-top:.25rem;}
 .exp-status{font-family:monospace;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--subtle);}
 @media(max-width:600px){.exp-status{display:none;}}
+.cert-icon-wrap{padding:.6rem;background:rgba(255,107,53,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 
 /* AU-DELÀ */
 .diff-section{padding:7rem 2rem;background:var(--bg);position:relative;z-index:5;overflow:hidden;}
@@ -633,6 +634,42 @@ footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;
         {% endfor %}
     </div>
 </section>
+
+<!-- CERTIFICATIONS -->
+{% if certifications %}
+<section class="experience-section" id="certifications">
+    <div style="max-width:80rem;margin:0 auto;">
+        <div class="reveal" style="margin-bottom:3rem;">
+            <div class="section-line"></div>
+            <h2 style="font-size:clamp(2rem,5vw,3rem);font-weight:700;text-transform:uppercase;letter-spacing:-.03em;">
+                Certifications
+            </h2>
+        </div>
+        {% for cert in certifications %}
+        <div class="exp-row reveal delay-{{ forloop.counter }}">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">
+                <div style="display:flex;align-items:center;gap:1.25rem;">
+                    <div class="cert-icon-wrap">
+                        <span class="material-symbols-outlined" style="font-size:1.5rem;color:var(--orange);">{{ cert.icon_name }}</span>
+                    </div>
+                    <div>
+                        <div class="exp-date">{{ cert.issue_date|date:"Y" }}</div>
+                        <div class="exp-title">{{ cert.title }}</div>
+                        <div class="exp-company">{{ cert.issuer }}</div>
+                    </div>
+                </div>
+                <div style="display:flex;align-items:center;gap:1.5rem;">
+                    {% if cert.certificate_file %}
+                    <a href="{{ cert.certificate_file.url }}" target="_blank" rel="noopener noreferrer" class="project-link" style="font-size:.68rem;">Voir le certificat <span class="material-symbols-outlined" style="font-size:1rem;">arrow_forward</span></a>
+                    {% endif %}
+                    <div class="exp-status">STATUT : CERTIFIÉ</div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
 
 <!-- AU-DELÀ DU CODE -->
 <section class="diff-section" id="deployment">

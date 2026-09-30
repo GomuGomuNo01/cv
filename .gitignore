@@ -20,6 +20,7 @@ ENV/
 media/*
 !media/projects/
 !media/education/
+!media/certifications/
 media/projects/*
 !media/projects/*.png
 !media/projects/*.gif
@@ -32,6 +33,8 @@ media/projects/gallery/*
 media/education/*
 !media/education/*.png
 !media/education/*.jpg
+media/certifications/*
+!media/certifications/*.pdf
 
 # Base de données locale
 

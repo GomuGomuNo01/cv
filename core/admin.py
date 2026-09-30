@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from core.models import Company, Education, Project, ProjectImage, Skill
+from core.models import Certification, Company, Education, Project, ProjectImage, Skill
 
 
 class ProjectImageInline(admin.TabularInline):
@@ -16,3 +16,4 @@ class ProjectAdmin(admin.ModelAdmin):
 admin.site.register(Skill)
 admin.site.register(Company)
 admin.site.register(Education)
+admin.site.register(Certification)
