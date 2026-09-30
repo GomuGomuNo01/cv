@@ -255,6 +255,16 @@ nav{position:fixed;top:1rem;left:50%;transform:translateX(-50%);width:95%;max-wi
 .live-badge{margin-left:auto;display:flex;align-items:center;gap:.5rem;}
 .live-label{font-family:monospace;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--green);}
 
+/* CONTACT */
+.contact-desc{font-size:clamp(.9rem,2vw,1.05rem);color:var(--muted);max-width:38rem;line-height:1.75;margin-top:1rem;}
+.contact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;}
+@media(max-width:700px){.contact-grid{grid-template-columns:1fr;}}
+.contact-card{display:flex;align-items:center;gap:1.25rem;padding:1.5rem;background:var(--bg);border:.5px solid var(--bg3);border-radius:.5rem;text-decoration:none;transition:border-color .3s,background .3s,transform .3s;}
+.contact-card:hover{border-color:var(--orange);background:var(--bg3);transform:translateY(-2px);}
+.contact-card-icon{font-size:1.75rem;flex-shrink:0;}
+.contact-card-label{font-family:monospace;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--subtle);margin-bottom:.3rem;}
+.contact-card-value{font-family:'Space Grotesk',sans-serif;font-size:.95rem;font-weight:600;color:var(--text);word-break:break-word;}
+
 /* FOOTER */
 footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;position:relative;z-index:5;}
 .footer-inner{max-width:80rem;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:2rem;}
@@ -701,24 +711,64 @@ footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;
     </div>
 </section>
 
+<!-- CONTACT -->
+<section class="experience-section" id="contact">
+    <div style="max-width:80rem;margin:0 auto;">
+        <div class="reveal" style="margin-bottom:3rem;">
+            <div class="section-line"></div>
+            <h2 style="font-size:clamp(2rem,5vw,3rem);font-weight:700;text-transform:uppercase;letter-spacing:-.03em;">
+                Me <span style="color:var(--green);">contacter</span>
+            </h2>
+            <p class="contact-desc">En recherche d'une alternance en data pour la rentrée de septembre 2026. Disponible pour un échange par email, téléphone ou sur LinkedIn.</p>
+        </div>
+        <div class="contact-grid reveal delay-1">
+            <a href="mailto:cedric.kouadio.dev@gmail.com" class="contact-card">
+                <span class="material-symbols-outlined contact-card-icon" style="color:var(--orange);">mail</span>
+                <div>
+                    <div class="contact-card-label">Email</div>
+                    <div class="contact-card-value">cedric.kouadio.dev@gmail.com</div>
+                </div>
+            </a>
+            <a href="tel:+33744276500" class="contact-card">
+                <span class="material-symbols-outlined contact-card-icon" style="color:var(--cyan);">call</span>
+                <div>
+                    <div class="contact-card-label">Téléphone</div>
+                    <div class="contact-card-value">+33 07 44 27 65 00</div>
+                </div>
+            </a>
+            <a href="https://linkedin.com/in/cedric-kouadio-dev" target="_blank" rel="noopener noreferrer" class="contact-card">
+                <span class="material-symbols-outlined contact-card-icon" style="color:var(--green);">work</span>
+                <div>
+                    <div class="contact-card-label">LinkedIn</div>
+                    <div class="contact-card-value">cedric-kouadio-dev</div>
+                </div>
+            </a>
+            <a href="https://github.com/GomuGomuNo01" target="_blank" rel="noopener noreferrer" class="contact-card">
+                <span class="material-symbols-outlined contact-card-icon" style="color:var(--text);">code</span>
+                <div>
+                    <div class="contact-card-label">GitHub</div>
+                    <div class="contact-card-value">GomuGomuNo01</div>
+                </div>
+            </a>
+        </div>
+        <div class="footer-meta" style="margin-top:2rem;">
+            <span>Localisation : {{ location }}</span><span>•</span>
+            <span>Disponibilité : {{ availability }}</span>
+        </div>
+    </div>
+</section>
+
 <!-- FOOTER -->
-<footer id="contact">
+<footer>
     <div class="footer-inner">
         <div>
             <div class="footer-logo">C. KOUADIO</div>
-            <p class="footer-copy">© 2026 Cédric Kouadio. cedric.kouadio.dev@gmail.com</p>
+            <p class="footer-copy">© 2026 Cédric Kouadio</p>
         </div>
-        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:1.5rem;">
-            <div class="social-links">
-                <a href="https://github.com/GomuGomuNo01" target="_blank" class="social-link">GitHub</a>
-                <a href="https://linkedin.com/in/cedric-kouadio-dev" target="_blank" class="social-link">LinkedIn</a>
-                <a href="#" class="social-link" onclick="toggleTerminal();return false;">Terminal</a>
-            </div>
-            <div class="footer-meta">
-                <span>Localisation : {{ location }}</span><span>•</span>
-                <span>Disponibilité : {{ availability }}</span><span>•</span>
-                <span>+33 07 44 27 65 00</span>
-            </div>
+        <div class="social-links">
+            <a href="https://github.com/GomuGomuNo01" target="_blank" class="social-link">GitHub</a>
+            <a href="https://linkedin.com/in/cedric-kouadio-dev" target="_blank" class="social-link">LinkedIn</a>
+            <a href="#" class="social-link" onclick="toggleTerminal();return false;">Terminal</a>
         </div>
     </div>
 </footer>
