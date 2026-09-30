@@ -231,13 +231,6 @@ nav{position:fixed;top:1rem;left:50%;transform:translateX(-50%);width:95%;max-wi
 .exp-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--orange),transparent);transform:scaleY(0);transform-origin:top;transition:transform .4s cubic-bezier(.16,1,.3,1);}
 .exp-row:hover{border-color:var(--orange);background:var(--bg3);}
 .exp-row:hover::before{transform:scaleY(1);}
-.exp-toggle{transition:transform .3s;color:var(--muted);flex-shrink:0;}
-.exp-row.open .exp-toggle{transform:rotate(180deg);color:var(--orange);}
-.exp-detail{max-height:0;overflow:hidden;transition:max-height .35s ease;}
-.exp-row.open .exp-detail{max-height:20rem;}
-.exp-detail-inner{padding-top:1.25rem;margin-top:1.25rem;border-top:.5px solid var(--bg3);}
-.exp-detail-inner li{font-size:.85rem;color:var(--muted);line-height:1.7;padding-left:1.1rem;position:relative;margin-bottom:.5rem;}
-.exp-detail-inner li::before{content:'▸';position:absolute;left:0;color:var(--orange);}
 .exp-date{font-family:monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--green);margin-bottom:.5rem;}
 .exp-title{font-size:clamp(1rem,2.5vw,1.2rem);font-weight:700;text-transform:uppercase;letter-spacing:-.01em;font-family:'Space Grotesk',sans-serif;color:var(--text);}
 .exp-company{color:var(--muted);font-size:.85rem;margin-top:.25rem;}
@@ -627,71 +620,6 @@ footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;
     </div>
 </section>
 
-<!-- EXPÉRIENCE -->
-<section class="experience-section" id="experience">
-    <div style="max-width:80rem;margin:0 auto;">
-        <div class="reveal" style="margin-bottom:3rem;">
-            <div class="section-line"></div>
-            <h2 style="font-size:clamp(2rem,5vw,3rem);font-weight:700;text-transform:uppercase;letter-spacing:-.03em;">
-                Parcours <span style="color:var(--green);">Professionnel</span>
-            </h2>
-        </div>
-        {% for company in companies %}
-        <div class="exp-row reveal delay-{{ forloop.counter }}" onclick="toggleExp(this)">
-            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">
-                <div>
-                    <div class="exp-date">{{ company.start_date|date:"Y" }} &gt;&gt; {% if company.is_current %}EN COURS{% else %}{{ company.end_date|date:"Y" }}{% endif %}</div>
-                    <div class="exp-title">{{ company.job_title }}</div>
-                    <div class="exp-company">@ {{ company.name }} &middot; {{ company.location }}</div>
-                </div>
-                <div style="display:flex;align-items:center;gap:1rem;">
-                    <div class="exp-status">STATUT : EXPÉRIENCE VÉRIFIÉE</div>
-                    <span class="material-symbols-outlined exp-toggle">expand_more</span>
-                </div>
-            </div>
-            <div class="exp-detail">
-                <ul class="exp-detail-inner">
-                    {% for task in company.get_task_list %}
-                    <li>{{ task }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-        {% empty %}
-        <div class="exp-row reveal delay-1">
-            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">
-                <div>
-                    <div class="exp-date">2023 &gt;&gt; EN COURS</div>
-                    <div class="exp-title">Ingénieur DevOps</div>
-                    <div class="exp-company">@ TechCorp &middot; Abidjan, CI</div>
-                </div>
-                <div class="exp-status">STATUT : EXPÉRIENCE VÉRIFIÉE</div>
-            </div>
-        </div>
-        <div class="exp-row reveal delay-2">
-            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">
-                <div>
-                    <div class="exp-date">2021 &gt;&gt; 2023</div>
-                    <div class="exp-title">Développeur Full Stack</div>
-                    <div class="exp-company">@ Agence Digital &middot; Abidjan, CI</div>
-                </div>
-                <div class="exp-status">STATUT : EXPÉRIENCE VÉRIFIÉE</div>
-            </div>
-        </div>
-        <div class="exp-row reveal delay-3">
-            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">
-                <div>
-                    <div class="exp-date">2019 &gt;&gt; 2021</div>
-                    <div class="exp-title">Développeur Backend</div>
-                    <div class="exp-company">@ Startup CI &middot; Télétravail</div>
-                </div>
-                <div class="exp-status">STATUT : EXPÉRIENCE VÉRIFIÉE</div>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
-</section>
-
 <!-- FORMATION -->
 <section class="experience-section" id="education" style="background:var(--bg);">
     <div style="max-width:80rem;margin:0 auto;">
@@ -885,11 +813,6 @@ document.getElementById('terminal-input').addEventListener('keypress',function(e
     .catch(()=>{out.innerHTML+=`<p style="color:#ff6b35;">Erreur : impossible de contacter le serveur.</p>`;out.scrollTop=out.scrollHeight;});
     this.value='';
 });
-
-/* ACCORDÉON EXPÉRIENCE */
-function toggleExp(row){
-    row.classList.toggle('open');
-}
 
 /* MENU MOBILE */
 function toggleMenu(){
