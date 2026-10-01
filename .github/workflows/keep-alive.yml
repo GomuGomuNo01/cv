@@ -1,0 +1,24 @@
+name: Garde le portfolio Render actif
+
+# Render (offre gratuite) met le service en veille après 15 minutes
+# d'inactivité ; la visite suivante déclenche un redémarrage de 30 à 60
+# secondes, que les visiteurs voient comme un temps de chargement anormal.
+# Ce workflow interroge le site toutes les 10 minutes pour qu'il ne
+# s'endorme jamais.
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch: {}
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping le portfolio
+        run: |
+          code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 90 "https://cedric-kouadio-portfolio.onrender.com/")
+          echo "Réponse HTTP: $code"
+          if [ "$code" -ge 500 ]; then
+            echo "::warning::Le portfolio a répondu avec le code $code"
+          fi
