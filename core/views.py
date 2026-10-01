@@ -27,6 +27,8 @@ class PortfolioView(TemplateView):
         projects = Project.objects.filter(is_featured=True).order_by('index_number').prefetch_related('gallery_images')
         context['projects'] = projects
         context['projects_count'] = projects.count()
+        context['projects_data'] = projects.filter(category='data')
+        context['projects_dev'] = projects.filter(category='dev')
         context['skills_data'] = Skill.objects.filter(category='data').order_by('order')
         context['skills_ia'] = Skill.objects.filter(category='ia').order_by('order')
         context['skills_dev'] = Skill.objects.filter(category='dev').order_by('order')

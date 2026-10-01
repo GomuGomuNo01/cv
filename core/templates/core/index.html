@@ -479,11 +479,18 @@ footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;
         <div class="reveal" style="text-align:center;margin-bottom:5rem;">
             <div class="section-line" style="margin:0 auto 1.5rem;"></div>
             <h2 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:700;text-transform:uppercase;letter-spacing:-.03em;">
-                Projets <span style="color:var(--orange3);">Data &amp; Dev</span>
+                Projets
             </h2>
         </div>
 
-        {% for project in projects %}
+        <div class="reveal" style="margin-bottom:3rem;">
+            <div class="section-line"></div>
+            <h3 style="font-size:clamp(1.3rem,3.5vw,1.9rem);font-weight:700;text-transform:uppercase;letter-spacing:-.02em;">
+                Data &amp; <span style="color:var(--orange3);">IA</span>
+            </h3>
+        </div>
+
+        {% for project in projects_data %}
         <div id="{{ project.slug }}" class="project-block {% if forloop.counter|divisibleby:2 %}is-reversed{% endif %}">
             <div class="reveal-left">
                 <span class="project-num" style="color:{% if forloop.counter|divisibleby:3 %}var(--green){% elif forloop.counter|divisibleby:2 %}var(--cyan){% else %}var(--orange3){% endif %};">
@@ -594,6 +601,73 @@ footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;
                         <span class="material-symbols-outlined" style="font-size:3rem;opacity:.3;">bar_chart</span>
                     </div>
                 </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        <div class="reveal" style="margin:6rem 0 3rem;">
+            <div class="section-line"></div>
+            <h3 style="font-size:clamp(1.3rem,3.5vw,1.9rem);font-weight:700;text-transform:uppercase;letter-spacing:-.02em;">
+                <span style="color:var(--cyan);">Développement</span>
+            </h3>
+        </div>
+
+        {% for project in projects_dev %}
+        <div id="{{ project.slug }}" class="project-block {% if forloop.counter|divisibleby:2 %}is-reversed{% endif %}">
+            <div class="reveal-left">
+                <span class="project-num" style="color:{% if forloop.counter|divisibleby:3 %}var(--green){% elif forloop.counter|divisibleby:2 %}var(--cyan){% else %}var(--orange3){% endif %};">
+                    {{ project.index_number }}_{{ project.title|slugify }}
+                </span>
+                <div class="project-title">
+                    {{ project.title }}
+                    {% if project.in_progress %}
+                    <span style="display:inline-block;vertical-align:middle;margin-left:.75rem;font-family:monospace;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cyan);border:.5px solid rgba(0,218,243,.4);background:rgba(0,218,243,.08);padding:.2rem .6rem;border-radius:999px;">En cours</span>
+                    {% endif %}
+                </div>
+                <p class="project-desc">{{ project.short_description }}</p>
+                <div class="tech-wrap">
+                    {% for tech in project.get_tech_list %}
+                    <span class="tech-badge">{{ tech|upper }}</span>
+                    {% endfor %}
+                </div>
+                <div style="display:flex;gap:1.5rem;flex-wrap:wrap;">
+                {% if project.github_link %}
+                <a href="{{ project.github_link }}" target="_blank" rel="noopener noreferrer" class="project-link">
+                Code <span class="material-symbols-outlined" style="font-size:1.1rem;">arrow_forward</span>
+            </a>
+                {% endif %}
+                {% if project.live_link %}
+                <a href="{{ project.live_link }}" target="_blank" rel="noopener noreferrer" class="project-link">
+                Démo <span class="material-symbols-outlined" style="font-size:1.1rem;">open_in_new</span>
+            </a>
+                {% endif %}
+                </div>
+                {% if project.download_link %}
+                <a href="{{ project.download_link }}" target="_blank" rel="noopener noreferrer" class="download-badge">
+                    <span class="download-badge-left"><span class="material-symbols-outlined" style="font-size:1rem;">download</span>Télécharger le rapport</span>
+                    <span class="download-badge-right">{{ project.download_label|default:"Fichier" }}</span>
+                </a>
+                {% endif %}
+            </div>
+            <div class="reveal-right">
+                {% if project.image %}
+                <div class="img-wrap" style="cursor:pointer;"
+                     onclick='openGallery([{% if project.image %}"{{ project.image.url }}"{% endif %}{% for img in project.gallery_images.all %},"{{ img.image.url }}"{% endfor %}], "{{ project.title }}")'>
+                    <img src="{{ project.image.url }}" alt="{{ project.title }}" loading="lazy" decoding="async"/>
+                    {% if project.gallery_images.all %}
+                    <span style="position:absolute;bottom:.75rem;right:.75rem;z-index:2;background:rgba(0,0,0,.65);color:#fff;font-family:monospace;font-size:.68rem;letter-spacing:.1em;padding:.3rem .7rem;border-radius:999px;display:flex;align-items:center;gap:.35rem;">
+                        <span class="material-symbols-outlined" style="font-size:.95rem;">photo_library</span>
+                        {{ project.gallery_images.all|length|add:1 }}
+                    </span>
+                    {% endif %}
+                </div>
+                {% else %}
+                <div class="img-wrap">
+                    <div class="img-placeholder" style="background:linear-gradient(135deg,#1a1200,#0d0d0d);">
+                        <span class="material-symbols-outlined" style="font-size:3rem;opacity:.3;">deployed_code</span>
+                    </div>
+                </div>
+                {% endif %}
             </div>
         </div>
         {% endfor %}

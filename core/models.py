@@ -16,8 +16,13 @@ class Skill(models.Model):
         return f"{self.name} ({self.category})"
 
 class Project(models.Model):
+    CATEGORY_CHOICES = [
+        ('data', 'Data & IA'),
+        ('dev', 'Développement'),
+    ]
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True)
+    category = models.CharField(max_length=10, choices=CATEGORY_CHOICES, default='data')
     index_number = models.CharField(max_length=10, help_text="Ex: 01, 02")
     short_description = models.TextField()
     image = models.ImageField(upload_to='projects/', blank=True, null=True)
