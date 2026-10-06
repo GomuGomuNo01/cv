@@ -31,6 +31,8 @@ class Project(models.Model):
     live_link = models.URLField(blank=True)
     download_link = models.URLField(blank=True, help_text="Lien de téléchargement direct (ex: rapport .pbix)")
     download_label = models.CharField(max_length=60, blank=True, help_text="Ex: .pbix avec données")
+    download_link_alt = models.URLField(blank=True, help_text="Second lien de téléchargement (ex: version portable)")
+    download_label_alt = models.CharField(max_length=60, blank=True, help_text="Ex: .zip portable")
     is_featured = models.BooleanField(default=True)
     in_progress = models.BooleanField(default=False, help_text="Projet encore en cours de développement")
     created_at = models.DateTimeField(auto_now_add=True)
