@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{% load portfolio_extras %}<!DOCTYPE html>
 <html class="dark" lang="fr">
 <head>
 <meta charset="utf-8"/>
@@ -514,7 +514,7 @@ footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;
                     {{ project.index_number }}_{{ project.title|slugify }}
                 </span>
                 <div class="project-title">
-                    {% if project.video_url %}<span class="project-title-video" role="button" tabindex="0" title="Voir la vidéo de présentation" data-video="{{ project.video_url }}" data-title="{{ project.title }}" onclick="openVideo(this.dataset.video, this.dataset.title)" onkeydown="if(event.key==='Enter')this.click()">{{ project.title }}</span>{% else %}{{ project.title }}{% endif %}
+                    {% if project.video_url %}<span class="project-title-video" role="button" tabindex="0" title="Voir la vidéo de présentation" data-video="{{ project.video_url|asset_url }}" data-title="{{ project.title }}" onclick="openVideo(this.dataset.video, this.dataset.title)" onkeydown="if(event.key==='Enter')this.click()">{{ project.title }}</span>{% else %}{{ project.title }}{% endif %}
                     {% if project.in_progress %}
                     <span style="display:inline-block;vertical-align:middle;margin-left:.75rem;font-family:monospace;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cyan);border:.5px solid rgba(0,218,243,.4);background:rgba(0,218,243,.08);padding:.2rem .6rem;border-radius:999px;">En cours</span>
                     {% endif %}
@@ -532,7 +532,7 @@ footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;
             </a>
                 {% endif %}
                 {% if project.video_url %}
-                <a href="#" class="project-link" data-video="{{ project.video_url }}" data-title="{{ project.title }}" onclick="openVideo(this.dataset.video, this.dataset.title); return false;">
+                <a href="#" class="project-link" data-video="{{ project.video_url|asset_url }}" data-title="{{ project.title }}" onclick="openVideo(this.dataset.video, this.dataset.title); return false;">
                 Présentation <span class="material-symbols-outlined" style="font-size:1.1rem;">play_circle</span>
             </a>
                 {% endif %}
@@ -558,7 +558,7 @@ footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;
                 {% if project.image %}
                 {% if project.video_url %}
                 <div class="img-wrap img-wrap-video" style="cursor:pointer;" role="button" tabindex="0" title="Voir la vidéo de présentation"
-                     data-video="{{ project.video_url }}" data-title="{{ project.title }}"
+                     data-video="{{ project.video_url|asset_url }}" data-title="{{ project.title }}"
                      onclick="openVideo(this.dataset.video, this.dataset.title)" onkeydown="if(event.key==='Enter')this.click()">
                     <img src="{{ project.image.url }}" alt="{{ project.title }}" loading="lazy" decoding="async"/>
                     <span class="video-play-badge"><span class="material-symbols-outlined">play_arrow</span>Vidéo</span>
@@ -652,7 +652,7 @@ footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;
                     {{ project.index_number }}_{{ project.title|slugify }}
                 </span>
                 <div class="project-title">
-                    {% if project.video_url %}<span class="project-title-video" role="button" tabindex="0" title="Voir la vidéo de présentation" data-video="{{ project.video_url }}" data-title="{{ project.title }}" onclick="openVideo(this.dataset.video, this.dataset.title)" onkeydown="if(event.key==='Enter')this.click()">{{ project.title }}</span>{% else %}{{ project.title }}{% endif %}
+                    {% if project.video_url %}<span class="project-title-video" role="button" tabindex="0" title="Voir la vidéo de présentation" data-video="{{ project.video_url|asset_url }}" data-title="{{ project.title }}" onclick="openVideo(this.dataset.video, this.dataset.title)" onkeydown="if(event.key==='Enter')this.click()">{{ project.title }}</span>{% else %}{{ project.title }}{% endif %}
                     {% if project.in_progress %}
                     <span style="display:inline-block;vertical-align:middle;margin-left:.75rem;font-family:monospace;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cyan);border:.5px solid rgba(0,218,243,.4);background:rgba(0,218,243,.08);padding:.2rem .6rem;border-radius:999px;">En cours</span>
                     {% endif %}
@@ -670,7 +670,7 @@ footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;
             </a>
                 {% endif %}
                 {% if project.video_url %}
-                <a href="#" class="project-link" data-video="{{ project.video_url }}" data-title="{{ project.title }}" onclick="openVideo(this.dataset.video, this.dataset.title); return false;">
+                <a href="#" class="project-link" data-video="{{ project.video_url|asset_url }}" data-title="{{ project.title }}" onclick="openVideo(this.dataset.video, this.dataset.title); return false;">
                 Présentation <span class="material-symbols-outlined" style="font-size:1.1rem;">play_circle</span>
             </a>
                 {% endif %}
@@ -696,7 +696,7 @@ footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;
                 {% if project.image %}
                 {% if project.video_url %}
                 <div class="img-wrap img-wrap-video" style="cursor:pointer;" role="button" tabindex="0" title="Voir la vidéo de présentation"
-                     data-video="{{ project.video_url }}" data-title="{{ project.title }}"
+                     data-video="{{ project.video_url|asset_url }}" data-title="{{ project.title }}"
                      onclick="openVideo(this.dataset.video, this.dataset.title)" onkeydown="if(event.key==='Enter')this.click()">
                     <img src="{{ project.image.url }}" alt="{{ project.title }}" loading="lazy" decoding="async"/>
                     <span class="video-play-badge"><span class="material-symbols-outlined">play_arrow</span>Vidéo</span>

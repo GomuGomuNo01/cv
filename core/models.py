@@ -31,7 +31,7 @@ class Project(models.Model):
     live_link = models.URLField(blank=True)
     download_link = models.URLField(blank=True, help_text="Lien de téléchargement direct (ex: rapport .pbix)")
     download_label = models.CharField(max_length=60, blank=True, help_text="Ex: .pbix avec données")
-    video_url = models.URLField(blank=True, help_text="Vidéo de présentation (mp4), ouverte en plein écran depuis le titre")
+    video_url = models.CharField(max_length=300, blank=True, help_text="Vidéo de présentation (mp4) ouverte en plein écran : URL absolue ou chemin statique (ex: core/videos/x.mp4)")
     download_link_alt = models.URLField(blank=True, help_text="Second lien de téléchargement (ex: version portable)")
     download_label_alt = models.CharField(max_length=60, blank=True, help_text="Ex: .zip portable")
     is_featured = models.BooleanField(default=True)
