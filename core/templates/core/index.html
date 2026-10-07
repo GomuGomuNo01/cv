@@ -41,6 +41,7 @@ tailwind.config = {
     --green: #10e93b;
     --cyan: #07d1e8;
     --nav-bg: rgba(248, 250, 252, 0.85);
+    --dropdown-bg: #f8fafc;
 }
 
 html.dark {
@@ -52,6 +53,7 @@ html.dark {
     --muted: #94a3b8; 
     --subtle: #475569;
     --nav-bg: rgba(15, 15, 15, 0.93);
+    --dropdown-bg: #121212;
 }
 
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;cursor:none;min-height:100vh;transition: background 0.3s ease, color 0.3s ease;}
@@ -102,6 +104,21 @@ nav{position:fixed;top:1rem;left:50%;transform:translateX(-50%);width:95%;max-wi
 .nav-link:hover,.nav-link.active{color:var(--text);}
 .nav-link:hover::after,.nav-link.active::after{width:100%;}
 .nav-link.active{color:var(--orange);}
+
+/* Menu déroulant "Projets" */
+.nav-dropdown{position:relative;display:flex;align-items:center;}
+.nav-dropdown-caret{font-size:1rem;vertical-align:middle;margin-left:.15rem;transition:transform .25s;}
+.nav-dropdown:hover .nav-dropdown-caret,.nav-dropdown:focus-within .nav-dropdown-caret{transform:rotate(180deg);}
+.nav-dropdown-menu{position:absolute;top:calc(100% + 1.25rem);left:50%;transform:translate(-50%,6px);display:grid;grid-template-columns:1fr 1fr;gap:.25rem 1.75rem;width:max-content;max-width:min(40rem,90vw);padding:1.25rem 1.5rem;background:var(--dropdown-bg);border:.5px solid rgba(255,107,53,.25);border-radius:1rem;box-shadow:0 18px 40px rgba(0,0,0,.35);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .2s,transform .2s,visibility .2s;z-index:101;}
+.nav-dropdown-menu::before{content:'';position:absolute;left:0;right:0;top:-1.25rem;height:1.25rem;}
+.nav-dropdown:hover .nav-dropdown-menu,.nav-dropdown:focus-within .nav-dropdown-menu{opacity:1;visibility:visible;pointer-events:auto;transform:translate(-50%,0);}
+.nav-dropdown.is-closed .nav-dropdown-menu{opacity:0;visibility:hidden;pointer-events:none;}
+.nav-dropdown-col{display:flex;flex-direction:column;}
+.nav-dropdown-title{font-family:monospace;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--orange);padding:0 .6rem .55rem;}
+.nav-dropdown-item{display:flex;align-items:baseline;gap:.6rem;padding:.45rem .6rem;border-radius:.4rem;font-family:'Space Grotesk',sans-serif;font-size:.8rem;color:var(--muted);text-decoration:none;white-space:nowrap;transition:color .2s,background .2s;}
+.nav-dropdown-item:hover,.nav-dropdown-item:focus-visible{color:var(--text);background:rgba(255,107,53,.08);outline:none;}
+.nav-dropdown-num{font-family:monospace;font-size:.65rem;color:var(--subtle);}
+.nav-dropdown-item:hover .nav-dropdown-num{color:var(--orange);}
 /* Burger */
 .nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;}
 .nav-burger span{display:block;width:22px;height:2px;background:var(--orange);border-radius:2px;transition:all .3s;}
@@ -294,7 +311,23 @@ footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;
     <div class="nav-links">
         <a href="#hero" class="nav-link active">Accueil</a>
         <a href="#stack" class="nav-link">Compétences</a>
-        <a href="#projects" class="nav-link">Projets</a>
+        <div class="nav-dropdown">
+            <a href="#projects" class="nav-link" aria-haspopup="true">Projets<span class="material-symbols-outlined nav-dropdown-caret">expand_more</span></a>
+            <div class="nav-dropdown-menu" role="menu" aria-label="Liste des projets">
+                <div class="nav-dropdown-col">
+                    <span class="nav-dropdown-title">Data &amp; IA</span>
+                    {% for p in projects_data %}
+                    <a href="#{{ p.slug }}" class="nav-dropdown-item" role="menuitem"><span class="nav-dropdown-num">{{ p.index_number }}</span>{{ p.title }}</a>
+                    {% endfor %}
+                </div>
+                <div class="nav-dropdown-col">
+                    <span class="nav-dropdown-title">Développement</span>
+                    {% for p in projects_dev %}
+                    <a href="#{{ p.slug }}" class="nav-dropdown-item" role="menuitem"><span class="nav-dropdown-num">{{ p.index_number }}</span>{{ p.title }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
         <a href="#experience" class="nav-link">Expérience</a>
         <a href="#education" class="nav-link">Formations</a>
         <a href="#certifications" class="nav-link">Certifications</a>
@@ -1002,6 +1035,22 @@ function typeNextLine(){
     const iv=setInterval(()=>{txt.textContent=line.text.slice(0,++ci);if(ci>=line.text.length){clearInterval(iv);setTimeout(typeNextLine,75);}},28);
 }
 setTimeout(typeNextLine,1100);
+
+/* MENU DÉROULANT PROJETS : défilement doux vers le projet, puis fermeture */
+document.querySelectorAll('.nav-dropdown-item').forEach(item => {
+    item.addEventListener('click', e => {
+        const target = document.querySelector(item.getAttribute('href'));
+        if (target) {
+            e.preventDefault();
+            target.scrollIntoView({behavior: 'smooth', block: 'start'});
+            history.replaceState(null, '', item.getAttribute('href'));
+        }
+        const dropdown = item.closest('.nav-dropdown');
+        dropdown.classList.add('is-closed');
+        item.blur();
+        dropdown.addEventListener('mouseleave', () => dropdown.classList.remove('is-closed'), {once: true});
+    });
+});
 
 /* NAV ACTIVE */
 const sections=document.querySelectorAll('section[id],footer[id]'),navLinks=document.querySelectorAll('.nav-link');
