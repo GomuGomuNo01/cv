@@ -203,6 +203,13 @@ nav{position:fixed;top:1rem;left:50%;transform:translateX(-50%);width:95%;max-wi
 .download-badge:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(242,200,17,.28);}
 .download-badge-left{display:inline-flex;align-items:center;gap:.45rem;background:#555;color:#fff;padding:.65rem 1rem;}
 .download-badge-right{display:inline-flex;align-items:center;background:#F2C811;color:#000;padding:.65rem 1rem;}
+.project-title-video{cursor:pointer;transition:color .25s;}
+.project-title-video:hover,.project-title-video:focus-visible{color:var(--orange);outline:none;}
+.img-wrap-video::after{display:none;}
+.img-wrap-video img{filter:none;opacity:1;}
+.video-play-badge{position:absolute;bottom:.75rem;right:.75rem;z-index:2;background:rgba(0,0,0,.65);color:#fff;font-family:monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;padding:.35rem .8rem .35rem .55rem;border-radius:999px;display:flex;align-items:center;gap:.3rem;transition:background .25s;}
+.video-play-badge .material-symbols-outlined{font-size:1.1rem;}
+.img-wrap-video:hover .video-play-badge{background:var(--orange);}
 .download-row{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.25rem;}
 .download-row .download-badge{margin-top:0;}
 .img-wrap{aspect-ratio:16/9;border-radius:.75rem;overflow:hidden;position:relative;background:var(--bg2);border: 1px solid var(--bg3);}
@@ -507,7 +514,7 @@ footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;
                     {{ project.index_number }}_{{ project.title|slugify }}
                 </span>
                 <div class="project-title">
-                    {{ project.title }}
+                    {% if project.video_url %}<span class="project-title-video" role="button" tabindex="0" title="Voir la vidéo de présentation" data-video="{{ project.video_url }}" data-title="{{ project.title }}" onclick="openVideo(this.dataset.video, this.dataset.title)" onkeydown="if(event.key==='Enter')this.click()">{{ project.title }}</span>{% else %}{{ project.title }}{% endif %}
                     {% if project.in_progress %}
                     <span style="display:inline-block;vertical-align:middle;margin-left:.75rem;font-family:monospace;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cyan);border:.5px solid rgba(0,218,243,.4);background:rgba(0,218,243,.08);padding:.2rem .6rem;border-radius:999px;">En cours</span>
                     {% endif %}
@@ -522,6 +529,11 @@ footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;
                 {% if project.live_link %}
                 <a href="{{ project.live_link }}" target="_blank" rel="noopener noreferrer" class="project-link">
                 Démo <span class="material-symbols-outlined" style="font-size:1.1rem;">open_in_new</span>
+            </a>
+                {% endif %}
+                {% if project.video_url %}
+                <a href="#" class="project-link" data-video="{{ project.video_url }}" data-title="{{ project.title }}" onclick="openVideo(this.dataset.video, this.dataset.title); return false;">
+                Présentation <span class="material-symbols-outlined" style="font-size:1.1rem;">play_circle</span>
             </a>
                 {% endif %}
                 </div>
@@ -544,6 +556,14 @@ footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;
             </div>
             <div class="reveal-right">
                 {% if project.image %}
+                {% if project.video_url %}
+                <div class="img-wrap img-wrap-video" style="cursor:pointer;" role="button" tabindex="0" title="Voir la vidéo de présentation"
+                     data-video="{{ project.video_url }}" data-title="{{ project.title }}"
+                     onclick="openVideo(this.dataset.video, this.dataset.title)" onkeydown="if(event.key==='Enter')this.click()">
+                    <img src="{{ project.image.url }}" alt="{{ project.title }}" loading="lazy" decoding="async"/>
+                    <span class="video-play-badge"><span class="material-symbols-outlined">play_arrow</span>Vidéo</span>
+                </div>
+                {% else %}
                 <div class="img-wrap" style="cursor:pointer;"
                      onclick='openGallery([{% if project.image %}"{{ project.image.url }}"{% endif %}{% for img in project.gallery_images.all %},"{{ img.image.url }}"{% endfor %}], "{{ project.title }}")'>
                     <img src="{{ project.image.url }}" alt="{{ project.title }}" loading="lazy" decoding="async"/>
@@ -554,6 +574,7 @@ footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;
                     </span>
                     {% endif %}
                 </div>
+                {% endif %}
                 {% else %}
                 <div class="img-wrap">
                     <div class="img-placeholder" style="background:linear-gradient(135deg,#1a1200,#0d0d0d);">
@@ -631,7 +652,7 @@ footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;
                     {{ project.index_number }}_{{ project.title|slugify }}
                 </span>
                 <div class="project-title">
-                    {{ project.title }}
+                    {% if project.video_url %}<span class="project-title-video" role="button" tabindex="0" title="Voir la vidéo de présentation" data-video="{{ project.video_url }}" data-title="{{ project.title }}" onclick="openVideo(this.dataset.video, this.dataset.title)" onkeydown="if(event.key==='Enter')this.click()">{{ project.title }}</span>{% else %}{{ project.title }}{% endif %}
                     {% if project.in_progress %}
                     <span style="display:inline-block;vertical-align:middle;margin-left:.75rem;font-family:monospace;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cyan);border:.5px solid rgba(0,218,243,.4);background:rgba(0,218,243,.08);padding:.2rem .6rem;border-radius:999px;">En cours</span>
                     {% endif %}
@@ -646,6 +667,11 @@ footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;
                 {% if project.live_link %}
                 <a href="{{ project.live_link }}" target="_blank" rel="noopener noreferrer" class="project-link">
                 Démo <span class="material-symbols-outlined" style="font-size:1.1rem;">open_in_new</span>
+            </a>
+                {% endif %}
+                {% if project.video_url %}
+                <a href="#" class="project-link" data-video="{{ project.video_url }}" data-title="{{ project.title }}" onclick="openVideo(this.dataset.video, this.dataset.title); return false;">
+                Présentation <span class="material-symbols-outlined" style="font-size:1.1rem;">play_circle</span>
             </a>
                 {% endif %}
                 </div>
@@ -668,6 +694,14 @@ footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;
             </div>
             <div class="reveal-right">
                 {% if project.image %}
+                {% if project.video_url %}
+                <div class="img-wrap img-wrap-video" style="cursor:pointer;" role="button" tabindex="0" title="Voir la vidéo de présentation"
+                     data-video="{{ project.video_url }}" data-title="{{ project.title }}"
+                     onclick="openVideo(this.dataset.video, this.dataset.title)" onkeydown="if(event.key==='Enter')this.click()">
+                    <img src="{{ project.image.url }}" alt="{{ project.title }}" loading="lazy" decoding="async"/>
+                    <span class="video-play-badge"><span class="material-symbols-outlined">play_arrow</span>Vidéo</span>
+                </div>
+                {% else %}
                 <div class="img-wrap" style="cursor:pointer;"
                      onclick='openGallery([{% if project.image %}"{{ project.image.url }}"{% endif %}{% for img in project.gallery_images.all %},"{{ img.image.url }}"{% endfor %}], "{{ project.title }}")'>
                     <img src="{{ project.image.url }}" alt="{{ project.title }}" loading="lazy" decoding="async"/>
@@ -678,6 +712,7 @@ footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;
                     </span>
                     {% endif %}
                 </div>
+                {% endif %}
                 {% else %}
                 <div class="img-wrap">
                     <div class="img-placeholder" style="background:linear-gradient(135deg,#1a1200,#0d0d0d);">
@@ -1047,7 +1082,32 @@ function renderGallery() {
     document.getElementById('gallery-next').style.display = nav ? 'flex' : 'none';
 }
 
+/* VIDÉO DE PRÉSENTATION PROJET (plein écran) */
+function openVideo(src, title) {
+    const modal = document.getElementById('video-modal');
+    const video = document.getElementById('video-player');
+    document.getElementById('video-title').textContent = title;
+    video.src = src;
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    video.currentTime = 0;
+    video.play().catch(() => {});
+}
+
+function closeVideo() {
+    const video = document.getElementById('video-player');
+    video.pause();
+    video.removeAttribute('src');
+    video.load();
+    document.getElementById('video-modal').style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
 document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && document.getElementById('video-modal').style.display === 'flex') {
+        closeVideo();
+        return;
+    }
     const modal = document.getElementById('gallery-modal');
     if (modal.style.display !== 'flex') return;
     if (e.key === 'Escape') closeGallery();
@@ -1072,6 +1132,15 @@ document.addEventListener('keydown', function(e) {
         </button>
     </div>
     <span id="gallery-counter" style="margin-top:1rem; color:var(--muted); font-family:monospace; font-size:.75rem; letter-spacing:.15em;"></span>
+</div>
+<div id="video-modal" onclick="if(event.target===this) closeVideo()" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,.95); flex-direction:column; align-items:center; justify-content:center; padding:1.5rem;">
+    <div style="width:100%; max-width:90rem; display:flex; align-items:center; justify-content:space-between; margin-bottom:1rem;">
+        <span id="video-title" style="color:var(--orange); font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:.9rem; letter-spacing:.1em; text-transform:uppercase;"></span>
+        <button onclick="closeVideo()" aria-label="Fermer la vidéo" style="background:none; border:none; color:#fff; cursor:pointer;">
+            <span class="material-symbols-outlined" style="font-size:1.8rem;">close</span>
+        </button>
+    </div>
+    <video id="video-player" controls playsinline preload="none" style="width:100%; max-width:90rem; max-height:82vh; border-radius:.5rem; border:.5px solid rgba(255,255,255,.15); background:#000;"></video>
 </div>
 </body>
 </html>
