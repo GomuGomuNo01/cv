@@ -29,6 +29,14 @@ class PortfolioView(TemplateView):
         context['projects_count'] = projects.count()
         context['projects_data'] = projects.filter(category='data')
         context['projects_dev'] = projects.filter(category='dev')
+        # Bandeau défilant sous le hero : version courte des compétences
+        # (section Compétences, migration 0052). À garder alignés.
+        context['marquee_skills'] = [
+            'Python', 'SQL / DuckDB', 'Power BI / DAX', 'PySpark',
+            'scikit-learn / XGBoost', 'RAG / LangChain', 'Claude Code / MCP',
+            'Playwright', 'FastAPI', 'Java / Spring Boot', 'Laravel',
+            'React / TypeScript', 'Docker', 'GitHub Actions',
+        ]
         context['skills_data'] = Skill.objects.filter(category='data').order_by('order')
         context['skills_ia'] = Skill.objects.filter(category='ia').order_by('order')
         context['skills_dev'] = Skill.objects.filter(category='dev').order_by('order')

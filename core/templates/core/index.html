@@ -170,7 +170,7 @@ nav{position:fixed;top:1rem;left:50%;transform:translateX(-50%);width:95%;max-wi
 
 /* MARQUEE */
 .marquee-wrap{overflow:hidden;border-top:.5px solid rgba(255,255,255,.07);border-bottom:.5px solid rgba(255,255,255,.07);padding:.8rem 0;background:var(--bg2);position:relative;z-index:5;}
-.marquee-inner{display:flex;animation:marquee 20s linear infinite;}
+.marquee-inner{display:flex;animation:marquee 24.5s linear infinite;}
 .marquee-item{font-family:monospace;font-size:.68rem;letter-spacing:.25em;text-transform:uppercase;color:var(--subtle);padding:0 3rem;white-space:nowrap;}
 .marquee-item span{color:var(--orange);margin-right:1.5rem;}
 
@@ -394,30 +394,9 @@ footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;
 <!-- MARQUEE -->
 <div class="marquee-wrap">
     <div class="marquee-inner">
-        <div class="marquee-item"><span>→</span>Python</div>
-        <div class="marquee-item"><span>→</span>SQL avancé</div>
-        <div class="marquee-item"><span>→</span>Power BI</div>
-        <div class="marquee-item"><span>→</span>Pandas / NumPy</div>
-        <div class="marquee-item"><span>→</span>scikit-learn</div>
-        <div class="marquee-item"><span>→</span>PySpark</div>
-        <div class="marquee-item"><span>→</span>Claude Code / MCP</div>
-        <div class="marquee-item"><span>→</span>RAG / LangChain</div>
-        <div class="marquee-item"><span>→</span>Java / Spring Boot</div>
-        <div class="marquee-item"><span>→</span>API REST</div>
-        <div class="marquee-item"><span>→</span>Docker</div>
-        <div class="marquee-item"><span>→</span>Git / GitHub</div>
-        <div class="marquee-item"><span>→</span>Python</div>
-        <div class="marquee-item"><span>→</span>SQL avancé</div>
-        <div class="marquee-item"><span>→</span>Power BI</div>
-        <div class="marquee-item"><span>→</span>Pandas / NumPy</div>
-        <div class="marquee-item"><span>→</span>scikit-learn</div>
-        <div class="marquee-item"><span>→</span>PySpark</div>
-        <div class="marquee-item"><span>→</span>Claude Code / MCP</div>
-        <div class="marquee-item"><span>→</span>RAG / LangChain</div>
-        <div class="marquee-item"><span>→</span>Java / Spring Boot</div>
-        <div class="marquee-item"><span>→</span>API REST</div>
-        <div class="marquee-item"><span>→</span>Docker</div>
-        <div class="marquee-item"><span>→</span>Git / GitHub</div>
+        {% for copy in "12" %}{% for item in marquee_skills %}
+        <div class="marquee-item"{% if forloop.parentloop.counter == 2 %} aria-hidden="true"{% endif %}><span>→</span>{{ item }}</div>
+        {% endfor %}{% endfor %}
     </div>
 </div>
 
