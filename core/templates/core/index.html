@@ -163,9 +163,59 @@ nav{position:fixed;top:1rem;left:50%;transform:translateX(-50%);width:95%;max-wi
 .terminal-box{background:#0e0e0e;border-radius:.75rem;border:.5px solid rgba(255,107,53,.2);overflow:hidden;box-shadow:0 25px 60px rgba(0,0,0,.6);animation:fadeUp .8s .5s both;}
 .terminal-bar{background:#181818;padding:.7rem 1rem;display:flex;align-items:center;gap:.5rem;}
 .term-dot{width:10px;height:10px;border-radius:50%;}
-.term-body{padding:1.5rem;font-family:monospace;font-size:.8rem;line-height:2;}
-.term-line{display:flex;gap:1rem;align-items:baseline;}
-.lnum{color:rgba(255,255,255,.2);min-width:1.75rem;}
+/* Carte GitHub du hero (style terminal) */
+.gh-card{display:block;text-decoration:none;color:#e5e7eb;transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s,border-color .35s;}
+.gh-card:hover{transform:translateY(-4px);border-color:rgba(255,107,53,.55);box-shadow:0 30px 70px rgba(0,0,0,.65),0 0 40px rgba(255,107,53,.15);}
+.gh-bar-title{margin:0 auto;font-family:monospace;font-size:.62rem;letter-spacing:.18em;color:rgba(255,255,255,.35);text-transform:lowercase;}
+.gh-live{display:flex;align-items:center;gap:.35rem;font-family:monospace;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:#28c840;}
+.gh-live-dot{width:6px;height:6px;border-radius:50%;background:#28c840;box-shadow:0 0 8px #28c840;animation:statusPulse 2s infinite;}
+.gh-body{padding:1.25rem 1.4rem 1.3rem;display:flex;flex-direction:column;gap:1rem;}
+.gh-head{display:flex;align-items:center;gap:.9rem;}
+.gh-avatar{border-radius:50%;border:2px solid rgba(255,107,53,.7);box-shadow:0 0 0 4px rgba(255,107,53,.12);flex-shrink:0;}
+.gh-id{min-width:0;flex:1;}
+.gh-name{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.05rem;color:#fff;letter-spacing:-.01em;}
+.gh-meta{font-family:monospace;font-size:.68rem;color:rgba(255,255,255,.45);margin-top:.15rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.gh-cta{display:flex;align-items:center;gap:.2rem;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);border:.5px solid rgba(255,107,53,.45);border-radius:999px;padding:.3rem .55rem .3rem .75rem;transition:background .25s,color .25s;flex-shrink:0;}
+.gh-cta .material-symbols-outlined{font-size:.95rem;}
+.gh-card:hover .gh-cta{background:var(--orange);color:#1a0d06;}
+.gh-cmd{font-family:monospace;font-size:.72rem;color:rgba(255,255,255,.55);}
+.gh-prompt{color:var(--orange);margin-right:.5rem;}
+.gh-cursor{display:inline-block;width:.45rem;height:.85rem;margin-left:.25rem;vertical-align:-2px;background:var(--orange);animation:ghBlink 1s steps(1) infinite;}
+@keyframes ghBlink{50%{opacity:0;}}
+.gh-heatmap{display:flex;flex-direction:column;gap:.35rem;}
+.gh-months,.gh-grid{display:grid;grid-template-columns:repeat(26,1fr);gap:3px;}
+.gh-months span{font-family:monospace;font-size:.58rem;color:rgba(255,255,255,.35);white-space:nowrap;}
+.gh-week{display:grid;grid-template-rows:repeat(7,1fr);gap:3px;}
+.gh-cell{display:block;aspect-ratio:1;border-radius:2px;background:rgba(255,255,255,.06);}
+.gh-grid .gh-cell{opacity:0;animation:ghCell .45s ease forwards;animation-delay:calc(var(--d) + 900ms);}
+@keyframes ghCell{from{opacity:0;transform:scale(.4);}to{opacity:1;transform:scale(1);}}
+.gh-cell.l1{background:rgba(255,107,53,.28);}
+.gh-cell.l2{background:rgba(255,107,53,.5);}
+.gh-cell.l3{background:rgba(255,107,53,.75);}
+.gh-cell.l4{background:#ff6b35;box-shadow:0 0 6px rgba(255,107,53,.6);}
+.gh-cell.future{background:transparent;}
+.gh-legend{display:flex;align-items:center;justify-content:flex-end;gap:3px;font-family:monospace;font-size:.58rem;color:rgba(255,255,255,.35);}
+.gh-legend .gh-cell{width:9px;height:9px;}
+.gh-legend .gh-cell:first-child{margin-left:.3rem;}
+.gh-legend .gh-cell:last-of-type{margin-right:.3rem;}
+.gh-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;border-top:.5px solid rgba(255,255,255,.08);border-bottom:.5px solid rgba(255,255,255,.08);padding:.75rem 0;}
+.gh-stats > div{display:flex;flex-direction:column;gap:.15rem;}
+.gh-stat-num{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.25rem;color:#fff;}
+.gh-stats > div:first-child .gh-stat-num{color:var(--orange);}
+.gh-stat-label{font-family:monospace;font-size:.56rem;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.4);line-height:1.3;}
+.gh-langbar{display:flex;height:6px;border-radius:999px;overflow:hidden;gap:2px;}
+.gh-langbar span{display:block;height:100%;}
+.gh-langlegend{display:flex;flex-wrap:wrap;gap:.35rem .9rem;margin-top:.55rem;font-family:monospace;font-size:.64rem;color:rgba(255,255,255,.6);}
+.gh-langlegend i,.gh-lang i{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:.35rem;vertical-align:0;}
+.gh-langlegend b{color:#fff;font-weight:600;}
+.gh-langnote{margin-left:auto;color:rgba(255,255,255,.3);}
+.gh-recent{display:flex;flex-direction:column;gap:.35rem;font-family:monospace;font-size:.68rem;}
+.gh-recent-row{display:flex;align-items:center;gap:.6rem;color:rgba(255,255,255,.75);min-width:0;}
+.gh-commit{color:#28c840;font-size:.6rem;}
+.gh-repo{color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;}
+.gh-lang{color:rgba(255,255,255,.45);white-space:nowrap;}
+.gh-ago{margin-left:auto;color:rgba(255,255,255,.35);white-space:nowrap;}
+@media(prefers-reduced-motion:reduce){.gh-grid .gh-cell{animation:none;opacity:1;}.gh-cursor,.gh-live-dot{animation:none;}}
 .k{color:var(--orange);}.v{color:#fff;}.c{color:var(--cyan);}.s{color:var(--green);}
 
 /* MARQUEE */
@@ -389,7 +439,7 @@ footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;
                 <span class="hero-title-line"><span class="hero-title-inner">Cédric</span></span>
                 <span class="hero-title-line"><span class="hero-title-inner accent-text hero-name">Kouadio</span></span>
             </h1>
-            <p class="hero-subtitle" style="margin-top:1.5rem;margin-bottom:1rem;">Data Analyst &amp; Développeur</p>
+            <p class="hero-subtitle" style="margin-top:1.5rem;margin-bottom:1rem;">Dev Fullstack | Data Analyst &amp; IA</p>
             <span class="tag-badge">Python • SQL • Power BI • IA</span>
             <p class="hero-desc" style="margin:1.75rem 0 2.25rem;">
                 Je transforme des données brutes en outils utilisables&nbsp;: tableaux de bord Power BI, traitements Python fiabilisés, agents IA testés avant mise en service.
@@ -399,15 +449,59 @@ footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;
                 <button class="btn-primary" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">Voir mes projets</button>
             </div>
         </div>
-        <div class="terminal-box">
+        {% if github %}
+        <a href="{{ github.html_url }}" target="_blank" rel="noopener noreferrer" class="terminal-box gh-card" aria-label="Voir le profil GitHub de {{ github.name }}">
             <div class="terminal-bar">
                 <div class="term-dot" style="background:#ff5f57;"></div>
                 <div class="term-dot" style="background:#ffbd2e;"></div>
                 <div class="term-dot" style="background:#28c840;"></div>
-                <span style="margin:0 auto;font-family:monospace;font-size:.62rem;letter-spacing:.18em;color:rgba(255,255,255,.2);text-transform:uppercase;">profil.yaml</span>
+                <span class="gh-bar-title">github.com/{{ github.login }}</span>
+                <span class="gh-live"><span class="gh-live-dot"></span>live</span>
             </div>
-            <div class="term-body" id="terminal-body"></div>
-        </div>
+            <div class="gh-body">
+                <div class="gh-head">
+                    <img src="{{ github.avatar_url }}&amp;s=112" alt="" width="52" height="52" class="gh-avatar" decoding="async"/>
+                    <div class="gh-id">
+                        <div class="gh-name">{{ github.name }}</div>
+                        <div class="gh-meta">@{{ github.login }}{% if github.location %} · {{ github.location }}{% endif %} · sur GitHub depuis {{ github.member_since }}</div>
+                    </div>
+                    <span class="gh-cta">Profil <span class="material-symbols-outlined">arrow_outward</span></span>
+                </div>
+
+                <div class="gh-cmd"><span class="gh-prompt">$</span> git log --since=&quot;6 months&quot; --author=cedric<span class="gh-cursor"></span></div>
+
+                <div class="gh-heatmap" aria-hidden="true">
+                    <div class="gh-months">
+                        {% for m in github.months %}<span style="grid-column:{{ m.column }};">{{ m.name }}</span>{% endfor %}
+                    </div>
+                    <div class="gh-grid">
+                        {% for week in github.weeks %}<div class="gh-week" style="--d:{% widthratio forloop.counter0 1 28 %}ms;">{% for day in week %}<span class="gh-cell{% if day.level is not None %} l{{ day.level }}{% else %} future{% endif %}" title="{{ day.label }}"></span>{% endfor %}</div>{% endfor %}
+                    </div>
+                    <div class="gh-legend">moins <span class="gh-cell l0"></span><span class="gh-cell l1"></span><span class="gh-cell l2"></span><span class="gh-cell l3"></span><span class="gh-cell l4"></span> plus</div>
+                </div>
+
+                <div class="gh-stats">
+                    <div><span class="gh-stat-num" data-target="{{ github.total_contributions }}" data-suffix="">{{ github.total_contributions }}</span><span class="gh-stat-label">contributions / 12 mois</span></div>
+                    <div><span class="gh-stat-num" data-target="{{ github.active_days }}" data-suffix="">{{ github.active_days }}</span><span class="gh-stat-label">jours actifs</span></div>
+                    <div><span class="gh-stat-num" data-target="{{ github.current_streak }}" data-suffix=" j">{{ github.current_streak }} j</span><span class="gh-stat-label">série en cours</span></div>
+                    <div><span class="gh-stat-num" data-target="{{ github.public_repos }}" data-suffix="">{{ github.public_repos }}</span><span class="gh-stat-label">dépôts publics</span></div>
+                </div>
+
+                <div class="gh-langs">
+                    <div class="gh-langbar">{% for l in github.languages %}<span style="width:{{ l.share|stringformat:'s' }}%;background:{{ l.color }};"></span>{% endfor %}</div>
+                    <div class="gh-langlegend">{% for l in github.languages %}<span><i style="background:{{ l.color }};"></i>{{ l.name }} <b>{{ l.repos }}</b></span>{% endfor %}<span class="gh-langnote">dépôts par langage</span></div>
+                </div>
+
+                {% if github.recent %}
+                <div class="gh-recent">
+                    {% for r in github.recent %}
+                    <div class="gh-recent-row"><span class="gh-commit">●</span><span class="gh-repo">{{ r.name }}</span>{% if r.language %}<span class="gh-lang"><i style="background:{{ r.color }};"></i>{{ r.language }}</span>{% endif %}<span class="gh-ago">{{ r.ago }}</span></div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        </a>
+        {% endif %}
     </div>
 </section>
 
@@ -1010,32 +1104,6 @@ const cntObs=new IntersectionObserver(entries=>{
 },{threshold:.5});
 document.querySelectorAll('[data-target]').forEach(el=>cntObs.observe(el));
 
-/* TERMINAL HERO */
-const TERM_LINES=[
-    {n:'01',cls:'k',text:'profil:'},
-    {n:'02',cls:'c',text:'  data:'},
-    {n:'03',cls:'v',text:'    langages: [Python, SQL]'},
-    {n:'04',cls:'v',text:'    outils: Power BI, Pandas'},
-    {n:'05',cls:'c',text:'  developpement:'},
-    {n:'06',cls:'v',text:'    langages: [Java, PHP, C#]'},
-    {n:'07',cls:'c',text:'  formation:'},
-    {n:'08',cls:'v',text:'    master: IA & Big Data (ESGI)'},
-    {n:'09',cls:'s',text:'  statut: DISPONIBLE'},
-    {n:'10',cls:'s',text:'  debut: septembre 2026 ✓'},
-];
-const termBody=document.getElementById('terminal-body');
-let lineIdx=0;
-function typeNextLine(){
-    if(lineIdx>=TERM_LINES.length)return;
-    const line=TERM_LINES[lineIdx++];
-    const row=document.createElement('div');row.className='term-line';
-    const num=document.createElement('span');num.className='lnum';num.textContent=line.n;
-    const txt=document.createElement('span');txt.className=line.cls;txt.textContent='';
-    row.appendChild(num);row.appendChild(txt);termBody.appendChild(row);
-    let ci=0;
-    const iv=setInterval(()=>{txt.textContent=line.text.slice(0,++ci);if(ci>=line.text.length){clearInterval(iv);setTimeout(typeNextLine,75);}},28);
-}
-setTimeout(typeNextLine,1100);
 
 /* MISE EN AVANT DES LIENS D'UN PROJET (arrivée par #ancre depuis un CV,
    changement d'ancre ou menu Projets) : halo et pastille temporaires sur

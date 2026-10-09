@@ -1,5 +1,6 @@
 from django.views.generic import TemplateView
 from .models import Project, Skill, Company, Education, Certification
+from .github_profile import get_github_profile
 
 class PortfolioView(TemplateView):
     template_name = "core/index.html"
@@ -29,6 +30,9 @@ class PortfolioView(TemplateView):
         context['projects_count'] = projects.count()
         context['projects_data'] = projects.filter(category='data')
         context['projects_dev'] = projects.filter(category='dev')
+        # Carte GitHub du hero (données en cache 6 h, copie de secours sinon)
+        context['github'] = get_github_profile()
+
         # Bandeau défilant sous le hero : version courte des compétences
         # (section Compétences, migration 0052). À garder alignés.
         context['marquee_skills'] = [
