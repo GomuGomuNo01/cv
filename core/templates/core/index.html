@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Cédric Kouadio &middot; Data Analyst &amp; Développeur</title>
+<title>Cédric Kouadio &middot; Dev Fullstack | Data Analyst &amp; IA</title>
 <meta name="description" content="Portfolio de Cédric Kouadio, étudiant en Master IA &amp; Big Data, Data Analyst et développeur en alternance."/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
@@ -139,7 +139,7 @@ nav{position:fixed;top:1rem;left:50%;transform:translateX(-50%);width:95%;max-wi
 .hero-glow{position:absolute;width:700px;height:700px;background:radial-gradient(circle,rgba(255,87,26,.2) 0%,transparent 70%);border-radius:50%;top:5%;right:-15%;animation:pulse 5s ease-in-out infinite;pointer-events:none;}
 .hero-glow-2{position:absolute;width:400px;height:400px;background:radial-gradient(circle,rgba(0,218,243,.12) 0%,transparent 70%);border-radius:50%;bottom:10%;left:-5%;animation:pulse 7s ease-in-out infinite reverse;pointer-events:none;}
 .hero-inner{max-width:80rem;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;position:relative;z-index:5;}
-@media(max-width:900px){.hero-inner{grid-template-columns:1fr;gap:3rem;}.terminal-box{display:none;}}
+@media(max-width:900px){.hero-inner{grid-template-columns:1fr;gap:3rem;}}
 .status-dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green);animation:statusPulse 2s infinite;flex-shrink:0;}
 .hero-title{font-size:clamp(3.5rem,9vw,8rem);font-weight:700;line-height:.9;text-transform:uppercase;letter-spacing:-.03em;overflow:hidden;}
 .hero-title-line{display:block;overflow:hidden;}
@@ -216,6 +216,15 @@ nav{position:fixed;top:1rem;left:50%;transform:translateX(-50%);width:95%;max-wi
 .gh-lang{color:rgba(255,255,255,.45);white-space:nowrap;}
 .gh-ago{margin-left:auto;color:rgba(255,255,255,.35);white-space:nowrap;}
 @media(prefers-reduced-motion:reduce){.gh-grid .gh-cell{animation:none;opacity:1;}.gh-cursor,.gh-live-dot{animation:none;}}
+@media(max-width:520px){
+    .gh-body{padding:1rem 1rem 1.1rem;gap:.85rem;}
+    .gh-stats{grid-template-columns:repeat(2,1fr);row-gap:.75rem;}
+    .gh-cmd{font-size:.64rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .gh-months span{font-size:.5rem;}
+    .gh-months,.gh-grid,.gh-week{gap:2px;}
+    .gh-langnote{display:none;}
+    .gh-cta{padding:.3rem .5rem;}
+}
 .k{color:var(--orange);}.v{color:#fff;}.c{color:var(--cyan);}.s{color:var(--green);}
 
 /* MARQUEE */
