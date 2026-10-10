@@ -289,6 +289,8 @@ nav{position:fixed;top:1rem;left:50%;transform:translateX(-50%);width:95%;max-wi
 /* Mise en avant temporaire des liens Démo / Présentation quand on arrive
    sur un projet par son ancre (liens "Voir le projet" des CV, menu Projets) */
 .project-actions{display:flex;gap:1.5rem;flex-wrap:wrap;width:fit-content;max-width:100%;position:relative;}
+/* Démo, Présentation et Code tiennent sur une ligne en largeur téléphone */
+@media(max-width:520px){.project-actions{gap:.9rem 1.1rem;}.project-link{letter-spacing:.1em;}}
 .project-actions::after{content:'';position:absolute;inset:-.6rem -.85rem;border-radius:.75rem;border:1.5px solid var(--orange);opacity:0;pointer-events:none;}
 .project-actions.is-spotlight::after{animation:actionsPulse 1.1s ease-in-out 4;}
 .project-actions.is-spotlight .project-link{animation:actionsGlow 1.1s ease-in-out 4;}
@@ -672,6 +674,11 @@ footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;
                 Présentation <span class="material-symbols-outlined" style="font-size:1.1rem;">play_circle</span>
             </a>
                 {% endif %}
+                {% if project.github_link %}
+                <a href="{{ project.github_link }}" target="_blank" rel="noopener noreferrer" class="project-link" title="Voir le code sur GitHub">
+                Code <span class="material-symbols-outlined" style="font-size:1.1rem;">code</span>
+            </a>
+                {% endif %}
                 </div>
                 {% if project.download_link or project.download_link_alt %}
                 <div class="download-row">
@@ -809,6 +816,11 @@ footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;
                 {% if project.video_url %}
                 <a href="#" class="project-link" data-video="{{ project.video_url|asset_url }}" data-title="{{ project.title }}" onclick="openVideo(this.dataset.video, this.dataset.title); return false;">
                 Présentation <span class="material-symbols-outlined" style="font-size:1.1rem;">play_circle</span>
+            </a>
+                {% endif %}
+                {% if project.github_link %}
+                <a href="{{ project.github_link }}" target="_blank" rel="noopener noreferrer" class="project-link" title="Voir le code sur GitHub">
+                Code <span class="material-symbols-outlined" style="font-size:1.1rem;">code</span>
             </a>
                 {% endif %}
                 </div>
