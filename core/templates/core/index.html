@@ -133,6 +133,34 @@ nav{position:fixed;top:1rem;left:50%;transform:translateX(-50%);width:95%;max-wi
 .mobile-menu a:hover{color:var(--orange);background:rgba(255,107,53,.06);}
 @media(max-width:1180px){.nav-links{display:none;}.nav-burger{display:flex;}}
 
+/* Navigation rapide en fin de page : flèche flottante qui révèle les
+   sections du header (survol à la souris, toucher sur écran tactile,
+   focus au clavier). Un clic à la souris sur la flèche remonte en haut. */
+.quicknav{position:fixed;right:1.5rem;bottom:calc(1.5rem + env(safe-area-inset-bottom));z-index:95;display:flex;flex-direction:column;align-items:flex-end;gap:.75rem;opacity:0;visibility:hidden;transform:translateY(16px);transition:opacity .3s,transform .3s,visibility .3s;}
+.quicknav.is-visible{opacity:1;visibility:visible;transform:none;}
+.quicknav-btn{width:3.25rem;height:3.25rem;border-radius:50%;border:none;background:var(--orange);color:#1a0d06;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 10px 28px rgba(255,107,53,.35);transition:transform .25s,box-shadow .25s;}
+.quicknav-btn .material-symbols-outlined{font-size:1.5rem;}
+.quicknav-btn:focus-visible{outline:2px solid var(--text);outline-offset:3px;}
+.quicknav-menu{display:flex;flex-direction:column;min-width:13.5rem;max-height:calc(100vh - 8rem);overflow-y:auto;padding:.7rem;background:var(--dropdown-bg);border:.5px solid rgba(255,107,53,.25);border-radius:1rem;box-shadow:0 18px 40px rgba(0,0,0,.35);opacity:0;visibility:hidden;pointer-events:none;transform:translateY(8px);transition:opacity .2s,transform .2s,visibility .2s;}
+.quicknav-title{font-family:monospace;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--orange);padding:.2rem .6rem .5rem;}
+.quicknav-item{display:flex;align-items:baseline;gap:.6rem;padding:.5rem .6rem;border-radius:.4rem;font-family:'Space Grotesk',sans-serif;font-size:.82rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);transition:color .2s,background .2s;}
+.quicknav-item:hover,.quicknav-item:focus-visible{color:var(--text);background:rgba(255,107,53,.08);outline:none;}
+.quicknav-item.active{color:var(--orange);}
+.quicknav-num{font-family:monospace;font-size:.65rem;color:var(--subtle);}
+.quicknav-item:hover .quicknav-num,.quicknav-item.active .quicknav-num{color:var(--orange);}
+.quicknav.is-visible.is-open .quicknav-menu,
+.quicknav.is-visible:has(:focus-visible) .quicknav-menu{opacity:1;visibility:visible;pointer-events:auto;transform:none;}
+@media(hover:hover){
+    .quicknav.is-visible:hover .quicknav-menu{opacity:1;visibility:visible;pointer-events:auto;transform:none;}
+    .quicknav-btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(255,107,53,.5);}
+}
+@media(max-width:600px){
+    .quicknav{right:1rem;bottom:calc(1rem + env(safe-area-inset-bottom));}
+    .quicknav-btn{width:3rem;height:3rem;}
+    .quicknav-item{padding:.65rem .7rem;font-size:.85rem;}
+}
+@media(prefers-reduced-motion:reduce){.quicknav,.quicknav-menu,.quicknav-btn{transition:none;}}
+
 /* HERO */
 .hero-section{position:relative;min-height:100vh;display:flex;align-items:center;padding:7rem 2rem 5rem;overflow:hidden;}
 .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,107,53,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,107,53,.06) 1px,transparent 1px);background-size:60px 60px;animation:gridMove 22s linear infinite;}
@@ -1089,6 +1117,15 @@ footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;
     </div>
 </footer>
 
+<div class="quicknav" id="quicknav">
+    <div class="quicknav-menu" id="quicknav-menu" role="navigation" aria-label="Aller à une section">
+        <span class="quicknav-title">Aller à</span>
+    </div>
+    <button type="button" class="quicknav-btn" id="quicknav-btn" aria-label="Sections du site (clic : revenir en haut)" aria-controls="quicknav-menu" aria-expanded="false">
+        <span class="material-symbols-outlined">arrow_upward</span>
+    </button>
+</div>
+
 <!-- SCRIPTS -->
 <script>
 /* CURSEUR */
@@ -1187,6 +1224,68 @@ document.querySelectorAll('.nav-dropdown-item').forEach(item => {
 /* NAV ACTIVE */
 const sections=document.querySelectorAll('section[id],footer[id]'),navLinks=document.querySelectorAll('.nav-link');
 window.addEventListener('scroll',()=>{let cur='';sections.forEach(s=>{if(window.scrollY>=s.offsetTop-220)cur=s.id;});navLinks.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+cur));},{passive:true});
+
+/* NAVIGATION RAPIDE EN FIN DE PAGE
+   Les sections reprennent celles du menu mobile (même liste que le header).
+   Souris : survol = sections, clic sur la flèche = retour en haut.
+   Tactile : toucher la flèche ouvre ou ferme la liste. */
+(function () {
+    const qn = document.getElementById('quicknav');
+    const btn = document.getElementById('quicknav-btn');
+    const menu = document.getElementById('quicknav-menu');
+    document.querySelectorAll('.mobile-menu a').forEach((link, i) => {
+        const item = document.createElement('a');
+        item.href = link.getAttribute('href');
+        item.className = 'quicknav-item';
+        item.innerHTML = '<span class="quicknav-num">' + String(i + 1).padStart(2, '0') + '</span>';
+        item.append(link.textContent.trim());
+        menu.appendChild(item);
+    });
+    const items = [...menu.querySelectorAll('.quicknav-item')];
+
+    function setOpen(open) {
+        qn.classList.toggle('is-open', open);
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+    function update() {
+        const doc = document.documentElement;
+        const nearEnd = window.scrollY + window.innerHeight >= doc.scrollHeight - window.innerHeight * 0.9;
+        qn.classList.toggle('is-visible', nearEnd);
+        if (!nearEnd) setOpen(false);
+        let cur = '';
+        sections.forEach(s => { if (window.scrollY >= s.offsetTop - 220) cur = s.id; });
+        items.forEach(it => it.classList.toggle('active', it.getAttribute('href') === '#' + cur));
+    }
+
+    let pointer = '';
+    btn.addEventListener('pointerdown', e => { pointer = e.pointerType; });
+    btn.addEventListener('click', () => {
+        if (pointer === 'touch' || pointer === 'pen') {
+            setOpen(!qn.classList.contains('is-open'));
+        } else {
+            window.scrollTo({top: 0, behavior: 'smooth'});
+            btn.blur();
+        }
+        pointer = '';
+    });
+    items.forEach(item => item.addEventListener('click', e => {
+        const target = document.querySelector(item.getAttribute('href'));
+        if (target) {
+            e.preventDefault();
+            target.scrollIntoView({behavior: 'smooth', block: 'start'});
+            history.replaceState(null, '', item.getAttribute('href'));
+        }
+        setOpen(false);
+        item.blur();
+    }));
+    document.addEventListener('click', e => { if (!qn.contains(e.target)) setOpen(false); });
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && qn.contains(document.activeElement)) { setOpen(false); document.activeElement.blur(); }
+    });
+    window.addEventListener('scroll', update, {passive: true});
+    window.addEventListener('resize', update);
+    update();
+})();
 
 /* CLIGNOTEMENT STATUT */
 const statusLine=document.getElementById('status-line');
