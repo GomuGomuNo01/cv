@@ -39,7 +39,7 @@ class PortfolioView(TemplateView):
             'Python', 'SQL / DuckDB', 'Power BI / DAX', 'PySpark',
             'scikit-learn / XGBoost', 'RAG / LangChain', 'Claude Code / MCP',
             'Playwright', 'FastAPI', 'Java / Spring Boot', 'Laravel',
-            'React / TypeScript', 'Docker', 'GitHub Actions',
+            'C# / ASP.NET Core', 'React / TypeScript', 'Docker', 'GitHub Actions',
         ]
         context['skills_data'] = Skill.objects.filter(category='data').order_by('order')
         context['skills_ia'] = Skill.objects.filter(category='ia').order_by('order')
