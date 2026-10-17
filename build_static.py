@@ -36,6 +36,31 @@ from django.db import connection  # noqa: E402
 from django.test import Client  # noqa: E402
 
 
+def masquer_demos_suspendues():
+    """Retire le lien "Démo" d'un projet hébergé sur Render quand le service
+    est suspendu ou en panne (réponse 5xx ou aucune réponse) : mieux vaut pas
+    de lien qu'une page "This service has been suspended". Le lien revient tout
+    seul au build suivant, dès que le service répond de nouveau."""
+    import urllib.error
+    import urllib.request
+
+    from core.models import Project
+
+    for projet in Project.objects.filter(live_link__contains='.onrender.com'):
+        try:
+            requete = urllib.request.Request(projet.live_link, method='HEAD',
+                                             headers={'User-Agent': 'build-portfolio'})
+            urllib.request.urlopen(requete, timeout=90)
+            disponible = True
+        except urllib.error.HTTPError as erreur:
+            disponible = erreur.code < 500
+        except Exception:
+            disponible = False
+        if not disponible:
+            print(f'Démo indisponible, lien masqué : {projet.slug} ({projet.live_link})')
+            Project.objects.filter(pk=projet.pk).update(live_link='')
+
+
 def main():
     # La base de données du build est reconstruite depuis les migrations
     db_path = Path(settings.DATABASES['default']['NAME'])
@@ -43,6 +68,7 @@ def main():
     if db_path.exists():
         db_path.unlink()
     call_command('migrate', verbosity=0)
+    masquer_demos_suspendues()
     call_command('collectstatic', interactive=False, clear=True, verbosity=0)
 
     response = Client(HTTP_HOST='localhost').get('/', secure=True)
