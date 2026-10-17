@@ -75,3 +75,6 @@ staticfiles/
 # Node (si tu utilises frontend)
 
 node_modules/
+
+# Site statique généré (GitHub Pages)
+_site/
