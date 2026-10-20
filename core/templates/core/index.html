@@ -236,7 +236,7 @@ nav{position:fixed;top:1rem;left:50%;transform:translateX(-50%);width:95%;max-wi
 .gh-legend .gh-cell{width:9px;height:9px;}
 .gh-legend .gh-cell:first-child{margin-left:.3rem;}
 .gh-legend .gh-cell:last-of-type{margin-right:.3rem;}
-.gh-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;border-top:.5px solid rgba(255,255,255,.08);border-bottom:.5px solid rgba(255,255,255,.08);padding:.75rem 0;}
+.gh-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:.5rem;border-top:.5px solid rgba(255,255,255,.08);border-bottom:.5px solid rgba(255,255,255,.08);padding:.75rem 0;}
 .gh-stats > div{display:flex;flex-direction:column;gap:.15rem;}
 .gh-stat-num{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.25rem;color:#fff;}
 .gh-stats > div:first-child .gh-stat-num{color:var(--orange);}
@@ -256,7 +256,7 @@ nav{position:fixed;top:1rem;left:50%;transform:translateX(-50%);width:95%;max-wi
 @media(prefers-reduced-motion:reduce){.gh-grid .gh-cell,.gh-grid .gh-cell.l1,.gh-grid .gh-cell.l2,.gh-grid .gh-cell.l3,.gh-grid .gh-cell.l4{animation:none;opacity:1;}.gh-grid::after{display:none;}.gh-cursor,.gh-live-dot{animation:none;}}
 @media(max-width:520px){
     .gh-body{padding:1rem 1rem 1.1rem;gap:.85rem;}
-    .gh-stats{grid-template-columns:repeat(2,1fr);row-gap:.75rem;}
+    .gh-stats{grid-template-columns:repeat(3,1fr);row-gap:.75rem;}
     .gh-cmd{font-size:.64rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
     .gh-months span{font-size:.5rem;}
     .gh-months,.gh-grid,.gh-week{gap:2px;}
@@ -532,6 +532,7 @@ footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;
                     <div><span class="gh-stat-num" data-target="{{ github.total_contributions }}" data-suffix="">{{ github.total_contributions }}</span><span class="gh-stat-label">contributions / 12 mois</span></div>
                     <div><span class="gh-stat-num" data-target="{{ github.active_days }}" data-suffix="">{{ github.active_days }}</span><span class="gh-stat-label">jours actifs</span></div>
                     <div><span class="gh-stat-num" data-target="{{ github.current_streak }}" data-suffix=" j">{{ github.current_streak }} j</span><span class="gh-stat-label">série en cours</span></div>
+                    <div><span class="gh-stat-num" data-target="{{ github.best_streak }}" data-suffix=" j">{{ github.best_streak }} j</span><span class="gh-stat-label">meilleure série</span></div>
                     <div><span class="gh-stat-num" data-target="{{ github.public_repos }}" data-suffix="">{{ github.public_repos }}</span><span class="gh-stat-label">dépôts publics</span></div>
                 </div>
 
