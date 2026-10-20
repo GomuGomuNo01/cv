@@ -227,6 +227,11 @@ nav{position:fixed;top:1rem;left:50%;transform:translateX(-50%);width:95%;max-wi
 .gh-cell.l3{background:rgba(255,107,53,.75);}
 .gh-cell.l4{background:#ff6b35;box-shadow:0 0 6px rgba(255,107,53,.6);}
 .gh-cell.future{background:transparent;}
+.gh-grid{position:relative;overflow:hidden;}
+.gh-grid::after{content:"";position:absolute;top:0;bottom:0;left:0;width:12%;pointer-events:none;opacity:0;background:linear-gradient(90deg,transparent,rgba(255,107,53,.3) 70%,transparent);animation:ghScan 7s linear 1.6s infinite;}
+@keyframes ghScan{0%{opacity:0;transform:translateX(-100%);}3%{opacity:1;}63%{opacity:1;}66%,100%{opacity:0;transform:translateX(833%);}}
+.gh-grid .gh-cell.l1,.gh-grid .gh-cell.l2,.gh-grid .gh-cell.l3,.gh-grid .gh-cell.l4{animation:ghCell .45s ease forwards,ghGlow 7s ease-out infinite;animation-delay:calc(var(--d) + 900ms),calc(var(--d) * 5.66 + 1830ms);}
+@keyframes ghGlow{0%{filter:none;}3%{filter:brightness(1.7) drop-shadow(0 0 5px rgba(255,107,53,.9));}12%,100%{filter:none;}}
 .gh-legend{display:flex;align-items:center;justify-content:flex-end;gap:3px;font-family:monospace;font-size:.58rem;color:rgba(255,255,255,.35);}
 .gh-legend .gh-cell{width:9px;height:9px;}
 .gh-legend .gh-cell:first-child{margin-left:.3rem;}
@@ -248,7 +253,7 @@ nav{position:fixed;top:1rem;left:50%;transform:translateX(-50%);width:95%;max-wi
 .gh-repo{color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;}
 .gh-lang{color:rgba(255,255,255,.45);white-space:nowrap;}
 .gh-ago{margin-left:auto;color:rgba(255,255,255,.35);white-space:nowrap;}
-@media(prefers-reduced-motion:reduce){.gh-grid .gh-cell{animation:none;opacity:1;}.gh-cursor,.gh-live-dot{animation:none;}}
+@media(prefers-reduced-motion:reduce){.gh-grid .gh-cell,.gh-grid .gh-cell.l1,.gh-grid .gh-cell.l2,.gh-grid .gh-cell.l3,.gh-grid .gh-cell.l4{animation:none;opacity:1;}.gh-grid::after{display:none;}.gh-cursor,.gh-live-dot{animation:none;}}
 @media(max-width:520px){
     .gh-body{padding:1rem 1rem 1.1rem;gap:.85rem;}
     .gh-stats{grid-template-columns:repeat(2,1fr);row-gap:.75rem;}
