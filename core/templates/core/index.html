@@ -703,8 +703,8 @@ footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;
                 <div class="project-actions">
                 <span class="project-actions-hint" aria-hidden="true"></span>
                 {% if project.live_link %}
-                <a href="{{ project.live_link }}" target="_blank" rel="noopener noreferrer" class="project-link">
-                Démo <span class="material-symbols-outlined" style="font-size:1.1rem;">open_in_new</span>
+                <a href="{{ project.live_link }}" target="_blank" rel="noopener noreferrer" class="project-link" data-label="{{ project.live_label|default:'Démo' }}">
+                {{ project.live_label|default:"Démo" }} <span class="material-symbols-outlined" style="font-size:1.1rem;">open_in_new</span>
             </a>
                 {% endif %}
                 {% if project.video_url %}
@@ -842,8 +842,8 @@ footer{background:var(--bg2);border-top:.5px solid var(--bg3);padding:4rem 2rem;
                 <div class="project-actions">
                 <span class="project-actions-hint" aria-hidden="true"></span>
                 {% if project.live_link %}
-                <a href="{{ project.live_link }}" target="_blank" rel="noopener noreferrer" class="project-link">
-                Démo <span class="material-symbols-outlined" style="font-size:1.1rem;">open_in_new</span>
+                <a href="{{ project.live_link }}" target="_blank" rel="noopener noreferrer" class="project-link" data-label="{{ project.live_label|default:'Démo' }}">
+                {{ project.live_label|default:"Démo" }} <span class="material-symbols-outlined" style="font-size:1.1rem;">open_in_new</span>
             </a>
                 {% endif %}
                 {% if project.video_url %}
@@ -1175,8 +1175,11 @@ function spotlightProject(id, delay) {
     const hasVideo = !!row.querySelector('[data-video]');
     const hasDemo = [...row.querySelectorAll('a')].some(a => !a.dataset.video);
     const hint = row.querySelector('.project-actions-hint');
+    const liveLink = row.querySelector('a:not([data-video])');
+    const consult = !!liveLink && !!liveLink.dataset.label && liveLink.dataset.label !== 'Démo';
     hint.textContent =
-        hasDemo && hasVideo ? 'Testez la démo ou regardez la vidéo'
+        consult ? (hasVideo ? 'Consultez le site ou regardez la vidéo' : 'Consultez le site en ligne')
+        : hasDemo && hasVideo ? 'Testez la démo ou regardez la vidéo'
         : hasVideo ? 'Regardez la vidéo de présentation'
         : 'Testez la démo en ligne';
     block.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el => el.classList.add('visible'));

@@ -29,6 +29,7 @@ class Project(models.Model):
     tech_stack = models.CharField(max_length=250, help_text="Liste séparée par des virgules")
     github_link = models.URLField(blank=True)
     live_link = models.URLField(blank=True)
+    live_label = models.CharField(max_length=30, blank=True, help_text="Libellé du lien externe (vide = « Démo »). Ex: Consulter")
     download_link = models.URLField(blank=True, help_text="Lien de téléchargement direct (ex: rapport .pbix)")
     download_label = models.CharField(max_length=60, blank=True, help_text="Ex: .pbix avec données")
     video_url = models.CharField(max_length=300, blank=True, help_text="Vidéo de présentation (mp4) ouverte en plein écran : URL absolue ou chemin statique (ex: core/videos/x.mp4)")
