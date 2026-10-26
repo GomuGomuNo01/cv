@@ -38,7 +38,7 @@ class PortfolioView(TemplateView):
         context['marquee_skills'] = [
             'Python', 'SQL / DuckDB', 'Power BI / DAX', 'PySpark',
             'scikit-learn / XGBoost', 'RAG / LangChain', 'Claude Code / MCP',
-            'Playwright', 'FastAPI', 'Java / Spring Boot', 'Laravel',
+            'Playwright', 'n8n / Airtable', 'FastAPI', 'Java / Spring Boot', 'Laravel',
             'C# / ASP.NET Core', 'React / TypeScript', 'Docker', 'GitHub Actions',
         ]
         context['skills_data'] = Skill.objects.filter(category='data').order_by('order')
