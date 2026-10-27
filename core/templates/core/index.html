@@ -1177,8 +1177,10 @@ function spotlightProject(id, delay) {
     const hint = row.querySelector('.project-actions-hint');
     const liveLink = row.querySelector('a:not([data-video])');
     const consult = !!liveLink && !!liveLink.dataset.label && liveLink.dataset.label !== 'Démo';
+    const repo = !!liveLink && liveLink.dataset.label === 'Code';
     hint.textContent =
-        consult ? (hasVideo ? 'Consultez le site ou regardez la vidéo' : 'Consultez le site en ligne')
+        repo ? 'Consultez le code du projet'
+        : consult ? (hasVideo ? 'Consultez le site ou regardez la vidéo' : 'Consultez le site en ligne')
         : hasDemo && hasVideo ? 'Testez la démo ou regardez la vidéo'
         : hasVideo ? 'Regardez la vidéo de présentation'
         : 'Testez la démo en ligne';
