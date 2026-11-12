@@ -22,3 +22,13 @@ jobs:
           if [ "$code" -ge 500 ]; then
             echo "::warning::Le portfolio a répondu avec le code $code"
           fi
+      # L'API de démo du projet API REST JWT est aussi sur l'offre gratuite de
+      # Render : sans visite, elle s'endort et le build du portfolio masque
+      # alors son lien "Démo" (voir masquer_demos_suspendues dans build_static.py).
+      - name: Ping l'API de démo API REST JWT
+        run: |
+          code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 90 "https://jwt-api-gkdg.onrender.com/swagger-ui/index.html")
+          echo "Réponse HTTP: $code"
+          if [ "$code" -ge 500 ]; then
+            echo "::warning::L'API de démo a répondu avec le code $code"
+          fi
